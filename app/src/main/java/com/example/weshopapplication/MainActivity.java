@@ -1,8 +1,10 @@
 package com.example.weshopapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,4 +13,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Create a menu inflater
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.homepagemenu, menu);
+
+        return true;
+    }
+    
 }
