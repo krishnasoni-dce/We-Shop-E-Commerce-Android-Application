@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         try {
-            
+
             if (item == null) {
                 return false;
             }
