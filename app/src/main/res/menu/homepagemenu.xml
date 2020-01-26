@@ -4,15 +4,14 @@
 
     <item
         android:id="@+id/item1"
-        android:icon="@drawable/ic_more_vert_black_24dp"
         android:title="Sports And Outdoors"
-        app:showAsAction="ifRoom"></item>
+        app:showAsAction="never" />
 
     <item
-        android:id="@+id/item2"
+        android:id="@+id/item3"
         android:title="Tech"
-        app:showAsAction="never">
-         
-    </item>
+        app:showAsAction="never" />
+
+
 </menu>
 
