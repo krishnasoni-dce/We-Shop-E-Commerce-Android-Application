@@ -8,4 +8,11 @@
         android:title="Sports And Outdoors"
         app:showAsAction="ifRoom"></item>
 
+    <item
+        android:id="@+id/item2"
+        android:title="Tech"
+        app:showAsAction="never">
+         
+    </item>
 </menu>
+
