@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 // Author: Sabin Constantin Lungu.
 // Matriculation Number: 40397517
@@ -20,7 +21,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class RegisterActivity extends AppCompatActivity { // Register class
     private static final String REGISTER_CHANNEL_ID = "register_channel";
     private EditText usernameField;
-
     private EditText emailAddressField;
     private static final int NOTIFICATION_CODE = 1;
     private TextView registerText; // The register text
@@ -28,10 +28,12 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private RadioButton termsAndConditions;
     private Button registerButton; // Register button
     private FirebaseAuth authentication;
+
     private boolean hasNumbers; // True or false if the inputs have numbers
     private boolean startsWithUppercase; // True or false if the inputs start with an upper case.
     private boolean hasCharacters; // True or false if the input has characters
     private boolean hasRegex;
+
     private boolean isValid;
     private boolean isRegistered;
     private NotificationManager notificationManager; // Notification manager variable
@@ -42,6 +44,14 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         setContentView(R.layout.activity_register);
 
         // Initialise components
+        this.usernameField = findViewById(R.id.usernameField);
+        this.emailAddressField = findViewById(R.id.emailAddressField);
+        this.registerText = findViewById(R.id.registerTxt);
+        this.passwordField = findViewById(R.id.passwordField);
+
+        this.termsAndConditions = findViewById(R.id.termsAndConditionsBox);
+        this.registerButton = findViewById(R.id.registerBtn);
+        this.authentication = FirebaseAuth.getInstance(); // Get an instance of the connection
     }
 
     public void requestNotificationPermission() {
@@ -50,10 +60,13 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
     public void onStart() {
         super.onStart();
+
+        FirebaseUser currentUser = authentication.getCurrentUser(); // Get current user
+
     }
 
     public boolean validateUsername() { // Routine that validates the username entered by the user against specific criteria
-
+        String usernameInputField = usernameField.getText().toString().trim();
 
         return false;
     }
