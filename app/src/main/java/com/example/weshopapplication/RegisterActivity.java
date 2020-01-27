@@ -81,11 +81,6 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         super.onStart();
 
         FirebaseUser currentUser = authentication.getCurrentUser(); // Get current user
-
-        if (currentUser != null) {
-            // transitionToLogin(); // Go to login if there is no user
-        }
-
     }
 
     private boolean validateUsername() { // Routine that validates the username entered by the user against specific criteria
@@ -120,13 +115,35 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 usernameField.setText(""); // Flush out the data
 
                 hasDigits = false; // Has digits is false.
+                isValid = false;
 
                 return false;
             }
 
             if (regexPatterns.matcher(usernameInputField).find()) { // If the username has a regex character.
                 usernameField.setError("Username should not contain regex character");
+
+                AlertDialog.Builder regexWarning = new AlertDialog.Builder(RegisterActivity.this).setMessage("Please re-enter Username.")
+                        .setTitle("Username Regex Warning").setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (dialog != null) {
+                                    dialog.dismiss();
+                                }
+                            }
+                        });
+
+                regexWarning.show();
+                usernameField.setText("");
+
                 return false;
+            } else {
+
+                isValid = true;
+                hasDigits = true;
+                hasRegex = true;
+                usernameField.setError(null);
+                return true;
             }
 
         }
@@ -136,6 +153,17 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
     private boolean validateEmailAddress() {
 
+        String emailAddressInputField = emailAddressField.getText().toString().trim(); // Get the input for the emailAddress
+
+        for (int i = 0; i < emailAddressInputField.length(); i++) {
+            if (!regexPatterns.matcher(emailAddressInputField).matches()) {
+                emailAddressField.setError("E-mail Address must contain @ symbol");
+            } else {
+                // Otherwise no errors
+                emailAddressField.setError(null);
+                return true;
+            }
+        }
 
         return false;
     }
@@ -150,12 +178,13 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
     }
 
+    private void writeToDatabase() { // Routine to write the registration details.
+
+    }
+
     private void sendNotification() { // Routine that sends notification once the registration is successful
 
     }
 
-    private void writeToDatabase() { // Routine to write the registration details.
-
-    }
 
 }
