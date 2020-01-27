@@ -2,15 +2,19 @@ package com.example.weshopapplication;
 
 import android.app.AlertDialog;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,7 +28,7 @@ import java.util.regex.Pattern;
 
 
 public class RegisterActivity extends AppCompatActivity { // Register class
-    private static final String REGISTER_CHANNEL_ID = "register_channel";
+    private static final String CHANNEL_ID = "register_channel";
     private EditText usernameField;
     private EditText emailAddressField;
     private static final int NOTIFICATION_CODE = 1;
@@ -33,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private RadioButton termsAndConditions;
     private Button registerButton; // Register button
     private FirebaseAuth authentication;
+    private Spinner spinner;
 
     private boolean hasDigits; // True or false if the inputs have numbers
     private boolean startsWithUppercase; // True or false if the inputs start with an upper case.
@@ -42,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private boolean isEmpty;
     private boolean isValid;
     private boolean isRegistered;
-    private NotificationManager notificationManager; // Notification manager variable
+    private NotificationManagerCompat notificationManager; // Notification manager variable
 
     private Pattern regexPatterns = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]"); // Regex patterns
 
@@ -61,17 +66,22 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         this.registerButton = findViewById(R.id.registerBtn);
         this.authentication = FirebaseAuth.getInstance(); // Get an instance of the connection
 
+        notificationManager = NotificationManagerCompat.from(this);
+
         this.registerButton.setOnClickListener(new View.OnClickListener() { // Add listener to the button
             @Override
             public void onClick(View buttonView) {
+                requestNotificationPermission();
                 validateUsername(); // Call method to validate username
                 validatePassword();
                 validateEmailAddress();
+                validateTermsAndConditions();
+                sendNotification();
             }
         });
 
-
     }
+
 
     public void requestNotificationPermission() { // Routine that requests the user to use permissions
 
@@ -137,9 +147,10 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 usernameField.setText("");
 
                 return false;
+
             } else {
 
-                isValid = true;
+                isValid = true; // Username valid
                 hasDigits = true;
                 hasRegex = true;
                 usernameField.setError(null);
@@ -155,34 +166,125 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
         String emailAddressInputField = emailAddressField.getText().toString().trim(); // Get the input for the emailAddress
 
-        for (int i = 0; i < emailAddressInputField.length(); i++) {
-            if (!regexPatterns.matcher(emailAddressInputField).matches()) {
+        if (emailAddressInputField.isEmpty()) {
+            emailAddressField.setError("E-mail Field cannot be left empty");
+            isEmpty = true;
+        }
+
+        if (emailAddressInputField.length() <= 0 || emailAddressInputField.length() > 25) {
+            emailAddressField.setError("E-mail can't have less than 0 characters or more than 25");
+            return false;
+        }
+
+
+        // Loop over the e-mail field
+
+        if (!regexPatterns.matcher(emailAddressInputField).find()) {
+
                 emailAddressField.setError("E-mail Address must contain @ symbol");
+            AlertDialog.Builder emailRegexWarning = new AlertDialog.Builder(RegisterActivity.this).setTitle("E-mail Regex Warning").setMessage("E-mail must contain @ symbol")
+                    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (dialog != null) { // If the dialog is not empty
+                                dialog.dismiss();
+                                dialog.cancel();
+                            }
+                        }
+                    });
+
+            emailRegexWarning.show();
+            emailAddressField.setText("");
+
+            return false;
+
             } else {
+
                 // Otherwise no errors
                 emailAddressField.setError(null);
                 return true;
+            }
+
+    }
+
+    private boolean validatePassword() {
+        String passwordEntryField = passwordField.getText().toString().trim();
+
+        if (passwordEntryField.isEmpty() && !regexPatterns.matcher(passwordEntryField).matches()) {
+            AlertDialog.Builder passwordWarning = new AlertDialog.Builder(RegisterActivity.this).setTitle("Password Warning")
+                    .setMessage("Re-enter Password Please").setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (dialog != null) {
+                                dialog.dismiss();
+                            }
+                        }
+                    });
+
+            passwordWarning.show();
+            passwordField.setText("");
+
+            passwordField.setError("Password cannot be left empty & must contain special characters");
+            isEmpty = true;
+            hasRegex = false;
+        }
+
+
+        for (int i = 0; i < passwordEntryField.length(); i++) {
+            if (!Character.isUpperCase(passwordEntryField.charAt(0))) { // If the password does not start with an upper case character
+                AlertDialog.Builder pwUpperCase = new AlertDialog.Builder(RegisterActivity.this).setTitle("Password Error")
+                        .setMessage("Re-enter Password").setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (dialog != null) {
+                                    dialog.dismiss();
+                                }
+                            }
+                        });
+
+                pwUpperCase.show();
+                passwordField.setText("");
+                passwordField.setError("Password must start with upper case character");
+                break;
             }
         }
 
         return false;
     }
 
-    private boolean validatePassword() {
+    private void validateTermsAndConditions() {
+        if (!termsAndConditions.isChecked()) {
+            AlertDialog.Builder boxError = new AlertDialog.Builder(RegisterActivity.this).setTitle("T&C Box Not Checked")
+                    .setMessage("Please tick terms and conditions box")
+                    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (dialog != null) {
+                                dialog.dismiss();
+                            }
+                        }
+                    });
 
-
-        return false;
+            boxError.show();
+        }
     }
 
-    private void validateTermsAndConditions() {
+    private void sendNotification() {
+        String notification_message = "Register Success";
 
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(RegisterActivity.this, CHANNEL_ID)
+                .setContentTitle(notification_message)
+                .setSmallIcon(R.drawable.ic_message_black_24dp)
+                .setContentText("You have successfully registered")
+                .setAutoCancel(true);
+
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationManager.notify(NOTIFICATION_CODE, builder.build());
     }
 
     private void writeToDatabase() { // Routine to write the registration details.
-
-    }
-
-    private void sendNotification() { // Routine that sends notification once the registration is successful
 
     }
 
