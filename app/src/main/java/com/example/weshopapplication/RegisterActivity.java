@@ -1,6 +1,8 @@
 package com.example.weshopapplication;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -59,24 +61,15 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         this.registerButton = findViewById(R.id.registerBtn);
         this.authentication = FirebaseAuth.getInstance(); // Get an instance of the connection
 
-        this.usernameField.setOnClickListener(new View.OnClickListener() {
+        this.registerButton.setOnClickListener(new View.OnClickListener() { // Add listener to the button
             @Override
-            public void onClick(View usernameView) {
-
-                if (usernameField.getId() == R.id.usernameField) {
-                    validateUsername(); // Call method to validate username
-                }
+            public void onClick(View buttonView) {
+                validateUsername(); // Call method to validate username
+                validatePassword();
+                validateEmailAddress();
             }
         });
 
-        this.emailAddressField.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View passwordView) {
-                if (passwordView.getId() == R.id.passwordField) {
-                    validatePassword();
-                }
-            }
-        });
 
     }
 
@@ -89,30 +82,53 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
         FirebaseUser currentUser = authentication.getCurrentUser(); // Get current user
 
+        if (currentUser != null) {
+            // transitionToLogin(); // Go to login if there is no user
+        }
+
     }
 
     private boolean validateUsername() { // Routine that validates the username entered by the user against specific criteria
         String usernameInputField = usernameField.getText().toString().trim();
 
-        if (usernameInputField.isEmpty()) {
+        if (usernameInputField.isEmpty()) { // If the input field is left empty
 
             usernameField.setError("Can't be left empty");
             isEmpty = true;
 
             return false;
-
-        } else {
-            usernameField.setError(null);
         }
 
-        for (int i = 0; i < usernameInputField.length(); i++) {
+        for (int i = 0; i < usernameInputField.length(); i++) { // Loop over the username
 
-            if (!Character.isDigit(usernameInputField.charAt(i)) || usernameInputField.length() > 10) {
+            if (!Character.isDigit(usernameInputField.charAt(i)) && usernameInputField.length() > 10) {
+
                 usernameField.setError("Username must contain digits and length must not be bigger than 10");
-                hasDigits = false;
+
+                AlertDialog.Builder usernameError = new AlertDialog.Builder(RegisterActivity.this).setMessage("Please re-enter Username")
+                        .setTitle("Username Error").setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (dialog != null) {
+                                    dialog.dismiss();
+                                }
+                            }
+                        });
+
+                usernameError.show(); // Show the dialogue
+                usernameField.setText(""); // Flush out the data
+
+                hasDigits = false; // Has digits is false.
 
                 return false;
             }
+
+            if (regexPatterns.matcher(usernameInputField).find()) { // If the username has a regex character.
+                usernameField.setError("Username should not contain regex character");
+                return false;
+            }
+
         }
 
         return false;
@@ -138,7 +154,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
     }
 
-    private void writeToDatabase() { // Routine to write the registration
+    private void writeToDatabase() { // Routine to write the registration details.
 
     }
 
