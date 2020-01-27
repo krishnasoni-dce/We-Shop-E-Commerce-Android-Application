@@ -1,9 +1,15 @@
 package com.example.weshopapplication;
+
+import android.app.NotificationManager;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 // Author: Sabin Constantin Lungu.
 // Matriculation Number: 40397517
@@ -12,14 +18,50 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class RegisterActivity extends AppCompatActivity { // Register class
-    private TextView registerText;
+    private static final String REGISTER_CHANNEL_ID = "register_channel";
     private EditText usernameField;
-    private EditText passwordField;
+
     private EditText emailAddressField;
+    private static final int NOTIFICATION_CODE = 1;
+    private TextView registerText; // The register text
+    private EditText passwordField;
+    private RadioButton termsAndConditions;
+    private Button registerButton; // Register button
+    private FirebaseAuth authentication;
+    private boolean hasNumbers; // True or false if the inputs have numbers
+    private boolean startsWithUppercase; // True or false if the inputs start with an upper case.
+    private boolean hasCharacters; // True or false if the input has characters
+    private boolean hasRegex;
+    private boolean isValid;
+    private boolean isRegistered;
+    private NotificationManager notificationManager; // Notification manager variable
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        // Initialise components
     }
+
+    public void requestNotificationPermission() {
+
+    }
+
+    public void onStart() {
+        super.onStart();
+    }
+
+    public boolean validateUsername() { // Routine that validates the username entered by the user against specific criteria
+
+
+        return false;
+    }
+
+    public boolean validatePassword() {
+
+
+        return false;
+    }
+
 }
