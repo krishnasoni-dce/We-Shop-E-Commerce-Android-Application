@@ -2,6 +2,7 @@ package com.example.weshopapplication;
 
 import android.app.NotificationManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -34,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private boolean hasCharacters; // True or false if the input has characters
     private boolean hasRegex;
 
+    private boolean isEmpty;
     private boolean isValid;
     private boolean isRegistered;
     private NotificationManager notificationManager; // Notification manager variable
@@ -52,9 +54,29 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         this.termsAndConditions = findViewById(R.id.termsAndConditionsBox);
         this.registerButton = findViewById(R.id.registerBtn);
         this.authentication = FirebaseAuth.getInstance(); // Get an instance of the connection
+
+        this.usernameField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View usernameView) {
+
+                if (usernameField.getId() == R.id.usernameField) {
+                    validateUsername(); // Call method to validate username
+                }
+            }
+        });
+
+        this.emailAddressField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View passwordView) {
+                if (passwordView.getId() == R.id.passwordField) {
+                    validatePassword();
+                }
+            }
+        });
+
     }
 
-    public void requestNotificationPermission() {
+    public void requestNotificationPermission() { // Routine that requests the user to use permissions
 
     }
 
@@ -65,16 +87,38 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
     }
 
-    public boolean validateUsername() { // Routine that validates the username entered by the user against specific criteria
+    private boolean validateUsername() { // Routine that validates the username entered by the user against specific criteria
         String usernameInputField = usernameField.getText().toString().trim();
+
+        if (usernameInputField.isEmpty()) {
+            usernameField.setError("Can't be left empty");
+            isEmpty = true;
+            return false;
+        } else {
+            usernameField.setError(null);
+        }
 
         return false;
     }
 
-    public boolean validatePassword() {
+    private boolean validateEmailAddress() {
 
 
         return false;
+    }
+
+    private boolean validatePassword() {
+
+
+        return false;
+    }
+
+    private void validateTermsAndConditions() {
+
+    }
+
+    private void writeToDatabase() { // Routine to write the registration
+
     }
 
 }
