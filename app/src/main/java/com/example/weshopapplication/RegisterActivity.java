@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.regex.Pattern;
+
 // Author: Sabin Constantin Lungu.
 // Matriculation Number: 40397517
 // Purpose of Activity: To allow users to register an account.
@@ -30,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private Button registerButton; // Register button
     private FirebaseAuth authentication;
 
-    private boolean hasNumbers; // True or false if the inputs have numbers
+    private boolean hasDigits; // True or false if the inputs have numbers
     private boolean startsWithUppercase; // True or false if the inputs start with an upper case.
     private boolean hasCharacters; // True or false if the input has characters
     private boolean hasRegex;
@@ -39,6 +41,8 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private boolean isValid;
     private boolean isRegistered;
     private NotificationManager notificationManager; // Notification manager variable
+
+    private Pattern regexPatterns = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]"); // Regex patterns
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,11 +95,24 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         String usernameInputField = usernameField.getText().toString().trim();
 
         if (usernameInputField.isEmpty()) {
+
             usernameField.setError("Can't be left empty");
             isEmpty = true;
+
             return false;
+
         } else {
             usernameField.setError(null);
+        }
+
+        for (int i = 0; i < usernameInputField.length(); i++) {
+
+            if (!Character.isDigit(usernameInputField.charAt(i)) || usernameInputField.length() > 10) {
+                usernameField.setError("Username must contain digits and length must not be bigger than 10");
+                hasDigits = false;
+
+                return false;
+            }
         }
 
         return false;
@@ -114,6 +131,10 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     }
 
     private void validateTermsAndConditions() {
+
+    }
+
+    private void sendNotification() { // Routine that sends notification once the registration is successful
 
     }
 
