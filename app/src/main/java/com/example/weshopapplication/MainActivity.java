@@ -1,11 +1,14 @@
 package com.example.weshopapplication;
 
 import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,11 +21,12 @@ import androidx.appcompat.app.AppCompatActivity;
 // Any Bugs?: N/A
 
 public class MainActivity extends AppCompatActivity {
+    // Encapsulated variables
     private ImageView welcomeImage;
-    private TextView text;
+    private TextView text; //
 
-    private Button registerButton;
-    private Button loginButton;
+    private Button registerButton; // Variable Button to register
+    private Button loginButton; // Variable to store the login button
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,18 @@ public class MainActivity extends AppCompatActivity {
         this.registerButton.setOnClickListener(new View.OnClickListener() { // Listener added to register button
             @Override
             public void onClick(View v) {
+                try {
 
+                    if (v.getId() == R.id.registerBtn) { // If the register button is clicked
+                        Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
+                        startActivity(registerIntent); // Take user to the register page
+
+                    }
+
+                } catch (ActivityNotFoundException act) { // Catch exception if the activity is not found
+                    act.printStackTrace();
+                    Log.d("Cause : ", act.getMessage());
+                }
             }
         });
 
@@ -51,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) { // Routine that creates the main menu
         // Create a menu inflater
 
         MenuInflater inflater = getMenuInflater();
@@ -98,5 +113,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    public void onBackPressed() { // Routine that determines if the back button is pressed
+        moveTaskToBack(true); // Move back a task
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
     }
 }
