@@ -2,9 +2,11 @@ package com.example.weshopapplication;
 
 import android.app.AlertDialog;
 import android.app.NotificationManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,10 +14,14 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -76,6 +82,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 validatePassword();
                 validateEmailAddress();
                 validateTermsAndConditions();
+                writeToDatabase();
                 sendNotification();
             }
         });
@@ -97,8 +104,19 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         String usernameInputField = usernameField.getText().toString().trim();
 
         if (usernameInputField.isEmpty()) { // If the input field is left empty
+            AlertDialog.Builder emptyDialog = new AlertDialog.Builder(RegisterActivity.this).setTitle("Username Error")
+                    .setMessage("Re-enter username please").setNegativeButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (dialog != null) {
+                                dialog.dismiss();
+                            }
+                        }
+                    });
 
+            emptyDialog.show();
             usernameField.setError("Can't be left empty");
+            usernameField.setText("");
             isEmpty = true;
 
             return false;
@@ -254,11 +272,12 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     }
 
     private void validateTermsAndConditions() {
-        if (!termsAndConditions.isChecked()) {
+        if (!termsAndConditions.isChecked()) { // If the terms and conditions box is not ticked
             AlertDialog.Builder boxError = new AlertDialog.Builder(RegisterActivity.this).setTitle("T&C Box Not Checked")
                     .setMessage("Please tick terms and conditions box")
                     .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                         @Override
+
                         public void onClick(DialogInterface dialog, int which) {
                             if (dialog != null) {
                                 dialog.dismiss();
@@ -268,6 +287,18 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
             boxError.show();
         }
+    }
+
+    private void writeToDatabase() { // Routine to write the registration details.
+        authentication.createUserWithEmailAndPassword(emailAddressField.getText().toString(), passwordField.getText().toString())
+                .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+
+                        }
+                    }
+                });
     }
 
     private void sendNotification() {
@@ -284,9 +315,14 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         notificationManager.notify(NOTIFICATION_CODE, builder.build());
     }
 
-    private void writeToDatabase() { // Routine to write the registration details.
+    private void transitionToLoginActivity() {
+        try {
 
+            // Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            // startActivity(intent);
+
+        } catch (ActivityNotFoundException act) {
+            Log.d("Problem Cause : ", act.getMessage());
+        }
     }
-
-
 }
