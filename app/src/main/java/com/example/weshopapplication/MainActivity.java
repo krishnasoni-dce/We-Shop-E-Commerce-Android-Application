@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
                     if (v.getId() == R.id.registerBtn) { // If the register button is clicked
                         Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
                         startActivity(registerIntent); // Take user to the register page
-
                     }
 
                 } catch (ActivityNotFoundException act) { // Catch exception if the activity is not found
@@ -78,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         try {
 
-            if (item == null) {
-                return false;
+            if (item == null) { // If there is no item to choose
+                return false; // Return false
             }
 
             switch (item.getItemId()) {
@@ -106,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
                 default:
 
-
             }
+
         } catch (ActivityNotFoundException exc) { // Catch exception
             exc.printStackTrace();
         }
@@ -119,6 +118,9 @@ public class MainActivity extends AppCompatActivity {
         moveTaskToBack(true); // Move back a task
     }
 
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> parent) { // Routine that determines if nothing is selected
+        if (parent == null) {
+            return;
+        }
     }
 }
