@@ -13,13 +13,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -51,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private boolean isEmpty;
     private boolean isValid;
     private boolean isRegistered;
+    private DocumentReference userDocRef = FirebaseFirestore.getInstance().document("userdata/userregistrationdata");
     private NotificationManagerCompat notificationManager; // Notification manager variable
 
     private Pattern regexPatterns = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]"); // Regex patterns
@@ -66,13 +71,12 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         this.registerText = findViewById(R.id.registerTxt);
         this.passwordField = findViewById(R.id.passwordField);
 
-
         this.termsAndConditions = findViewById(R.id.termsAndConditionsBox);
         this.registerButton = findViewById(R.id.registerBtn);
-        this.authentication = FirebaseFirestore.getInstance(); // Get an instance of the connection
+        this.authentication = FirebaseFirestore.getInstance();
 
         notificationManager = NotificationManagerCompat.from(this);
-        FirebaseApp.initializeApp(this); // Initialise the firebase app
+        FirebaseApp.initializeApp(RegisterActivity.this); // Initialise the firebase app
 
         this.registerButton.setOnClickListener(new View.OnClickListener() { // Add listener to the button
             @Override
@@ -83,14 +87,9 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
                 validateEmailAddress();
                 validateTermsAndConditions();
-
-                if (isValid == validateEmailAddress() || isValid == validatePassword() || isValid == validateUsername()) {
-                    sendNotification();
-                }
-
                 writeToDatabase();
-                transitionToLogin(); // Take user to login after registration
-
+                sendNotification();
+                transitionToLogin();
             }
         });
 
@@ -294,39 +293,27 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         }
     }
 
-
-    private void writeToDatabase() { // Writes to database
+    public void writeToDatabase() { // Writes to database
         final boolean isWritten = false;
 
-        try {
-            HashMap<String, String> userData = new HashMap<>(); // A HashMap of a key and pair value for the user data
+        HashMap<String, Object> userData = new HashMap<>(); // A HashMap of a key and pair value for the user data
 
             userData.put("username", usernameField.getText().toString());
-            userData.put("emailAddress", emailAddressField.getText().toString());
+        userData.put("email_address", emailAddressField.getText().toString());
             userData.put("password", passwordField.getText().toString());
 
-            authentication.collection("Users").document("Registered_Users").set(userData)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void argNull) {
-                            AlertDialog.Builder writeSuccess = new AlertDialog.Builder(RegisterActivity.this).setTitle("Success")
-                                    .setMessage("Data written success").setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            if (dialog != null) {
-                                                dialog.dismiss();
-                                            }
-                                        }
-                                    });
+        authentication.collection("user_data").add(userData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Toast.makeText(RegisterActivity.this, "Added SUCCESSS", Toast.LENGTH_LONG).show();
+            }
 
-                            writeSuccess.show();
-                        }
-                    });
-
-        } catch (IllegalArgumentException il) {
-            Log.d("Error : ", il.getMessage());
-
-        }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(RegisterActivity.this, "Not added", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void sendNotification() {
@@ -343,14 +330,12 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         notificationManager.notify(NOTIFICATION_CODE, builder.build()); // Build the notification with a code.
     }
 
-    private void transitionToLogin() { // Take user to login after registration
+    private void transitionToLogin() {
         try {
-
-            Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class); // A new intent.
+            Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
             startActivity(loginIntent);
-
-        } catch (ActivityNotFoundException act) {
-            Log.d("Cause of error : ", act.getMessage()); // Displays error message in the log if an activity is not found.
+        } catch (ActivityNotFoundException exc) {
+            Log.d("Error", exc.getMessage());
         }
     }
 }
