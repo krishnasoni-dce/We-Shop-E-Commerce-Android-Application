@@ -2,9 +2,15 @@ package com.example.weshopapplication;
 
 import android.app.AlertDialog;
 import android.app.NotificationManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -81,12 +87,59 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 requestNotificationPermission();
                 validateUsername(); // Call method to validate username
                 validateEmailAddress();
+
                 validatePassword();
                 validateTermsAndConditions();
                 writeToDatabase();
             }
         });
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.register_menu, menu);
+
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        try {
+
+            switch (item.getItemId()) {
+                case R.id.sportsAndOutdoorsCategory:
+                    Intent sportsActivity = new Intent(RegisterActivity.this, SportsAndOutdoorsActivity.class);
+                    startActivity(sportsActivity);
+
+                    return true;
+
+
+                case R.id.techCategory:
+                    Intent techActivity = new Intent(RegisterActivity.this, TechActivity.class);
+                    startActivity(techActivity);
+
+                    return true;
+
+                case R.id.clothingCategory:
+                    Intent clothingCategory = new Intent(RegisterActivity.this, ClothingCategory.class);
+                    startActivity(clothingCategory);
+
+                    return true;
+
+                case R.id.diyCategory:
+                    Intent diyCategory = new Intent(RegisterActivity.this, DIYActivity.class);
+                    startActivity(diyCategory);
+
+                    return true;
+
+                default:
+            }
+
+        } catch (ActivityNotFoundException act) {
+            Log.d("Error : ", act.getMessage());
+        }
+
+        return true;
     }
 
 
@@ -98,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         super.onStart();
     }
 
-    private void validateUsername() { // Routine that validates the username entered by the user against specific criteria
+    private boolean validateUsername() { // Routine that validates the username entered by the user against specific criteria
         String usernameInputField = usernameField.getText().toString().trim();
 
         if (usernameInputField.isEmpty()) { // If the input field is left empty
@@ -117,6 +170,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             usernameField.setError("Can't be left empty");
             usernameField.setText("");
             isEmpty = true;
+            return false;
         }
 
         for (int i = 0; i < usernameInputField.length(); i++) { // Loop over the username
@@ -160,12 +214,14 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
                 regexWarning.show();
                 usernameField.setText("");
-                return;
+
             } else {
                 usernameField.setError(null);
             }
 
         }
+
+        return true;
     }
 
     private void validateEmailAddress() {

@@ -101,10 +101,10 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
 
-                case R.id.clothingCategory:
+                case R.id.clothingCategory: // If the clothing category is chosen
 
                     Intent clothingIntent = new Intent(MainActivity.this, ClothingCategory.class);
-                    startActivity(clothingIntent);
+                    startActivity(clothingIntent); // Go to the clothing intent
                     return true;
 
                 case R.id.diyCategory:
