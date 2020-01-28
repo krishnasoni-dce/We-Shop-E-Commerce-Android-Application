@@ -11,7 +11,7 @@
         android:id="@+id/welcomeImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="336dp"
+        android:layout_marginBottom="340dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/welcome" />
@@ -20,9 +20,9 @@
         android:id="@+id/welcomeTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="292dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="300dp"
+        android:fontFamily="sans-serif-medium"
         android:text="Don't have an account? Register today"
         android:textColor="@android:color/white"
         android:textSize="22sp"
@@ -31,26 +31,28 @@
 
     <Button
         android:id="@+id/registerBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginLeft="96dp"
+        android:layout_width="112dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="80dp"
         android:layout_marginBottom="196dp"
-        android:background="@android:color/black"
+        android:background="@drawable/button_round"
         android:text="Register"
         android:textColor="@android:color/white"
+
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/loginBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="112dp"
+        android:layout_height="41dp"
         android:layout_marginStart="60dp"
         android:layout_marginLeft="60dp"
         android:layout_marginBottom="196dp"
-        android:background="@android:color/black"
+        android:background="@drawable/button_round"
         android:text="Login"
+        android:textStyle="bold"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/registerBtn" />

@@ -100,6 +100,7 @@
 
         android:paddingRight="90dp"
         android:text="Register"
+        android:fontFamily="sans-serif-medium"
         android:shadowRadius="5"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
