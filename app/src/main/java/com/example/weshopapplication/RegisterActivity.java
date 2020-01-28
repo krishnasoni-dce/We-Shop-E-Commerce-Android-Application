@@ -5,14 +5,15 @@ import android.app.NotificationManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,12 +40,12 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private EditText usernameField;
     private EditText emailAddressField;
     private static final int NOTIFICATION_CODE = 1;
+    private static final int PERMISSION_CODE = 1;
     private TextView registerText; // The register text
     private EditText passwordField;
     private RadioButton termsAndConditions;
     private Button registerButton; // Register button
     private FirebaseAuth authentication;
-    private Spinner spinner;
 
     private boolean hasDigits; // True or false if the inputs have numbers
     private boolean startsWithUppercase; // True or false if the inputs start with an upper case.
@@ -58,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private Pattern regexPatterns = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]"); // Regex patterns
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { // Android Lifecycle method 1
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
@@ -67,6 +69,8 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         this.emailAddressField = findViewById(R.id.emailAddressField);
         this.registerText = findViewById(R.id.registerTxt);
         this.passwordField = findViewById(R.id.passwordField);
+
+        FirebaseApp.initializeApp(this); // Initialise the firebase app
 
         this.termsAndConditions = findViewById(R.id.termsAndConditionsBox);
         this.registerButton = findViewById(R.id.registerBtn);
@@ -80,10 +84,17 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 requestNotificationPermission();
                 validateUsername(); // Call method to validate username
                 validatePassword();
+
                 validateEmailAddress();
                 validateTermsAndConditions();
-                writeToDatabase();
-                sendNotification();
+
+                if (isValid == validateEmailAddress() || isValid == validatePassword() || isValid == validateUsername()) {
+                    sendNotification();
+                }
+
+                registerAccount(); // Call method to write data to Firebase database
+                transitionToLogin(); // Take user to login after registration
+
             }
         });
 
@@ -94,10 +105,14 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
     }
 
-    public void onStart() {
+    public void onStart() { // Android Lifecycle method 2.
         super.onStart();
 
         FirebaseUser currentUser = authentication.getCurrentUser(); // Get current user
+
+        if (currentUser == null) { // If there is no user
+            transitionToLogin(); // Go to login
+        }
     }
 
     private boolean validateUsername() { // Routine that validates the username entered by the user against specific criteria
@@ -199,7 +214,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
         if (!regexPatterns.matcher(emailAddressInputField).find()) {
 
-                emailAddressField.setError("E-mail Address must contain @ symbol");
+            emailAddressField.setError("E-mail Address must contain @ symbol");
             AlertDialog.Builder emailRegexWarning = new AlertDialog.Builder(RegisterActivity.this).setTitle("E-mail Regex Warning").setMessage("E-mail must contain @ symbol")
                     .setNegativeButton("OK", new DialogInterface.OnClickListener() {
 
@@ -217,19 +232,19 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
             return false;
 
-            } else {
+        } else {
 
-                // Otherwise no errors
-                emailAddressField.setError(null);
-                return true;
-            }
+            // Otherwise no errors
+            emailAddressField.setError(null);
+            return true;
+        }
 
     }
 
     private boolean validatePassword() {
         String passwordEntryField = passwordField.getText().toString().trim();
 
-        if (passwordEntryField.isEmpty() && !regexPatterns.matcher(passwordEntryField).matches()) {
+        if (passwordEntryField.isEmpty() && !regexPatterns.matcher(passwordEntryField).matches()) { // If the password is empty and there are no regex characters found
             AlertDialog.Builder passwordWarning = new AlertDialog.Builder(RegisterActivity.this).setTitle("Password Warning")
                     .setMessage("Re-enter Password Please").setNegativeButton("OK", new DialogInterface.OnClickListener() {
                         @Override
@@ -289,17 +304,6 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         }
     }
 
-    private void writeToDatabase() { // Routine to write the registration details.
-        authentication.createUserWithEmailAndPassword(emailAddressField.getText().toString(), passwordField.getText().toString())
-                .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-
-                        }
-                    }
-                });
-    }
 
     private void sendNotification() {
         String notification_message = "Register Success";
@@ -315,14 +319,28 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         notificationManager.notify(NOTIFICATION_CODE, builder.build());
     }
 
-    private void transitionToLoginActivity() {
+    private void registerAccount() {
+        authentication.createUserWithEmailAndPassword(emailAddressField.getText().toString(), passwordField.getText().toString()).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if (task.isSuccessful()) {
+                    Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Could not Register", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void transitionToLogin() {
         try {
 
-            // Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-            // startActivity(intent);
+            Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
 
         } catch (ActivityNotFoundException act) {
-            Log.d("Problem Cause : ", act.getMessage());
+            Log.d("Cause of error : ", act.getMessage());
         }
     }
 }

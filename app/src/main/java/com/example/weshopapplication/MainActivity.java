@@ -60,7 +60,14 @@ public class MainActivity extends AppCompatActivity {
         this.loginButton.setOnClickListener(new View.OnClickListener() { // Listener for login button
             @Override
             public void onClick(View v) {
+                try {
 
+                    Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(loginIntent);
+
+                } catch (ActivityNotFoundException exc) {
+                    Log.d("Error : ", exc.getMessage());
+                }
             }
         });
     }
@@ -83,23 +90,28 @@ public class MainActivity extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.sportsAndOutdoorsCategory:
-                    //    Intent intent = new Intent(MainActivity.this, );
+                    Intent sportsIntent = new Intent(MainActivity.this, SportsAndOutdoorsActivity.class);
+                    startActivity(sportsIntent);
 
                     return true;
 
                 case R.id.techCategory:
-                    //  Intent intent = new Intent(MainActivity.this, );
+                    Intent techIntent = new Intent(MainActivity.this, TechActivity.class);
+                    startActivity(techIntent);
 
                     return true;
 
 
                 case R.id.clothingCategory:
 
+                    Intent clothingIntent = new Intent(MainActivity.this, ClothingCategory.class);
+                    startActivity(clothingIntent);
                     return true;
 
                 case R.id.diyCategory:
 
-                    // Intent intent = new Intent(MainActivity.this, );
+                    Intent intent = new Intent(MainActivity.this, DIYActivity.class);
+                    startActivity(intent);
 
                     return true; // Return true;
 
