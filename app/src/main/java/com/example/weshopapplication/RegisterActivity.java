@@ -13,20 +13,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 // Author: Sabin Constantin Lungu.
@@ -45,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private EditText passwordField;
     private RadioButton termsAndConditions;
     private Button registerButton; // Register button
-    private FirebaseAuth authentication;
+    private FirebaseFirestore authentication;
 
     private boolean hasDigits; // True or false if the inputs have numbers
     private boolean startsWithUppercase; // True or false if the inputs start with an upper case.
@@ -70,13 +66,13 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         this.registerText = findViewById(R.id.registerTxt);
         this.passwordField = findViewById(R.id.passwordField);
 
-        FirebaseApp.initializeApp(this); // Initialise the firebase app
 
         this.termsAndConditions = findViewById(R.id.termsAndConditionsBox);
         this.registerButton = findViewById(R.id.registerBtn);
-        this.authentication = FirebaseAuth.getInstance(); // Get an instance of the connection
+        this.authentication = FirebaseFirestore.getInstance(); // Get an instance of the connection
 
         notificationManager = NotificationManagerCompat.from(this);
+        FirebaseApp.initializeApp(this); // Initialise the firebase app
 
         this.registerButton.setOnClickListener(new View.OnClickListener() { // Add listener to the button
             @Override
@@ -92,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                     sendNotification();
                 }
 
-                registerAccount(); // Call method to write data to Firebase database
+                writeToDatabase();
                 transitionToLogin(); // Take user to login after registration
 
             }
@@ -107,12 +103,6 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
     public void onStart() { // Android Lifecycle method 2.
         super.onStart();
-
-        FirebaseUser currentUser = authentication.getCurrentUser(); // Get current user
-
-        if (currentUser == null) { // If there is no user
-            transitionToLogin(); // Go to login
-        }
     }
 
     private boolean validateUsername() { // Routine that validates the username entered by the user against specific criteria
@@ -305,42 +295,62 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     }
 
 
-    private void sendNotification() {
-        String notification_message = "Register Success";
+    private void writeToDatabase() { // Writes to database
+        final boolean isWritten = false;
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(RegisterActivity.this, CHANNEL_ID)
-                .setContentTitle(notification_message)
-                .setSmallIcon(R.drawable.ic_message_black_24dp)
-                .setContentText("You have successfully registered")
-                .setAutoCancel(true);
+        try {
+            HashMap<String, String> userData = new HashMap<>(); // A HashMap of a key and pair value for the user data
+
+            userData.put("username", usernameField.getText().toString());
+            userData.put("emailAddress", emailAddressField.getText().toString());
+            userData.put("password", passwordField.getText().toString());
+
+            authentication.collection("Users").document("Registered_Users").set(userData)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void argNull) {
+                            AlertDialog.Builder writeSuccess = new AlertDialog.Builder(RegisterActivity.this).setTitle("Success")
+                                    .setMessage("Data written success").setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if (dialog != null) {
+                                                dialog.dismiss();
+                                            }
+                                        }
+                                    });
+
+                            writeSuccess.show();
+                        }
+                    });
+
+        } catch (IllegalArgumentException il) {
+            Log.d("Error : ", il.getMessage());
+
+        }
+    }
+
+    private void sendNotification() {
+        String notification_message = "Register Success"; // Message to display
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(RegisterActivity.this, CHANNEL_ID) // Create a notification builder by passing the activity and channel id
+                .setContentTitle(notification_message) // Set the content title of the notification
+                .setSmallIcon(R.drawable.ic_message_black_24dp) // Displays the icon.
+                .setContentText("You have successfully registered") // Sets the content text
+                .setAutoCancel(true); // Automatically cancels
 
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(NOTIFICATION_CODE, builder.build());
+        notificationManager.notify(NOTIFICATION_CODE, builder.build()); // Build the notification with a code.
     }
 
-    private void registerAccount() {
-        authentication.createUserWithEmailAndPassword(emailAddressField.getText().toString(), passwordField.getText().toString()).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-
-                if (task.isSuccessful()) {
-                    Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(RegisterActivity.this, "Could not Register", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    private void transitionToLogin() {
+    private void transitionToLogin() { // Take user to login after registration
         try {
 
-            Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+            Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class); // A new intent.
             startActivity(loginIntent);
 
         } catch (ActivityNotFoundException act) {
-            Log.d("Cause of error : ", act.getMessage());
+            Log.d("Cause of error : ", act.getMessage()); // Displays error message in the log if an activity is not found.
         }
     }
 }

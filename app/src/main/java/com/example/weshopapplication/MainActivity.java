@@ -81,19 +81,18 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) { // Determines which item is selected from the menu
         try {
-
             if (item == null) { // If there is no item to choose
                 return false; // Return false
             }
 
             switch (item.getItemId()) {
-                case R.id.sportsAndOutdoorsCategory:
-                    Intent sportsIntent = new Intent(MainActivity.this, SportsAndOutdoorsActivity.class);
+                case R.id.sportsAndOutdoorsCategory: // If the sports and outdoors category is chosen
+                    Intent sportsIntent = new Intent(MainActivity.this, SportsAndOutdoorsActivity.class); // Take user to the sports and outdoors activity
                     startActivity(sportsIntent);
 
-                    return true;
+                    return true; // Return true.
 
                 case R.id.techCategory:
                     Intent techIntent = new Intent(MainActivity.this, TechActivity.class);
