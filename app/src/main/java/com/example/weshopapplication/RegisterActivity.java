@@ -44,10 +44,12 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private EditText emailAddressField;
     private static final int NOTIFICATION_CODE = 1;
     private static final int PERMISSION_CODE = 1;
+
     private TextView registerText; // The register text
     private EditText passwordField;
     private FirebaseAuth authentication;
     private RadioButton termsAndConditions;
+
     private Button registerButton; // Register button
     private FirebaseFirestore fireStoreAuth;
 
@@ -59,8 +61,8 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private boolean isEmpty;
     private boolean isValid;
     private boolean isRegistered;
-    private NotificationManagerCompat notificationManager; // Notification manager variable
 
+    private NotificationManagerCompat notificationManager; // Notification manager variable
     private Pattern regexPatterns = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]"); // Regex patterns
 
     @Override
@@ -79,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         authentication = FirebaseAuth.getInstance();
         fireStoreAuth = FirebaseFirestore.getInstance();
 
-        notificationManager = NotificationManagerCompat.from(this);
+        notificationManager = NotificationManagerCompat.from(this); // Register the notification manager
 
         this.registerButton.setOnClickListener(new View.OnClickListener() { // Add listener to the button
             @Override
@@ -87,23 +89,21 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 requestNotificationPermission();
                 validateUsername(); // Call method to validate username
                 validateEmailAddress();
-
                 validatePassword();
                 validateTermsAndConditions();
                 writeToDatabase();
             }
         });
-
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) { // Routine that creates the menu
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.register_menu, menu);
 
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) { // Routine that determines which menu item is chosen
         try {
 
             switch (item.getItemId()) {
