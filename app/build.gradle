@@ -3,10 +3,10 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion '29.0.2'
     defaultConfig {
         applicationId "com.example.weshopapplication"
-        minSdkVersion 16
+        minSdkVersion 19
         multiDexEnabled true
         targetSdkVersion 29
         versionCode 1

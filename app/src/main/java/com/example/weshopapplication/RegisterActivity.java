@@ -2,12 +2,9 @@ package com.example.weshopapplication;
 
 import android.app.AlertDialog;
 import android.app.NotificationManager;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +19,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -43,9 +40,10 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private static final int PERMISSION_CODE = 1;
     private TextView registerText; // The register text
     private EditText passwordField;
+    private FirebaseAuth authentication;
     private RadioButton termsAndConditions;
     private Button registerButton; // Register button
-    private FirebaseFirestore authentication;
+    private FirebaseFirestore fireStoreAuth;
 
     private boolean hasDigits; // True or false if the inputs have numbers
     private boolean startsWithUppercase; // True or false if the inputs start with an upper case.
@@ -55,7 +53,6 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private boolean isEmpty;
     private boolean isValid;
     private boolean isRegistered;
-    private DocumentReference userDocRef = FirebaseFirestore.getInstance().document("userdata/userregistrationdata");
     private NotificationManagerCompat notificationManager; // Notification manager variable
 
     private Pattern regexPatterns = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]"); // Regex patterns
@@ -73,23 +70,20 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
         this.termsAndConditions = findViewById(R.id.termsAndConditionsBox);
         this.registerButton = findViewById(R.id.registerBtn);
-        this.authentication = FirebaseFirestore.getInstance();
+        authentication = FirebaseAuth.getInstance();
+        fireStoreAuth = FirebaseFirestore.getInstance();
 
         notificationManager = NotificationManagerCompat.from(this);
-        FirebaseApp.initializeApp(RegisterActivity.this); // Initialise the firebase app
 
         this.registerButton.setOnClickListener(new View.OnClickListener() { // Add listener to the button
             @Override
             public void onClick(View buttonView) {
                 requestNotificationPermission();
                 validateUsername(); // Call method to validate username
-                validatePassword();
-
                 validateEmailAddress();
+                validatePassword();
                 validateTermsAndConditions();
                 writeToDatabase();
-                sendNotification();
-                transitionToLogin();
             }
         });
 
@@ -104,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         super.onStart();
     }
 
-    private boolean validateUsername() { // Routine that validates the username entered by the user against specific criteria
+    private void validateUsername() { // Routine that validates the username entered by the user against specific criteria
         String usernameInputField = usernameField.getText().toString().trim();
 
         if (usernameInputField.isEmpty()) { // If the input field is left empty
@@ -118,19 +112,18 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                         }
                     });
 
+
             emptyDialog.show();
             usernameField.setError("Can't be left empty");
             usernameField.setText("");
             isEmpty = true;
-
-            return false;
         }
 
         for (int i = 0; i < usernameInputField.length(); i++) { // Loop over the username
 
-            if (!Character.isDigit(usernameInputField.charAt(i)) && usernameInputField.length() > 10) {
+            if (!Character.isDigit(usernameInputField.charAt(i)) && usernameInputField.length() > 20) {
 
-                usernameField.setError("Username must contain digits and length must not be bigger than 10");
+                usernameField.setError("Username must contain digits and length must not be bigger than 20 characters");
 
                 AlertDialog.Builder usernameError = new AlertDialog.Builder(RegisterActivity.this).setMessage("Please re-enter Username")
                         .setTitle("Username Error").setNegativeButton("OK", new DialogInterface.OnClickListener() {
@@ -148,9 +141,9 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
                 hasDigits = false; // Has digits is false.
                 isValid = false;
-
-                return false;
+                break;
             }
+
 
             if (regexPatterns.matcher(usernameInputField).find()) { // If the username has a regex character.
                 usernameField.setError("Username should not contain regex character");
@@ -167,39 +160,41 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
                 regexWarning.show();
                 usernameField.setText("");
-
-                return false;
-
+                return;
             } else {
-
-                isValid = true; // Username valid
-                hasDigits = true;
-                hasRegex = true;
                 usernameField.setError(null);
-                return true;
             }
 
         }
-
-        return false;
     }
 
-    private boolean validateEmailAddress() {
+    private void validateEmailAddress() {
 
         String emailAddressInputField = emailAddressField.getText().toString().trim(); // Get the input for the emailAddress
 
+
         if (emailAddressInputField.isEmpty()) {
+            AlertDialog.Builder emailError = new AlertDialog.Builder(RegisterActivity.this).setTitle("E-mail Error").setMessage("Re-Enter E-mail")
+                    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (dialog != null) {
+                                dialog.dismiss();
+                            }
+                        }
+                    });
+
+            emailError.show();
+            emailError.setCancelable(true);
+
             emailAddressField.setError("E-mail Field cannot be left empty");
             isEmpty = true;
         }
 
         if (emailAddressInputField.length() <= 0 || emailAddressInputField.length() > 25) {
             emailAddressField.setError("E-mail can't have less than 0 characters or more than 25");
-            return false;
+            return;
         }
-
-
-        // Loop over the e-mail field
 
         if (!regexPatterns.matcher(emailAddressInputField).find()) {
 
@@ -218,22 +213,15 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
             emailRegexWarning.show();
             emailAddressField.setText("");
-
-            return false;
-
-        } else {
-
-            // Otherwise no errors
-            emailAddressField.setError(null);
-            return true;
+            return;
+        }
         }
 
-    }
-
-    private boolean validatePassword() {
+    private void validatePassword() {
         String passwordEntryField = passwordField.getText().toString().trim();
 
         if (passwordEntryField.isEmpty() && !regexPatterns.matcher(passwordEntryField).matches()) { // If the password is empty and there are no regex characters found
+
             AlertDialog.Builder passwordWarning = new AlertDialog.Builder(RegisterActivity.this).setTitle("Password Warning")
                     .setMessage("Re-enter Password Please").setNegativeButton("OK", new DialogInterface.OnClickListener() {
                         @Override
@@ -252,8 +240,8 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             hasRegex = false;
         }
 
-
         for (int i = 0; i < passwordEntryField.length(); i++) {
+
             if (!Character.isUpperCase(passwordEntryField.charAt(0))) { // If the password does not start with an upper case character
                 AlertDialog.Builder pwUpperCase = new AlertDialog.Builder(RegisterActivity.this).setTitle("Password Error")
                         .setMessage("Re-enter Password").setNegativeButton("OK", new DialogInterface.OnClickListener() {
@@ -271,11 +259,10 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 break;
             }
         }
-
-        return false;
     }
 
     private void validateTermsAndConditions() {
+
         if (!termsAndConditions.isChecked()) { // If the terms and conditions box is not ticked
             AlertDialog.Builder boxError = new AlertDialog.Builder(RegisterActivity.this).setTitle("T&C Box Not Checked")
                     .setMessage("Please tick terms and conditions box")
@@ -290,31 +277,11 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                     });
 
             boxError.show();
+        } else {
+            sendNotification();
         }
     }
 
-    public void writeToDatabase() { // Writes to database
-        final boolean isWritten = false;
-
-        HashMap<String, Object> userData = new HashMap<>(); // A HashMap of a key and pair value for the user data
-
-            userData.put("username", usernameField.getText().toString());
-        userData.put("email_address", emailAddressField.getText().toString());
-            userData.put("password", passwordField.getText().toString());
-
-        authentication.collection("user_data").add(userData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(RegisterActivity.this, "Added SUCCESSS", Toast.LENGTH_LONG).show();
-            }
-
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(RegisterActivity.this, "Not added", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
 
     private void sendNotification() {
         String notification_message = "Register Success"; // Message to display
@@ -330,12 +297,28 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         notificationManager.notify(NOTIFICATION_CODE, builder.build()); // Build the notification with a code.
     }
 
-    private void transitionToLogin() {
-        try {
-            Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-            startActivity(loginIntent);
-        } catch (ActivityNotFoundException exc) {
-            Log.d("Error", exc.getMessage());
-        }
+    private void writeToDatabase() { // Writes to database
+
+        String usernameEntry = usernameField.getText().toString();
+        String emailEntry = emailAddressField.getText().toString();
+        String passwordEntry = passwordField.getText().toString();
+
+        HashMap<String, String> user_data = new HashMap<>();
+
+        user_data.put("username", usernameEntry);
+        user_data.put("email_address", emailEntry);
+        user_data.put("password", passwordEntry);
+
+        fireStoreAuth.collection("userdata").add(user_data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Toast.makeText(RegisterActivity.this, "Added data", Toast.LENGTH_LONG).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(RegisterActivity.this, "Not added", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
