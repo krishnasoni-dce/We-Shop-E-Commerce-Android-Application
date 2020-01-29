@@ -13,6 +13,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -30,6 +31,10 @@ public class MainActivityTest {
 
     @Rule
     public ActivityTestRule<RegisterActivity> registerRule = new ActivityTestRule<>(RegisterActivity.class);
+
+    @Rule
+    public ActivityTestRule<LoginActivity> loginActivityRule = new ActivityTestRule<>(LoginActivity.class);
+
 
     // Activities to be tested
     private MainActivity mainActivity = null;
@@ -49,8 +54,7 @@ public class MainActivityTest {
 
     @Before
     public void setUp() throws Exception {
-        mainActivity = activityRule.getActivity(); // Get the activity
-        registerActivity = registerRule.getActivity();
+        getActivities();
 
         // Get the edit text fields
         usernameTest = registerActivity.findViewById(R.id.usernameField);
@@ -58,11 +62,16 @@ public class MainActivityTest {
         passwordTest = registerActivity.findViewById(R.id.passwordField);
     }
 
+    public void getActivities() {
+        mainActivity = activityRule.getActivity(); // Get the activity
+        registerActivity = registerRule.getActivity();
+        loginActivity = loginActivityRule.getActivity(); // Get the login activity
+    }
+
 
     @Test
     public void testMainActivityLauncher() { // Routine that tests if the main activity launches.
         View view = mainActivity.findViewById(R.id.welcomeTxt);
-
 
         assertNotNull(view);
     }
@@ -76,7 +85,7 @@ public class MainActivityTest {
     @Test
     public void testUsernameEntryOne() { // 1. Tests entries for an empty username. Should not get accepted and should pass
 
-        assertNotEquals("", usernameTest.getText().toString());
+        assertEquals("", usernameTest.getText().toString());
     }
 
     @Test
@@ -99,5 +108,6 @@ public class MainActivityTest {
     public void tearDown() throws Exception {
         mainActivity = null;
         registerActivity = null;
+        loginActivity = null;
     }
 }
