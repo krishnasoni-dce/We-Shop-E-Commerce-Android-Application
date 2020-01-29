@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
 
 // Author: Sabin Constantin Lungu.
 // Matriculation Number: 40397517
-// Purpose of Activity: To allow users to register an account.
+// Purpose of Activity: To allow users to register an account and write their registration data to a Firebase database.
 // Any errors? N/A
 
 
@@ -45,8 +45,9 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private static final String CHANNEL_ID = "register_channel";
     private EditText usernameField;
     private EditText emailAddressField;
+
     private static final int NOTIFICATION_CODE = 1;
-    private static final int PERMISSION_CODE = 1;
+    private static final int PERMISSION_CODE = 1; // A permission code for asking permission to access notifications
 
     private TextView registerText; // The register text
     private EditText passwordField;
@@ -139,7 +140,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             }
 
         } catch (ActivityNotFoundException act) {
-            Log.d("Error : ", act.getMessage());
+            Log.d("Error : ", act.toString()); // Get the cause of the error.
         }
 
         return true;
@@ -171,14 +172,14 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
             emptyDialog.show();
             usernameField.setError("Can't be left empty");
-            usernameField.setText("");
-            isEmpty = true;
-            return false;
+            usernameField.setText(""); // Flush the empty field out
+            isEmpty = true; // The field is empty
+            return false; // Return false
         }
 
         for (int i = 0; i < usernameInputField.length(); i++) { // Loop over the username
 
-            if (!Character.isDigit(usernameInputField.charAt(i)) && usernameInputField.length() > 20) {
+            if (!Character.isDigit(usernameInputField.charAt(i)) && usernameInputField.length() > 20) { // If the username has no digits or the length is bigger than 20
 
                 usernameField.setError("Username must contain digits and length must not be bigger than 20 characters");
 
@@ -227,7 +228,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         return true;
     }
 
-    private void validateEmailAddress() {
+    private void validateEmailAddress() { // Routine that validates the e-mail address.
 
         String emailAddressInputField = emailAddressField.getText().toString().trim(); // Get the input for the emailAddress
 

@@ -13,7 +13,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 // Purpose of Test: To test if the MainActivity loads
@@ -34,6 +34,7 @@ public class MainActivityTest {
     // Activities to be tested
     private MainActivity mainActivity = null;
     private RegisterActivity registerActivity = null;
+
     private LoginActivity loginActivity = null;
     private SportsAndOutdoorsActivity sportsAndOutdoorsActivity = null;
     private TechActivity techActivity = null;
@@ -73,16 +74,25 @@ public class MainActivityTest {
     }
 
     @Test
-    public void testUsernameEntry() { // Tests entries for the username
+    public void testUsernameEntryOne() { // 1. Tests entries for an empty username. Should not get accepted and should pass
 
-        assertEquals("sabin29", usernameTest.getText().toString());
+        assertNotEquals("", usernameTest.getText().toString());
     }
 
+    @Test
+    public void testUsernameEntryTwo() { // 2. Tests for regex entries (SHOULD PASS AS THE VALIDATION WORKS 100%)
+        assertNotEquals("*£&$^", usernameTest.getText().toString());
+    }
 
     @Test
     public void testRegisterActivityLauncher() {
         View registerView = registerActivity.findViewById(R.id.registerTxt);
         assertNotNull(registerView);
+    }
+
+    @Test
+    public void testLoginActivityLauncher() { // Test stub that tests to see if the login activity launches
+        //View loginView = loginActivity.findViewById();
     }
 
     @After
