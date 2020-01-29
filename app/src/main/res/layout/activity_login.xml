@@ -29,9 +29,9 @@
         android:background="@drawable/edit_round"
         android:drawableLeft="@drawable/ic_email_black_24dp"
         android:drawablePadding="13dp"
+        android:hint="E-mail Address"
         android:inputType="textEmailAddress"
         android:paddingLeft="13dp"
-        android:text="E-mail Address"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -45,9 +45,9 @@
         android:drawableLeft="@drawable/ic_lock_black_24dp"
         android:drawablePadding="20dp"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPersonName"
         android:paddingLeft="13dp"
-        android:text="Password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

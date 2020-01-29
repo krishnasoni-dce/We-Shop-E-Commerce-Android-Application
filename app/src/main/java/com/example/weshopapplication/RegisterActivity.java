@@ -25,7 +25,6 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,19 +42,19 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity { // Register class
     private static final String CHANNEL_ID = "register_channel";
-    private EditText usernameField;
-    private EditText emailAddressField;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private volatile EditText usernameField;
 
     private static final int NOTIFICATION_CODE = 1;
     private static final int PERMISSION_CODE = 1; // A permission code for asking permission to access notifications
 
     private TextView registerText; // The register text
     private EditText passwordField;
-    private FirebaseAuth authentication;
     private RadioButton termsAndConditions;
 
     private Button registerButton; // Register button
-    private FirebaseFirestore fireStoreAuth;
+    private volatile EditText emailAddressField;
+
 
     private boolean hasDigits; // True or false if the inputs have numbers
     private boolean startsWithUppercase; // True or false if the inputs start with an upper case.
@@ -67,7 +66,8 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private boolean isRegistered;
 
     private NotificationManagerCompat notificationManager; // Notification manager variable
-    private Pattern regexPatterns = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]"); // Regex patterns
+    private FirebaseAuth authentication;
+    private volatile Pattern regexPatterns = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]"); // Regex patterns
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { // Android Lifecycle method 1
@@ -82,14 +82,16 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
         this.termsAndConditions = findViewById(R.id.termsAndConditionsBox);
         this.registerButton = findViewById(R.id.registerBtn);
+
         authentication = FirebaseAuth.getInstance();
-        fireStoreAuth = FirebaseFirestore.getInstance();
+
 
         notificationManager = NotificationManagerCompat.from(this); // Register the notification manager
 
         this.registerButton.setOnClickListener(new View.OnClickListener() { // Add listener to the button
             @Override
             public void onClick(View buttonView) {
+
                 requestNotificationPermission();
                 validateUsername(); // Call method to validate username
                 validateEmailAddress();
@@ -108,9 +110,10 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     }
 
     public boolean onOptionsItemSelected(MenuItem item) { // Routine that determines which menu item is chosen
-        try {
 
+        try {
             switch (item.getItemId()) {
+
                 case R.id.sportsAndOutdoorsCategory: // If the sports and outdoors category is clicked on
                     Intent sportsActivity = new Intent(RegisterActivity.this, SportsAndOutdoorsActivity.class); // Create intent for sports activity
                     startActivity(sportsActivity);
@@ -146,8 +149,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         return true;
     }
 
-
-    public void requestNotificationPermission() { // Routine that requests the user to use permissions
+    private void requestNotificationPermission() { // Routine that requests the user to use permissions
 
     }
 
@@ -342,6 +344,8 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
             sendNotification();
             writeToDatabase();
+
+            writeToFirestore();
             transitionToLogin();
         }
     }
@@ -363,45 +367,64 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
     private void writeToDatabase() { // Writes to database
 
+        // Get the user inputs
         String usernameEntry = usernameField.getText().toString();
         String emailEntry = emailAddressField.getText().toString();
         String passwordEntry = passwordField.getText().toString();
 
-        authentication.createUserWithEmailAndPassword(emailEntry, passwordEntry).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        authentication.createUserWithEmailAndPassword(emailEntry, passwordEntry).addOnCompleteListener(new OnCompleteListener<AuthResult>() { // Create user account with e-mail and password
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
+
+                if (task.isSuccessful()) { // If the register task is successful
+
                     Toast.makeText(RegisterActivity.this, "Data written to DB", Toast.LENGTH_LONG).show();
+
                 } else {
+
                     Toast.makeText(RegisterActivity.this, "Could not write to DB", Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    private void writeToFirestore() {
+        String usernameEntry = usernameField.getText().toString();
+        String emailEntry = emailAddressField.getText().toString();
+        String passwordEntry = passwordField.getText().toString();
+
 
         HashMap<String, String> user_data = new HashMap<>(); // HashMap for the user data
 
+        // Add the field entries into the HashMap
         user_data.put("username", usernameEntry);
         user_data.put("email_address", emailEntry);
         user_data.put("password", passwordEntry);
 
-        fireStoreAuth.collection("userdata").add(user_data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(RegisterActivity.this, "Added data", Toast.LENGTH_LONG).show();
-            }
+        Toast.makeText(RegisterActivity.this, "Before firestore", Toast.LENGTH_LONG).show();
 
+        db.collection("user_data").add(user_data).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentReference> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(RegisterActivity.this, "ADDED DATA TO FIRESTORE", Toast.LENGTH_LONG).show();
+                }
+            }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(RegisterActivity.this, "Not added", Toast.LENGTH_LONG).show();
+                Toast.makeText(RegisterActivity.this, "Could not write to FIRESTORE", Toast.LENGTH_LONG).show();
+                Log.d("Error is : ", e.toString());
             }
         });
+
     }
 
     private void transitionToLogin() { // Take the user to the login page after registration
         String errorMessage = "Error";
         try {
 
+            // Take user to login
             Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
             startActivity(loginIntent);
 
