@@ -4,16 +4,15 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 // Author of Application: Sabin Constantin Lungu
 // Purpose of Class: Main Activity implements homepage functionality of application.
@@ -27,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button registerButton; // Variable Button to register
     private Button loginButton; // Variable to store the login button
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
         this.registerButton = findViewById(R.id.registerBtn);
         this.loginButton = findViewById(R.id.loginBtn);
+
+        this.auth = FirebaseAuth.getInstance();
 
         this.registerButton.setOnClickListener(new View.OnClickListener() { // Listener added to register button
             @Override
@@ -72,14 +74,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) { // Routine that creates the main menu
-        // Create a menu inflater
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.homepagemenu, menu);
-
-        return true;
-    }
 
     public boolean onOptionsItemSelected(MenuItem item) { // Determines which item is selected from the menu
         try {
@@ -115,6 +109,10 @@ public class MainActivity extends AppCompatActivity {
 
                     return true; // Return true;
 
+                case R.id.logoutFeature:
+                    logout();
+                    finish();
+
                 default:
 
             }
@@ -130,9 +128,8 @@ public class MainActivity extends AppCompatActivity {
         moveTaskToBack(true); // Move back a task
     }
 
-    public void onNothingSelected(AdapterView<?> parent) { // Routine that determines if nothing is selected
-        if (parent == null) {
-            return;
-        }
+    private void logout() {
+        auth.signOut();
+        finish();
     }
 }

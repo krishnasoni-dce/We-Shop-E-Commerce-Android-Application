@@ -44,7 +44,7 @@ import java.util.regex.Pattern;
 public class RegisterActivity extends AppCompatActivity { // Register class
     private static final String CHANNEL_ID = "register_channel";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private volatile EditText usernameField;
+    private EditText usernameField;
 
     private static final int NOTIFICATION_CODE = 1;
     private static final int PERMISSION_CODE = 1; // A permission code for asking permission to access notifications
@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private RadioButton termsAndConditions;
 
     private Button registerButton; // Register button
-    private volatile EditText emailAddressField;
+    private EditText emailAddressField;
 
 
     private boolean hasDigits; // True or false if the inputs have numbers
@@ -68,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
     private NotificationManagerCompat notificationManager; // Notification manager variable
     private FirebaseAuth authentication = FirebaseAuth.getInstance();
-    private volatile Pattern regexPatterns = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]"); // Regex patterns
+    private Pattern regexPatterns = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]"); // Regex patterns
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { // Android Lifecycle method 1
@@ -83,9 +83,6 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
         this.termsAndConditions = findViewById(R.id.termsAndConditionsBox);
         this.registerButton = findViewById(R.id.registerBtn);
-
-
-
 
         notificationManager = NotificationManagerCompat.from(this); // Register the notification manager
 
@@ -137,6 +134,12 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 case R.id.diyCategory:
                     Intent diyCategory = new Intent(RegisterActivity.this, DIYActivity.class);
                     startActivity(diyCategory);
+
+                    return true;
+
+                case R.id.logoutFeature:
+                    logout();
+                    finish();
 
                     return true;
 
@@ -388,12 +391,10 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         user_data.put("email_address", emailEntry);
         user_data.put("password", passwordEntry);
 
-        Toast.makeText(RegisterActivity.this, "Before firestore", Toast.LENGTH_LONG).show();
-
         db.collection("user_data").add(user_data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(RegisterActivity.this, "ADDED DDATA TO FIRESOTRE", Toast.LENGTH_LONG).show();
+                Toast.makeText(RegisterActivity.this, "Added data to firestore", Toast.LENGTH_LONG).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -429,5 +430,10 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
             Log.d(errorMessage, act.toString());
         }
+    }
+
+    private void logout() {
+        authentication.signOut();
+        finish();
     }
 }

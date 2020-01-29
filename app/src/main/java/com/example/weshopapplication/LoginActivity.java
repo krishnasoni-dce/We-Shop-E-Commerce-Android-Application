@@ -5,8 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -36,7 +34,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailAddressField;
     private EditText passwordField;
     private Button loginButton;
-
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth auth;
     private Pattern regexPatterns = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]"); // Regex patterns
@@ -60,18 +57,6 @@ public class LoginActivity extends AppCompatActivity {
                 validatePassword();
             }
         });
-    }
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        if (menu != null) { // If there is currently no menu
-            MenuInflater menuInflater = getMenuInflater();
-            menuInflater.inflate(R.menu.login_menu, menu);
-        } else {
-            return false;
-        }
-
-        return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -110,8 +95,9 @@ public class LoginActivity extends AppCompatActivity {
 
                     return true;
 
-
                 default:
+
+                    return super.onOptionsItemSelected(item);
             }
 
         } catch (ActivityNotFoundException act) {
@@ -171,6 +157,7 @@ public class LoginActivity extends AppCompatActivity {
                     });
 
             passwordError.show();
+            passwordField.setError("Password cannot be left empty");
             passwordField.setText(flushedString);
 
             return false;
@@ -178,7 +165,6 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             passwordField.setError(null);
             login();
-            transitionToHomepage();
             return true;
         }
     }
@@ -191,13 +177,23 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "You are logged in as " + emailInput, Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "You aree logged in as " + emailInput, Toast.LENGTH_LONG).show();
+                    transitionToHomepage();
+
+                } else if (!task.isSuccessful()) {
+                    Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
     private void transitionToHomepage() {
+        try {
+            Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(homeIntent);
 
+        } catch (ActivityNotFoundException act) {
+            Log.d("Error", act.toString());
+        }
     }
 }

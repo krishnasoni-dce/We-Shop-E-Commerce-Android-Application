@@ -22,6 +22,14 @@
         android:title="DIY"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/logoutFeature"
+        android:title="Logout"
+        android:visible="true"
+        app:showAsAction="ifRoom">
+
+    </item>
+
 
 </menu>
 

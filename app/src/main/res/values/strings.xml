@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">We Shop E-Commerce</string>
     <string name="title_activity_login">LoginActivity</string>
 </resources>
