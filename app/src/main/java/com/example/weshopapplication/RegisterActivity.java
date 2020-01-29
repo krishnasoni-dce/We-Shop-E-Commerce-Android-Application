@@ -343,27 +343,12 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
         } else {
 
-            sendNotification();
             writeToDatabase();
-
             writeToFirestore();
+
+            sendNotification();
             transitionToLogin();
         }
-    }
-
-
-    private void sendNotification() {
-        String notification_message = "Register Success"; // Message to display
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(RegisterActivity.this, CHANNEL_ID) // Create a notification builder by passing the activity and channel id
-                .setContentTitle(notification_message) // Set the content title of the notification
-                .setSmallIcon(R.drawable.ic_message_black_24dp) // Displays the icon.
-                .setContentText("You have successfully registered") // Sets the content text
-                .setAutoCancel(true); // Automatically cancels
-
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        notificationManager.notify(NOTIFICATION_CODE, builder.build()); // Build the notification with a code.
     }
 
     private void writeToDatabase() { // Writes to database
@@ -416,7 +401,20 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 Log.d("error : ", e.toString());
             }
         });
+    }
 
+    private void sendNotification() {
+        String notification_message = "Register Success"; // Message to display
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(RegisterActivity.this, CHANNEL_ID) // Create a notification builder by passing the activity and channel id
+                .setContentTitle(notification_message) // Set the content title of the notification
+                .setSmallIcon(R.drawable.ic_message_black_24dp) // Displays the icon.
+                .setContentText("You have successfully registered") // Sets the content text
+                .setAutoCancel(true); // Automatically cancels
+
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationManager.notify(NOTIFICATION_CODE, builder.build()); // Build the notification with a code.
     }
 
     private void transitionToLogin() { // Take the user to the login page after registration

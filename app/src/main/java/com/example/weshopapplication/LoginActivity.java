@@ -143,7 +143,9 @@ public class LoginActivity extends AppCompatActivity {
             emailAddressField.setError("E-mail must contain @ symbol");
             emailAddressField.setText("");
             return false;
+
         } else {
+
             emailAddressField.setError(null); // Set no error otherwise
             login();
             return true;
@@ -176,6 +178,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             passwordField.setError(null);
             login();
+            transitionToHomepage();
             return true;
         }
     }
@@ -188,9 +191,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "You are logged as " + emailInput, Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "You are logged in as " + emailInput, Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    private void transitionToHomepage() {
+
     }
 }
