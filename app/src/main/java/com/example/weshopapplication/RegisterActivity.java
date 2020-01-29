@@ -23,8 +23,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -89,9 +92,9 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 requestNotificationPermission();
                 validateUsername(); // Call method to validate username
                 validateEmailAddress();
+
                 validatePassword();
                 validateTermsAndConditions();
-                writeToDatabase();
             }
         });
     }
@@ -107,8 +110,8 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         try {
 
             switch (item.getItemId()) {
-                case R.id.sportsAndOutdoorsCategory:
-                    Intent sportsActivity = new Intent(RegisterActivity.this, SportsAndOutdoorsActivity.class);
+                case R.id.sportsAndOutdoorsCategory: // If the sports and outdoors category is clicked on
+                    Intent sportsActivity = new Intent(RegisterActivity.this, SportsAndOutdoorsActivity.class); // Create intent for sports activity
                     startActivity(sportsActivity);
 
                     return true;
@@ -333,8 +336,12 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                     });
 
             boxError.show();
+
         } else {
+
             sendNotification();
+            writeToDatabase();
+            transitionToLogin();
         }
     }
 
@@ -359,7 +366,18 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         String emailEntry = emailAddressField.getText().toString();
         String passwordEntry = passwordField.getText().toString();
 
-        HashMap<String, String> user_data = new HashMap<>();
+        authentication.createUserWithEmailAndPassword(emailEntry, passwordEntry).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(RegisterActivity.this, "Data written to DB", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Could not write to DB", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        HashMap<String, String> user_data = new HashMap<>(); // HashMap for the user data
 
         user_data.put("username", usernameEntry);
         user_data.put("email_address", emailEntry);
@@ -370,11 +388,25 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             public void onSuccess(DocumentReference documentReference) {
                 Toast.makeText(RegisterActivity.this, "Added data", Toast.LENGTH_LONG).show();
             }
+
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(RegisterActivity.this, "Not added", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void transitionToLogin() { // Take the user to the login page after registration
+        String errorMessage = "Error";
+        try {
+
+            Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
+
+        } catch (ActivityNotFoundException act) {
+
+            Log.d(errorMessage, act.toString());
+        }
     }
 }
