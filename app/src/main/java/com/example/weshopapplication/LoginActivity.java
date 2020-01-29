@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -187,7 +188,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    //  Toast.makeText(LoginActivity.this, "You are logged in as : ", auth.getCurrentUser() " ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "You are logged as " + emailInput, Toast.LENGTH_LONG).show();
                 }
             }
         });

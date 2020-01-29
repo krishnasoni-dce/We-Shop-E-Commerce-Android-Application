@@ -25,6 +25,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -66,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private boolean isRegistered;
 
     private NotificationManagerCompat notificationManager; // Notification manager variable
-    private FirebaseAuth authentication;
+    private FirebaseAuth authentication = FirebaseAuth.getInstance();
     private volatile Pattern regexPatterns = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]"); // Regex patterns
 
     @Override
@@ -83,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         this.termsAndConditions = findViewById(R.id.termsAndConditionsBox);
         this.registerButton = findViewById(R.id.registerBtn);
 
-        authentication = FirebaseAuth.getInstance();
+
 
 
         notificationManager = NotificationManagerCompat.from(this); // Register the notification manager
@@ -389,12 +390,13 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     }
 
     private void writeToFirestore() {
+
         String usernameEntry = usernameField.getText().toString();
         String emailEntry = emailAddressField.getText().toString();
         String passwordEntry = passwordField.getText().toString();
 
 
-        HashMap<String, String> user_data = new HashMap<>(); // HashMap for the user data
+        HashMap<String, Object> user_data = new HashMap<>(); // HashMap for the user data
 
         // Add the field entries into the HashMap
         user_data.put("username", usernameEntry);
@@ -403,18 +405,15 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
         Toast.makeText(RegisterActivity.this, "Before firestore", Toast.LENGTH_LONG).show();
 
-        db.collection("user_data").add(user_data).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<DocumentReference>() {
+        db.collection("user_data").add(user_data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(RegisterActivity.this, "ADDED DATA TO FIRESTORE", Toast.LENGTH_LONG).show();
-                }
+            public void onSuccess(DocumentReference documentReference) {
+                Toast.makeText(RegisterActivity.this, "ADDED DDATA TO FIRESOTRE", Toast.LENGTH_LONG).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(RegisterActivity.this, "Could not write to FIRESTORE", Toast.LENGTH_LONG).show();
-                Log.d("Error is : ", e.toString());
+                Log.d("error : ", e.toString());
             }
         });
 

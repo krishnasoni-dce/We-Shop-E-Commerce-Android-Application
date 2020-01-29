@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "738180815643",
-    "firebase_url": "https://weshopapplication-e2f26.firebaseio.com",
-    "project_id": "weshopapplication-e2f26",
-    "storage_bucket": "weshopapplication-e2f26.appspot.com"
+    "project_number": "271359503714",
+    "firebase_url": "https://weshopapplication-74eec.firebaseio.com",
+    "project_id": "weshopapplication-74eec",
+    "storage_bucket": "weshopapplication-74eec.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:738180815643:android:1463b3df81907705ea91be",
+        "mobilesdk_app_id": "1:271359503714:android:d2f46f869dac5ea9f4d03b",
         "android_client_info": {
           "package_name": "com.example.weshopapplication"
         }
       },
       "oauth_client": [
         {
-          "client_id": "738180815643-48m2koshikjb351pvhv9c227qcsa5b1h.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.weshopapplication",
-            "certificate_hash": "b4caad7d003385e9e44f75ca1155d7f76d9ebdcb"
-          }
-        },
-        {
-          "client_id": "738180815643-0r3o66ikhi2lbalonidgug2lv94ql2vb.apps.googleusercontent.com",
+          "client_id": "271359503714-2593n3v7op50v7mu4hnq6fineh4khrvi.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDiG5zU5ghciz0yGGdYjLFgJRtPt5aYK1c"
+          "current_key": "AIzaSyBBr4GUvhbd-Ew2GAX0tJWhIz6OBykmr9s"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "738180815643-0r3o66ikhi2lbalonidgug2lv94ql2vb.apps.googleusercontent.com",
+              "client_id": "271359503714-2593n3v7op50v7mu4hnq6fineh4khrvi.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
