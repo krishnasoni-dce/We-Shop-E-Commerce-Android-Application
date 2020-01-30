@@ -20,13 +20,7 @@
     <item
         android:id="@+id/diyCategory"
         android:title="DIY"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/logoutFeature"
-        android:title="Logout"
-        android:visible="true"
-        app:showAsAction="ifRoom">
+        app:showAsAction="never">
 
     </item>
 

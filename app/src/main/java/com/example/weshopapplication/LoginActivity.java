@@ -187,7 +187,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void transitionToHomepage() {
+    public void transitionToHomepage() {
         try {
             Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(homeIntent);

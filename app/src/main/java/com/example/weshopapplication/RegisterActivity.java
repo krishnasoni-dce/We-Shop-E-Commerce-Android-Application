@@ -94,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 validateUsername(); // Call method to validate username
                 validateEmailAddress();
 
-                validatePassword();
+                validatePassword(); // Call method to validate the password
                 validateTermsAndConditions();
             }
         });
@@ -137,13 +137,9 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
                     return true;
 
-                case R.id.logoutFeature:
-                    logout();
-                    finish();
-
-                    return true;
-
                 default:
+
+                    return super.onOptionsItemSelected(item); // Return the base item selected
             }
 
         } catch (ActivityNotFoundException act) {
@@ -179,6 +175,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             emptyDialog.show();
             usernameField.setError("Can't be left empty");
             usernameField.setText(""); // Flush the empty field out
+
             isEmpty = true; // The field is empty
             return false; // Return false
         }
@@ -257,12 +254,14 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             isEmpty = true;
         }
 
-        if (emailAddressInputField.length() <= 0 || emailAddressInputField.length() > 25) {
-            emailAddressField.setError("E-mail can't have less than 0 characters or more than 25");
-            return;
+        if (emailAddressInputField.length() > 25) { // If the e-mail length is bigger than 25 characters
+            emailAddressField.setError("E-mail can't have less than 0 characters or more than 25"); // Display error
+
+            isValid = false; // Not valid
+            return; // Return.
         }
 
-        if (!regexPatterns.matcher(emailAddressInputField).find()) {
+        if (!regexPatterns.matcher(emailAddressInputField).find()) { // If there is no regex characters matched including the @ symbol that is needed
 
             emailAddressField.setError("E-mail Address must contain @ symbol");
             AlertDialog.Builder emailRegexWarning = new AlertDialog.Builder(RegisterActivity.this).setTitle("E-mail Regex Warning").setMessage("E-mail must contain @ symbol")
@@ -283,7 +282,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         }
         }
 
-    private void validatePassword() {
+    private void validatePassword() { // Routine to validate the password
         String passwordEntryField = passwordField.getText().toString().trim();
 
         if (passwordEntryField.isEmpty() && !regexPatterns.matcher(passwordEntryField).matches()) { // If the password is empty and there are no regex characters found
@@ -306,7 +305,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             hasRegex = false;
         }
 
-        for (int i = 0; i < passwordEntryField.length(); i++) {
+        for (int i = 0; i < passwordEntryField.length(); i++) { // Loop over the password entry
 
             if (!Character.isUpperCase(passwordEntryField.charAt(0))) { // If the password does not start with an upper case character
                 AlertDialog.Builder pwUpperCase = new AlertDialog.Builder(RegisterActivity.this).setTitle("Password Error")
@@ -329,7 +328,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
     private void validateTermsAndConditions() {
 
-        if (!termsAndConditions.isChecked()) { // If the terms and conditions box is not ticked
+        if (!termsAndConditions.isChecked()) { // If the terms and conditions box is not checked
             AlertDialog.Builder boxError = new AlertDialog.Builder(RegisterActivity.this).setTitle("T&C Box Not Checked")
                     .setMessage("Please tick terms and conditions box")
                     .setNegativeButton("OK", new DialogInterface.OnClickListener() {
@@ -342,14 +341,14 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                         }
                     });
 
-            boxError.show();
+            boxError.show(); // Show the error
 
         } else {
 
+            sendNotification();
             writeToDatabase();
             writeToFirestore();
 
-            sendNotification();
             transitionToLogin();
         }
     }
@@ -404,7 +403,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         });
     }
 
-    private void sendNotification() {
+    private void sendNotification() { // Routine to send notification after registration
         String notification_message = "Register Success"; // Message to display
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(RegisterActivity.this, CHANNEL_ID) // Create a notification builder by passing the activity and channel id
@@ -424,16 +423,11 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
             // Take user to login
             Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-            startActivity(loginIntent);
+            startActivity(loginIntent); // Start the login activity
 
         } catch (ActivityNotFoundException act) {
 
             Log.d(errorMessage, act.toString());
         }
-    }
-
-    private void logout() {
-        authentication.signOut();
-        finish();
     }
 }

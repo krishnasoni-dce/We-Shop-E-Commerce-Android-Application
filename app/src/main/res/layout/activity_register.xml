@@ -78,7 +78,7 @@
         android:id="@+id/termsAndConditionsBox"
         android:layout_width="201dp"
         android:layout_height="33dp"
-        android:layout_marginStart="72dp"
+        android:layout_marginStart="80dp"
         android:layout_marginBottom="360dp"
         android:background="@drawable/edit_round"
         android:fontFamily="sans-serif-medium"

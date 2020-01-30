@@ -4,6 +4,8 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -74,6 +76,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.homepagemenu, menu);
+
+        return true;
+
+    }
+
 
     public boolean onOptionsItemSelected(MenuItem item) { // Determines which item is selected from the menu
         try {
@@ -108,10 +119,6 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
 
                     return true; // Return true;
-
-                case R.id.logoutFeature:
-                    logout();
-                    finish();
 
                 default:
 
