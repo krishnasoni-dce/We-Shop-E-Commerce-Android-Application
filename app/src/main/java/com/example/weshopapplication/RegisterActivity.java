@@ -56,7 +56,6 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private Button registerButton; // Register button
     private EditText emailAddressField;
 
-
     private boolean hasDigits; // True or false if the inputs have numbers
     private boolean startsWithUppercase; // True or false if the inputs start with an upper case.
     private boolean hasCharacters; // True or false if the input has characters
@@ -102,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
     public boolean onCreateOptionsMenu(Menu menu) { // Routine that creates the menu
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.register_menu, menu);
+        inflater.inflate(R.menu.register_menu, menu); // Inflate the menu
 
         return true;
     }
@@ -282,7 +281,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         }
         }
 
-    private void validatePassword() { // Routine to validate the password
+    private boolean validatePassword() { // Routine to validate the password
         String passwordEntryField = passwordField.getText().toString().trim();
 
         if (passwordEntryField.isEmpty() && !regexPatterns.matcher(passwordEntryField).matches()) { // If the password is empty and there are no regex characters found
@@ -303,6 +302,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             passwordField.setError("Password cannot be left empty & must contain special characters");
             isEmpty = true;
             hasRegex = false;
+            return false;
         }
 
         for (int i = 0; i < passwordEntryField.length(); i++) { // Loop over the password entry
@@ -324,9 +324,11 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 break;
             }
         }
+
+        return true;
     }
 
-    private void validateTermsAndConditions() {
+    private boolean validateTermsAndConditions() {
 
         if (!termsAndConditions.isChecked()) { // If the terms and conditions box is not checked
             AlertDialog.Builder boxError = new AlertDialog.Builder(RegisterActivity.this).setTitle("T&C Box Not Checked")
@@ -342,6 +344,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                     });
 
             boxError.show(); // Show the error
+            return false;
 
         } else {
 
@@ -351,12 +354,13 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
             transitionToLogin();
         }
+
+        return true;
     }
 
     private void writeToDatabase() { // Writes to database
 
         // Get the user inputs
-        String usernameEntry = usernameField.getText().toString();
         String emailEntry = emailAddressField.getText().toString();
         String passwordEntry = passwordField.getText().toString();
 

@@ -94,6 +94,16 @@ public class MainActivityTest {
     }
 
     @Test
+    public void testEmailAddressEntryOne() { // 1. Test one for the e-mail address
+        assertNotEquals("sabinlungu293@f", emailAddressTest.getText().toString()); // Will pass because this value is unexpected
+    }
+
+    @Test
+    public void testEmailAddressEntryTwo() {
+
+    }
+
+    @Test
     public void testRegisterActivityLauncher() {
         View registerView = registerActivity.findViewById(R.id.registerTxt);
         assertNotNull(registerView);
@@ -101,7 +111,8 @@ public class MainActivityTest {
 
     @Test
     public void testLoginActivityLauncher() { // Test stub that tests to see if the login activity launches
-        //View loginView = loginActivity.findViewById();
+        View loginView = loginActivity.findViewById(R.id.loginBtn); // Finds the login button
+        assertNotNull(loginView); // Check condition
     }
 
     @After
