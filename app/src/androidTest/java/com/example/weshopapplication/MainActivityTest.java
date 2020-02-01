@@ -99,7 +99,7 @@ public class MainActivityTest {
     }
 
     @Test
-    public void testEmailAddressEntryTwo() {
+    public void testEmailAddressEntryTwo() { // Routine to test another e-mail address entry
 
     }
 

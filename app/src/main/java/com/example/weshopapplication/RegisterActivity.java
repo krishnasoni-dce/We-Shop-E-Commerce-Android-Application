@@ -386,7 +386,6 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         String emailEntry = emailAddressField.getText().toString();
         String passwordEntry = passwordField.getText().toString();
 
-
         HashMap<String, Object> user_data = new HashMap<>(); // HashMap for the user data
 
         // Add the field entries into the HashMap

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:background="@android:color/holo_blue_dark"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".BasketActivity">
+
+    <Button
+        android:id="@+id/place_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Place Order" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_basket"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/place_order" />
+
+</RelativeLayout>
