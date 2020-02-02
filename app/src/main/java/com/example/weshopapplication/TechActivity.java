@@ -24,14 +24,21 @@ import java.util.ArrayList;
 
 public class TechActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private TextView firstProductText;
-    private Thread thread;
+    private Thread firstActivityThread;
     private ImageView firstProductImg;
     private TextView productCost;
     private TextView firstProductColour;
     private Button firstAddToBasketButton;
 
+    private TextView secondProductText;
+    private ImageView secondProductImg;
+    private TextView secondProductCost;
+    private TextView secondProductColour;
+    private Button secondAddToBasketButton;
+
+
     private NotificationBadge badge;
-    private ImageView cartIcon;
+    private ImageView cartIcon; // Cart Icon should be red once a product is added
     private Spinner firstProductColourOptions;
     private Spinner firstProductQuantityOptions;
 
@@ -41,6 +48,14 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     private CustomArrayAdapter quantitiesCustomAdapter;
     private ColourArrayAdapter colourArrayAdapter;
 
+    private ArrayList<Colours> secondListOfColours;
+    private ArrayList<Quantities> secondListOfQuantities;
+
+    private CustomArrayAdapter secondQuantitiesCustomAdapter;
+    private ColourArrayAdapter secondColourArrayAdapter;
+    private Button nextPageBtn;
+
+    // VARIABLES FOR THE COSTS
     private int quantity_zero_cost = 0;
     private int quantity_one_cost = 500;
     private int quantity_two_cost = 3 * quantity_one_cost;
@@ -52,8 +67,8 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tech);
 
-        this.thread = new Thread();
-
+        // INITIALISE COMPONENTS FOR FIRST PRODUCT
+        this.firstActivityThread = new Thread();
         this.firstProductText = findViewById(R.id.firstProductText);
         this.firstProductImg = findViewById(R.id.firstProductImg);
         this.productCost = findViewById(R.id.firstProductCost);
@@ -79,6 +94,15 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         firstProductColourOptions.setOnItemSelectedListener(this);
         firstProductQuantityOptions.setOnItemSelectedListener(this);
+
+
+        // Initialise components for SECOND PRODUCT
+        this.secondProductText = findViewById(R.id.secondProductTxt);
+        this.secondProductImg = findViewById(R.id.appleWatchImg);
+        this.secondProductCost = findViewById(R.id.secondProductCost);
+
+
+
 
         firstAddToBasketButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -244,7 +268,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         public String toString() {
             return " " + this.quantity;
         }
-
     }
 
 
@@ -336,6 +359,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                     return super.onOptionsItemSelected(item); // Return basae item
 
             }
+
         } catch (ActivityNotFoundException act) {
 
             Log.d(error_message, act.toString());
