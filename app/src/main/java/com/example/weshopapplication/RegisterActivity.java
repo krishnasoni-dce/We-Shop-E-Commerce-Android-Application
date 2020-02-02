@@ -1,11 +1,10 @@
 package com.example.weshopapplication;
 
 import android.app.AlertDialog;
-import android.app.NotificationManager;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -38,16 +37,12 @@ import java.util.regex.Pattern;
 // Author: Sabin Constantin Lungu.
 // Matriculation Number: 40397517
 // Purpose of Activity: To allow users to register an account and write their registration data to a Firebase database.
-// Any errors? N/A
-
+// Any errors? Pending testing..
 
 public class RegisterActivity extends AppCompatActivity { // Register class
     private static final String CHANNEL_ID = "register_channel";
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private EditText usernameField;
-
-    private static final int NOTIFICATION_CODE = 1;
-    private static final int PERMISSION_CODE = 1; // A permission code for asking permission to access notifications
 
     private TextView registerText; // The register text
     private EditText passwordField;
@@ -82,14 +77,12 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
         this.termsAndConditions = findViewById(R.id.termsAndConditionsBox);
         this.registerButton = findViewById(R.id.registerBtn);
-
         notificationManager = NotificationManagerCompat.from(this); // Register the notification manager
+
 
         this.registerButton.setOnClickListener(new View.OnClickListener() { // Add listener to the button
             @Override
             public void onClick(View buttonView) {
-
-                requestNotificationPermission();
                 validateUsername(); // Call method to validate username
                 validateEmailAddress();
 
@@ -146,10 +139,6 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         }
 
         return true;
-    }
-
-    private void requestNotificationPermission() { // Routine that requests the user to use permissions
-
     }
 
     public void onStart() { // Android Lifecycle method 2.
@@ -279,7 +268,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             emailAddressField.setText("");
             return;
         }
-        }
+    }
 
     private boolean validatePassword() { // Routine to validate the password
         String passwordEntryField = passwordField.getText().toString().trim();
@@ -347,15 +336,29 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             return false;
 
         } else {
-
-            sendNotification();
-            writeToDatabase();
+            sendNotification(); // CALL METHOD TO SEND NOTIFICATION
+            writeToDatabase(); // Write registration data to database
             writeToFirestore();
 
-            transitionToLogin();
+            transitionToLogin(); // Take user to login page
         }
 
         return true;
+    }
+
+
+    private void sendNotification() { // Routine to send notification after registration
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID) // Create the notification builder by passing the context to display it in and the channel id
+                .setSmallIcon(R.drawable.ic_message_black_24dp) // Give the notification an icon
+                .setContentTitle("Registration Status") // Set the content title of it
+                .setContentText("You have registered Success!") // Give the message to be displayed
+                .setPriority(NotificationCompat.PRIORITY_HIGH) // Set the priority of the notification
+                .setColor(Color.BLACK) // Give the notification a colour
+                .setAutoCancel(true); // Can auto cancel it
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(RegisterActivity.this); // Create the compat notification
+        notificationManager.notify(0, builder.build()); // Build the notification
     }
 
     private void writeToDatabase() { // Writes to database
@@ -404,20 +407,6 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 Log.d("error : ", e.toString());
             }
         });
-    }
-
-    private void sendNotification() { // Routine to send notification after registration
-        String notification_message = "Register Success"; // Message to display
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(RegisterActivity.this, CHANNEL_ID) // Create a notification builder by passing the activity and channel id
-                .setContentTitle(notification_message) // Set the content title of the notification
-                .setSmallIcon(R.drawable.ic_message_black_24dp) // Displays the icon.
-                .setContentText("You have successfully registered") // Sets the content text
-                .setAutoCancel(true); // Automatically cancels
-
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        notificationManager.notify(NOTIFICATION_CODE, builder.build()); // Build the notification with a code.
     }
 
     private void transitionToLogin() { // Take the user to the login page after registration
