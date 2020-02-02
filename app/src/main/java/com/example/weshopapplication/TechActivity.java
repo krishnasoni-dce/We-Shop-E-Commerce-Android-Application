@@ -181,6 +181,48 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View secondButton) {
 
+                String colourErrorTitleTwo = " First Colour Menu Error";
+                String colourErrorTwoBodyMsg = "You must select a colour before adding the product to cart";
+
+                String quantityTitleErrorTwo = "First Quantity Menu Error";
+                String quantityErrorTwoBodyMsg = "You must select a quantity before adding the product to cart";
+
+
+                if (secondButton.getId() == R.id.secondAddToBasketBtn) {
+                    if (secondProductColourOptions.getSelectedItemPosition() == 0) {
+                        AlertDialog.Builder secondProductColourError = new AlertDialog.Builder(TechActivity.this)
+                                .setTitle(colourErrorTitleTwo)
+                                .setMessage(colourErrorTwoBodyMsg)
+                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (dialog != null) {
+                                            dialog.dismiss();
+                                        }
+                                    }
+                                });
+
+                        secondProductColourError.show();
+                        secondProductColourError.setCancelable(true); // User can click outside the Window to cancel the dialogue
+                    }
+
+                    if (secondProductQuantityOptions.getSelectedItemPosition() == 0) {
+                        AlertDialog.Builder secondProductQuantityError = new AlertDialog.Builder(TechActivity.this)
+                                .setTitle(quantityTitleErrorTwo)
+                                .setMessage(quantityErrorTwoBodyMsg)
+                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (dialog != null) {
+                                            dialog.dismiss();
+                                        }
+                                    }
+                                });
+
+                        secondProductQuantityError.show();
+                        secondProductQuantityError.setCancelable(true);
+                    }
+                }
             }
         });
     }

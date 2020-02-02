@@ -217,16 +217,16 @@
 
     <Button
         android:id="@+id/nextPageBtn"
-        android:layout_width="126dp"
-        android:layout_height="45dp"
+        android:layout_width="124dp"
+        android:layout_height="37dp"
         android:layout_marginStart="298dp"
+        android:background="@android:color/white"
         android:fontFamily="sans-serif-medium"
         android:text="Next Page"
+        android:textColor="@android:color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.857"
-        android:background="@android:color/black"
-        android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
