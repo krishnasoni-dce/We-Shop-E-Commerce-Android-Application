@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 
 public class TechActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private TextView firstProductText;
+    private Thread thread;
     private ImageView firstProductImg;
     private TextView productCost;
     private TextView firstProductColour;
@@ -49,6 +51,8 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tech);
+
+        this.thread = new Thread();
 
         this.firstProductText = findViewById(R.id.firstProductText);
         this.firstProductImg = findViewById(R.id.firstProductImg);
@@ -79,14 +83,19 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         firstAddToBasketButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String colourErrorTitleOne = "Colour Menu Error";
+                String colourErrorBodyMsg = "You must select a colour before adding the product to cart";
 
-                if (v.getId() == R.id.firstAddToBasketBtn) {
+                String quantityErrorTitleOne = "Quantity Menu Error";
+                String quantityErrorBodyMsg = "You must select a quantity before adding the product to cart";
+
+                if (v.getId() == R.id.firstAddToBasketBtn) { // If the first add to basket button is clicked
 
                     if (firstProductColourOptions.getSelectedItemPosition() == 0) { //
 
-                        AlertDialog.Builder colourError = new AlertDialog.Builder(TechActivity.this)
-                                .setTitle("Colour Menu Error")
-                                .setMessage("You must select a colour before adding the product to cart").setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                        AlertDialog.Builder colourErrorOne = new AlertDialog.Builder(TechActivity.this)
+                                .setTitle(colourErrorTitleOne)
+                                .setMessage(colourErrorBodyMsg).setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         if (dialog != null) {
@@ -95,8 +104,28 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                                     }
                                 });
 
-                        colourError.show();
-                        colourError.setCancelable(true);
+                        colourErrorOne.show();
+                        colourErrorOne.setCancelable(true);
+                    }
+
+                    if (firstProductQuantityOptions.getSelectedItemPosition() == 0) {
+
+                        AlertDialog.Builder quantityErrorOne = new AlertDialog.Builder(TechActivity.this)
+
+                                .setTitle(quantityErrorTitleOne).setMessage(quantityErrorBodyMsg)
+
+                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (dialog != null) {
+                                            dialog.dismiss();
+                                        }
+                                    }
+                                });
+
+                        quantityErrorOne.show();
+                        quantityErrorOne.setCancelable(true);
                     }
                 }
             }
@@ -139,22 +168,29 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         if (parent.getItemAtPosition(position).equals(listOfQuantities.get(0))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_zero_cost);
-
+            valueAppended = true;
         } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(1))) {
-
             productCost.setText(null);
             productCost.append(appended_text + quantity_one_cost);
+            valueAppended = true;
         } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(2))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_two_cost);
+            valueAppended = true;
         } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(3))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_three_cost);
+            valueAppended = true;
 
         } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(4))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_four_cost);
+            valueAppended = true;
+
+
         } else {
+
+            valueAppended = false;
             return;
         }
     }
@@ -256,6 +292,59 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String error_message = "Error Cause : ";
+
+        try {
+
+            switch (item.getItemId()) {
+
+                case R.id.sportsAndOutdoorsCategory:
+                    Intent sportsAndOutdoors = new Intent(TechActivity.this, SportsAndOutdoorsActivity.class);
+                    Thread.sleep(1);
+                    startActivity(sportsAndOutdoors);
+
+                    return true;
+
+                case R.id.techCategory:
+                    Intent techCategory = new Intent(TechActivity.this, TechActivity.class);
+                    Thread.sleep(1);
+                    startActivity(techCategory);
+
+                    return true;
+
+                case R.id.clothingCategory:
+                    Intent clothingCategory = new Intent(TechActivity.this, ClothingCategory.class);
+                    Thread.sleep(1);
+                    startActivity(clothingCategory);
+
+                    return true;
+
+
+                case R.id.diyCategory:
+                    Intent diyCategory = new Intent(TechActivity.this, DIYActivity.class);
+                    Thread.sleep(1);
+                    startActivity(diyCategory);
+
+                    return true;
+
+                default:
+                    return super.onOptionsItemSelected(item); // Return basae item
+
+            }
+        } catch (ActivityNotFoundException act) {
+
+            Log.d(error_message, act.toString());
+
+
+        } catch (InterruptedException excp) {
+
+            Log.d(error_message, excp.toString());
+        }
 
         return true;
     }
