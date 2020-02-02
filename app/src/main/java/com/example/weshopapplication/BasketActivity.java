@@ -3,32 +3,31 @@ package com.example.weshopapplication;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class BasketActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
+    private ArrayList<String> listOfProducts;
+    private ListView listView;
     private ArrayAdapter<String> adapter;
     private Button placeOrder;
-    private List<String> productsList;
+    private String[] techProducts = {"iPhone X 256GB", "Apple Watch Series 5", "AirPods Pro", "Samsung Galaxy Note"};
+    private TechActivity activity;
 
-    @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basket);
 
-        this.productsList = new ArrayList<>();
+        this.listOfProducts = new ArrayList<>();
+        this.listView = findViewById(R.id.listViewBasket);
+        this.adapter = new ArrayAdapter<>(BasketActivity.this, R.layout.activity_basket, listOfProducts);
 
-        this.recyclerView = findViewById(R.id.recycler_basket);
-        this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        this.recyclerView.setHasFixedSize(true);
+        this.listView.setAdapter(adapter);
 
-        this.placeOrder = findViewById(R.id.place_order);
 
     }
 

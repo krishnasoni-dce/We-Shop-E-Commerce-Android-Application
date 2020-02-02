@@ -18,8 +18,8 @@
         android:background="@color/colorPrimaryDark"
         android:text="Place Order" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_basket"
+    <ListView
+        android:id="@+id/listViewBasket"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/place_order" />
