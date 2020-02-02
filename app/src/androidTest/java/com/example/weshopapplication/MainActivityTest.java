@@ -20,7 +20,6 @@ import static org.junit.Assert.assertNotNull;
 // Purpose of Test: To test if the MainActivity loads
 // Author of Test: Sabin Constantin Lungu
 
-
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class MainActivityTest {
@@ -38,18 +37,22 @@ public class MainActivityTest {
     @Rule
     public ActivityTestRule<TechActivity> techActivityActivityTestRule = new ActivityTestRule<>(TechActivity.class);
 
+    @Rule
+    public ActivityTestRule<BasketActivity> basketActivityActivityTestRule = new ActivityTestRule<>(BasketActivity.class);
+
 
     // Activities to be tested
     private MainActivity mainActivity = null;
     private RegisterActivity registerActivity = null;
-
     private LoginActivity loginActivity = null;
     private SportsAndOutdoorsActivity sportsAndOutdoorsActivity = null;
     private TechActivity techActivity = null;
     private ClothingCategory clothingCategory = null;
     private DIYActivity diyActivity = null;
 
+    private BasketActivity productsBasket = null;
 
+    // Retrieve the data from the fields
     private EditText usernameTest;
     private EditText emailAddressTest;
     private EditText passwordTest;
@@ -58,7 +61,6 @@ public class MainActivityTest {
     @Before
     public void setUp() throws Exception {
         getActivities();
-
         // Get the edit text fields
         usernameTest = registerActivity.findViewById(R.id.usernameField);
         emailAddressTest = registerActivity.findViewById(R.id.emailAddressField);
@@ -70,6 +72,7 @@ public class MainActivityTest {
         registerActivity = registerRule.getActivity();
         loginActivity = loginActivityRule.getActivity(); // Get the login activity
         techActivity = techActivityActivityTestRule.getActivity(); // Get the tech activity
+        productsBasket = basketActivityActivityTestRule.getActivity();
     }
 
 
@@ -119,9 +122,15 @@ public class MainActivityTest {
     }
 
     @Test
-    public void testTechActivityLauncher() {
+    public void testTechActivityLauncher() { // Tests to see if the tech activity loads correctly.
         View activityView = techActivity.findViewById(R.id.firstProductImg);
         assertNotNull(activityView);
+    }
+
+    @Test
+    public void testLoadBasketActivity() { // Tests to see if the basket loads correctly.
+        View basketView = productsBasket.findViewById(R.id.placeOrderBtn);
+        assertNotNull(basketView);
     }
 
     @Test
@@ -131,9 +140,11 @@ public class MainActivityTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() { // After test
         mainActivity = null;
         registerActivity = null;
         loginActivity = null;
+        techActivity = null;
+        productsBasket = null;
     }
 }

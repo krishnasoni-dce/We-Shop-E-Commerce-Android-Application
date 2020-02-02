@@ -63,17 +63,9 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         this.listOfColours = new ArrayList<>();
         this.listOfQuantities = new ArrayList<>();
 
-        listOfColours.add(0, "Choose Colour");
-        listOfColours.add(1, "Space Gray");
-        listOfColours.add(2, "Silver");
-        listOfColours.add(3, "Gold");
+        addToColoursList();
+        addToQuantitiesList();
 
-        listOfQuantities.add(0, "Choose Quantity");
-        listOfQuantities.add(1, "1");
-        listOfQuantities.add(2, "2");
-        listOfQuantities.add(3, "3");
-        listOfQuantities.add(4, "4");
-        listOfQuantities.add(5, "5");
 
         this.firstCAdapter = new ArrayAdapter<String>(TechActivity.this, android.R.layout.simple_spinner_item, listOfColours);
         firstCAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -82,6 +74,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         this.firstQAdapter = new ArrayAdapter<String>(TechActivity.this, android.R.layout.simple_spinner_item, listOfQuantities);
         firstQAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         firstProductQuantityOptions.setAdapter(firstQAdapter);
+
 
         firstProductQuantityOptions.setOnItemSelectedListener(this);
 
@@ -99,26 +92,35 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             }
         });
-
     }
 
-    @Override
-    public void onBackPressed() {
-        try {
-            startActivity(new Intent(TechActivity.this, MainActivity.class));
-        } catch (ActivityNotFoundException exc) {
-            Log.d("Error : ", exc.getMessage());
-        }
+    private boolean addToColoursList() {
+        boolean addedColours = false;
+
+        listOfColours.add(0, "Choose Colour");
+        listOfColours.add(1, "Space Gray");
+        listOfColours.add(2, "Silver");
+        listOfColours.add(3, "Gold");
+
+        addedColours = true;
+
+        return true;
     }
 
-    public void onDestroy() {
-        super.onDestroy();
-    }
+    private boolean addToQuantitiesList() { // Routine to add the quantities to the array list
+        boolean addedQuantities = false;
 
-    public void onResume() {
-        super.onResume();
-    }
+        listOfQuantities.add(0, "Choose Quantity");
+        listOfQuantities.add(1, "1");
+        listOfQuantities.add(2, "2");
+        listOfQuantities.add(3, "3");
+        listOfQuantities.add(4, "4");
+        listOfQuantities.add(5, "5");
 
+        addedQuantities = true;
+
+        return true;
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -142,8 +144,72 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(5))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_five_cost);
+
         } else {
             return;
+        }
+    }
+
+    class Colours { // Anonymous inner class o
+        private String colour;
+
+        public Colours(String colour) {
+            this.colour = colour;
+        }
+
+        public String getColour() {
+            return this.colour;
+        }
+
+        public void setColour(String colour) {
+            this.colour = colour;
+        }
+
+        @Override
+        public String toString() {
+            return "Colours{" +
+                    "colour='" + colour + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        try {
+            startActivity(new Intent(TechActivity.this, MainActivity.class));
+        } catch (ActivityNotFoundException exc) {
+            Log.d("Error : ", exc.getMessage());
+        }
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    public void onResume() {
+        super.onResume();
+    }
+
+    class Quantities {
+        private String quantity;
+
+        public Quantities(String quantity) {
+            this.quantity = quantity;
+        }
+
+        public String getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(String quantity) {
+            this.quantity = quantity;
+        }
+
+        @Override
+        public String toString() {
+            return "Quantities{" +
+                    "quantity='" + quantity + '\'' +
+                    '}';
         }
     }
 
