@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class TechActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -32,11 +31,11 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     private Spinner firstProductColourOptions;
     private Spinner firstProductQuantityOptions;
 
-    private List<String> listOfColours;
-    private List<String> listOfQuantities;
+    private ArrayList<String> listOfColours;
+    private ArrayList<String> listOfQuantities;
 
-    private ArrayAdapter<Product> firstCAdapter;
-    private ArrayAdapter<Product> firstQAdapter;
+    private ArrayAdapter<String> firstCAdapter;
+    private ArrayAdapter<String> firstQAdapter;
 
     private int quantity_one_cost = 500;
     private int quantity_two_cost = 2 * quantity_one_cost;
@@ -54,22 +53,46 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         this.productCost = findViewById(R.id.firstProductCost);
         this.firstProductColour = findViewById(R.id.firstProductColorText); // Text View for Product Cost £: (1)
 
-        this.firstProductColourOptions = findViewById(R.id.colourSpinner); // Spinner 1. -> COLOURS
-        this.firstProductQuantityOptions = findViewById(R.id.quantitySpinner); // Spinner 2 -> QUANTITIES
+        this.firstProductColourOptions = findViewById(R.id.firstColourSpinner); // Spinner 1. -> COLOURS
+        this.firstProductQuantityOptions = findViewById(R.id.firstQuantitySpinner); // Spinner 2 -> QUANTITIES
         this.firstAddToBasketButton = findViewById(R.id.firstAddToBasketBtn); // Button: -> ADD TO BASKET BUTTON 1
 
-        List<Product> productOptions = new ArrayList<>();
+        this.listOfColours = new ArrayList<>();
+        this.listOfQuantities = new ArrayList<>();
 
-        Product iPhoneProductOne = new Product("Space Gray", 1);
-        productOptions.add(iPhoneProductOne);
+        listOfColours.add(0, "Choose Colour");
+        listOfColours.add(1, "Space Gray");
+        listOfColours.add(2, "Silver");
+        listOfColours.add(3, "Gold");
 
-        firstCAdapter = new ArrayAdapter<Product>(TechActivity.this, android.R.layout.simple_spinner_item, productOptions);
+        listOfQuantities.add(0, "Choose Quantity");
+        listOfQuantities.add(1, "1");
+        listOfQuantities.add(2, "2");
+        listOfQuantities.add(3, "3");
+        listOfQuantities.add(4, "4");
+        listOfQuantities.add(5, "5");
+
+        this.firstCAdapter = new ArrayAdapter<String>(TechActivity.this, android.R.layout.simple_spinner_item, listOfColours);
         firstCAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         firstProductColourOptions.setAdapter(firstCAdapter);
 
+        this.firstQAdapter = new ArrayAdapter<String>(TechActivity.this, android.R.layout.simple_spinner_item, listOfQuantities);
+        firstQAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        firstProductQuantityOptions.setAdapter(firstQAdapter);
 
+    }
 
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    public void onResume() {
+        super.onResume();
     }
 
 
