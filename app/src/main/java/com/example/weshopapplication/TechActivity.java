@@ -1,6 +1,7 @@
 package com.example.weshopapplication;
 
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,19 +9,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
-
 
 public class TechActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private TextView firstProductText;
@@ -34,17 +33,17 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     private Spinner firstProductColourOptions;
     private Spinner firstProductQuantityOptions;
 
-    private ArrayList<String> listOfColours;
-    private ArrayList<String> listOfQuantities;
+    private ArrayList<Colours> listOfColours;
+    private ArrayList<Quantities> listOfQuantities;
 
-    private ArrayAdapter<String> firstCAdapter;
-    private ArrayAdapter<String> firstQAdapter;
+    private CustomArrayAdapter quantitiesCustomAdapter;
+    private ColourArrayAdapter colourArrayAdapter;
 
+    private int quantity_zero_cost = 0;
     private int quantity_one_cost = 500;
-    private int quantity_two_cost = 2 * quantity_one_cost;
-    private int quantity_three_cost = 3 * quantity_one_cost;
-    private int quantity_four_cost = 4 * quantity_one_cost;
-    private int quantity_five_cost = 5 * quantity_one_cost;
+    private int quantity_two_cost = 3 * quantity_one_cost;
+    private int quantity_three_cost = 4 * quantity_one_cost;
+    private int quantity_four_cost = 5 * quantity_one_cost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,29 +65,39 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         addToColoursList();
         addToQuantitiesList();
 
+        this.colourArrayAdapter = new ColourArrayAdapter(TechActivity.this, listOfColours);
+        colourArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        firstProductColourOptions.setAdapter(colourArrayAdapter);
 
-        this.firstCAdapter = new ArrayAdapter<String>(TechActivity.this, android.R.layout.simple_spinner_item, listOfColours);
-        firstCAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        firstProductColourOptions.setAdapter(firstCAdapter);
+        this.quantitiesCustomAdapter = new CustomArrayAdapter(TechActivity.this, listOfQuantities);
+        quantitiesCustomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        firstProductQuantityOptions.setAdapter(quantitiesCustomAdapter);
 
-        this.firstQAdapter = new ArrayAdapter<String>(TechActivity.this, android.R.layout.simple_spinner_item, listOfQuantities);
-        firstQAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        firstProductQuantityOptions.setAdapter(firstQAdapter);
-
-
+        firstProductColourOptions.setOnItemSelectedListener(this);
         firstProductQuantityOptions.setOnItemSelectedListener(this);
 
         firstAddToBasketButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (v.getId() == R.id.firstAddToBasketBtn) {
 
-                    if (listOfColours.get(0).equals("Choose Colour")) {
-                        Toast.makeText(TechActivity.this, "You must choose a colour ", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(TechActivity.this, listOfColours.get(1), Toast.LENGTH_LONG).show();
-                    }
+                    if (firstProductColourOptions.getSelectedItemPosition() == 0) { //
 
+                        AlertDialog.Builder colourError = new AlertDialog.Builder(TechActivity.this)
+                                .setTitle("Colour Menu Error")
+                                .setMessage("You must select a colour before adding the product to cart").setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (dialog != null) {
+                                            dialog.dismiss();
+                                        }
+                                    }
+                                });
+
+                        colourError.show();
+                        colourError.setCancelable(true);
+                    }
                 }
             }
         });
@@ -96,13 +105,12 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private boolean addToColoursList() {
         boolean addedColours = false;
+        Colours[] coloursArray = {new Colours(0, "Choose Colour Please"), new Colours(1, "Space Gray"), new Colours(2, "Silver"), new Colours(3, "Gold")};
 
-        listOfColours.add(0, "Choose Colour");
-        listOfColours.add(1, "Space Gray");
-        listOfColours.add(2, "Silver");
-        listOfColours.add(3, "Gold");
-
-        addedColours = true;
+        for (Colours colours : coloursArray) {
+            listOfColours.add(colours);
+            addedColours = true;
+        }
 
         return true;
     }
@@ -110,12 +118,12 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     private boolean addToQuantitiesList() { // Routine to add the quantities to the array list
         boolean addedQuantities = false;
 
-        listOfQuantities.add(0, "Choose Quantity");
-        listOfQuantities.add(1, "1");
-        listOfQuantities.add(2, "2");
-        listOfQuantities.add(3, "3");
-        listOfQuantities.add(4, "4");
-        listOfQuantities.add(5, "5");
+        listOfQuantities.add(new Quantities(0));
+        listOfQuantities.add(new Quantities(1));
+        listOfQuantities.add(new Quantities(2));
+        listOfQuantities.add(new Quantities(3));
+        listOfQuantities.add(new Quantities(4));
+        listOfQuantities.add(new Quantities(5));
 
         addedQuantities = true;
 
@@ -125,40 +133,51 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         boolean valueAppended = false;
+
         String appended_text = "Product Cost : £";
 
-        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(1))) {
+        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(0))) {
+            productCost.setText(null);
+            productCost.append(appended_text + quantity_zero_cost);
+
+        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(1))) {
+
             productCost.setText(null);
             productCost.append(appended_text + quantity_one_cost);
-
         } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(2))) {
-
             productCost.setText(null);
             productCost.append(appended_text + quantity_two_cost);
         } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(3))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_three_cost);
+
         } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(4))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_four_cost);
-        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(5))) {
-            productCost.setText(null);
-            productCost.append(appended_text + quantity_five_cost);
-
         } else {
             return;
         }
     }
 
     class Colours { // Anonymous inner class o
+        private int index;
         private String colour;
 
-        public Colours(String colour) {
+        public Colours(int index, String colour) {
+            this.index = index;
             this.colour = colour;
         }
 
+        public int getIndex() {
+            return index;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
         public String getColour() {
-            return this.colour;
+            return colour;
         }
 
         public void setColour(String colour) {
@@ -167,11 +186,31 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         @Override
         public String toString() {
-            return "Colours{" +
-                    "colour='" + colour + '\'' +
-                    '}';
+            return " " + colour;
         }
     }
+
+    class Quantities {
+        private int quantity;
+
+        public Quantities(int quantity) {
+            this.quantity = quantity;
+        }
+
+        public int getQuantity() {
+            return this.quantity;
+        }
+
+        public void setQuantity(int quantity) {
+            this.quantity = quantity;
+        }
+
+        public String toString() {
+            return " " + this.quantity;
+        }
+
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -188,29 +227,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void onResume() {
         super.onResume();
-    }
-
-    class Quantities {
-        private String quantity;
-
-        public Quantities(String quantity) {
-            this.quantity = quantity;
-        }
-
-        public String getQuantity() {
-            return quantity;
-        }
-
-        public void setQuantity(String quantity) {
-            this.quantity = quantity;
-        }
-
-        @Override
-        public String toString() {
-            return "Quantities{" +
-                    "quantity='" + quantity + '\'' +
-                    '}';
-        }
     }
 
     @Override
