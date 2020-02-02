@@ -55,4 +55,5 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/registerBtn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

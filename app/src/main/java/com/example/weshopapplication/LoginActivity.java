@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +39,8 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth auth;
     private Pattern regexPatterns = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]"); // Regex patterns
+    private final int logout_button_id = 101;
+    private boolean isAdded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,14 @@ public class LoginActivity extends AppCompatActivity {
                 validatePassword();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater categoriesMenu = getMenuInflater();
+        categoriesMenu.inflate(R.menu.homepagemenu, menu);
+
+        return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -94,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(diyIntent);
 
                     return true;
+
 
                 default:
 
@@ -177,7 +190,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "You aree logged in as " + emailInput, Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "You are logged in as " + emailInput, Toast.LENGTH_LONG).show();
                     transitionToHomepage();
 
                 } else if (!task.isSuccessful()) {
@@ -186,6 +199,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public void transitionToHomepage() {
         try {

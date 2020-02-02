@@ -1,7 +1,9 @@
 package com.example.weshopapplication;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -102,7 +104,11 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onBackPressed() {
-        moveTaskToBack(true);
+        try {
+            startActivity(new Intent(TechActivity.this, MainActivity.class));
+        } catch (ActivityNotFoundException exc) {
+            Log.d("Error : ", exc.getMessage());
+        }
     }
 
     public void onDestroy() {
@@ -122,12 +128,22 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         if (parent.getItemAtPosition(position).equals(listOfQuantities.get(1))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_one_cost);
+
         } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(2))) {
+
             productCost.setText(null);
             productCost.append(appended_text + quantity_two_cost);
         } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(3))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_three_cost);
+        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(4))) {
+            productCost.setText(null);
+            productCost.append(appended_text + quantity_four_cost);
+        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(5))) {
+            productCost.setText(null);
+            productCost.append(appended_text + quantity_five_cost);
+        } else {
+            return;
         }
     }
 
@@ -137,6 +153,11 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
+
+        // Inflate the activities menu
+        MenuInflater activityInflater = getMenuInflater(); // Get the activity inflater
+        activityInflater.inflate(R.menu.homepagemenu, menu);
+
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.basket_action_button, menu);
 
@@ -156,5 +177,4 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         return true;
     }
-
 }

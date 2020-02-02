@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         this.registerButton = findViewById(R.id.registerBtn);
         this.loginButton = findViewById(R.id.loginBtn);
 
-        this.auth = FirebaseAuth.getInstance();
+        this.auth = FirebaseAuth.getInstance(); // Get instance of fire base
 
         this.registerButton.setOnClickListener(new View.OnClickListener() { // Listener added to register button
             @Override
@@ -76,14 +76,23 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
 
+    public boolean onCreateOptionsMenu(Menu menu) { // Overidden method that creates the menu
+
+        // Inflate the activities
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.homepagemenu, menu);
 
-        return true;
+        // Inflate the logout button
+        MenuInflater logoutInflater = getMenuInflater();
+        logoutInflater.inflate(R.menu.logout_menu, menu);
 
+        MenuItem logout = menu.findItem(R.id.logout_button);
+        logout.setVisible(true); // Set the logout button to be initially true. Will be changed to false
+
+        return true;
     }
+
 
 
     public boolean onOptionsItemSelected(MenuItem item) { // Determines which item is selected from the menu
@@ -92,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 return false; // Return false
             }
 
+            // Determines which activity is chosen
             switch (item.getItemId()) {
                 case R.id.sportsAndOutdoorsCategory: // If the sports and outdoors category is chosen
                     Intent sportsIntent = new Intent(MainActivity.this, SportsAndOutdoorsActivity.class); // Take user to the sports and outdoors activity
@@ -120,7 +130,13 @@ public class MainActivity extends AppCompatActivity {
 
                     return true; // Return true;
 
+                case R.id.logout_button:
+                    logout();
+                    return true;
+
                 default:
+
+                    return super.onOptionsItemSelected(item); // Return the base item
 
             }
 
@@ -135,8 +151,9 @@ public class MainActivity extends AppCompatActivity {
         moveTaskToBack(true); // Move back a task
     }
 
-    private void logout() {
+    private void logout() { // Logout the user
         auth.signOut();
         finish();
+        startActivity(new Intent(MainActivity.this, LoginActivity.class)); // Take user to login activity
     }
 }
