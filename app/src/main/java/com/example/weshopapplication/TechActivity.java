@@ -80,6 +80,8 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         firstQAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         firstProductQuantityOptions.setAdapter(firstQAdapter);
 
+        firstProductQuantityOptions.setOnItemSelectedListener(this);
+
     }
 
     @Override
@@ -98,10 +100,17 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (parent.getItemAtPosition(position).equals("Choose Colour")) {
+        boolean valueAppended = false;
 
-        } else {
-            String colourChosen = parent.getItemAtPosition(position).toString();
+        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(1))) {
+
+            productCost.append(" " + quantity_one_cost);
+            valueAppended = true;
+        }
+
+        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(2))) {
+            productCost.append("");
+            productCost.append(" " + quantity_two_cost);
         }
     }
 
