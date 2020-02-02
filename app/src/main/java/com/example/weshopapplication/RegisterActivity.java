@@ -339,22 +339,23 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                     });
 
             boxError.show(); // Show the error
-
-
+            termsAndConditions.setError("Must be ticked");
         }
 
-        if (termsAndConditions.isChecked() && isValid) {
+        if (termsAndConditions.isChecked() && isValid) { // If the terms and conditions box is checked and the validation is all valid
 
             sendNotification(); // CALL METHOD TO SEND NOTIFICATION
             writeToDatabase(); // Write registration data to database
             writeToFirestore();
-
             transitionToLogin(); // Take user to login page
+
         } else {
-            return false;
+            termsAndConditions.setError(null); // Otherwise set no error
+
+            return false; // Otherwise return false
         }
 
-        return true;
+        return true; // Fallback onto previous statement and return true
     }
 
 
