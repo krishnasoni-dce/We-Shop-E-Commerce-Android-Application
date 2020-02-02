@@ -159,12 +159,13 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                         }
                     });
 
-
             emptyDialog.show();
             usernameField.setError("Can't be left empty");
             usernameField.setText(""); // Flush the empty field out
-
             isEmpty = true; // The field is empty
+
+            isValid = !usernameInputField.isEmpty();
+
             return false; // Return false
         }
 
@@ -193,6 +194,9 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 break;
             }
 
+            if (Character.isDigit(usernameInputField.charAt(i)) && usernameInputField.length() != 20) {
+                isValid = true;
+            }
 
             if (regexPatterns.matcher(usernameInputField).find()) { // If the username has a regex character.
                 usernameField.setError("Username should not contain regex character");
@@ -209,8 +213,10 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
                 regexWarning.show();
                 usernameField.setText("");
+                isValid = false;
 
             } else {
+                isValid = true;
                 usernameField.setError(null);
             }
 
@@ -333,14 +339,19 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                     });
 
             boxError.show(); // Show the error
-            return false;
 
-        } else {
+
+        }
+
+        if (termsAndConditions.isChecked() && isValid) {
+
             sendNotification(); // CALL METHOD TO SEND NOTIFICATION
             writeToDatabase(); // Write registration data to database
             writeToFirestore();
 
             transitionToLogin(); // Take user to login page
+        } else {
+            return false;
         }
 
         return true;

@@ -74,19 +74,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <RadioButton
-        android:id="@+id/termsAndConditionsBox"
-        android:layout_width="201dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginBottom="360dp"
-        android:background="@drawable/edit_round"
-        android:fontFamily="sans-serif-medium"
-        android:text="Terms and Conditions"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/registerBtn"
         android:layout_width="300dp"
@@ -107,6 +94,19 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <RadioButton
+        android:id="@+id/termsAndConditionsBox"
+        android:layout_width="201dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="132dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/edit_round"
+        android:fontFamily="sans-serif-medium"
+        android:text="Terms and Conditions"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/registerBtn"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
