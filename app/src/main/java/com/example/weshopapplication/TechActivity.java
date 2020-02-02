@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -82,6 +83,21 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         firstProductQuantityOptions.setOnItemSelectedListener(this);
 
+        firstAddToBasketButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v.getId() == R.id.firstAddToBasketBtn) {
+
+                    if (listOfColours.get(0).equals("Choose Colour")) {
+                        Toast.makeText(TechActivity.this, "You must choose a colour ", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(TechActivity.this, listOfColours.get(1), Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            }
+        });
+
     }
 
     @Override
@@ -101,16 +117,17 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         boolean valueAppended = false;
+        String appended_text = "Product Cost : £";
 
         if (parent.getItemAtPosition(position).equals(listOfQuantities.get(1))) {
-
-            productCost.append(" " + quantity_one_cost);
-            valueAppended = true;
-        }
-
-        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(2))) {
-            productCost.append("");
-            productCost.append(" " + quantity_two_cost);
+            productCost.setText(null);
+            productCost.append(appended_text + quantity_one_cost);
+        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(2))) {
+            productCost.setText(null);
+            productCost.append(appended_text + quantity_two_cost);
+        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(3))) {
+            productCost.setText(null);
+            productCost.append(appended_text + quantity_three_cost);
         }
     }
 
@@ -127,7 +144,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         badge = view.findViewById(R.id.badge);
         cartIcon = view.findViewById(R.id.cart_icon);
-
 
         cartIcon.setOnClickListener(new View.OnClickListener() {
             @Override
