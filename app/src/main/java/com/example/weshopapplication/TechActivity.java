@@ -121,7 +121,11 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         this.colourArrayAdapter = new ColourArrayAdapter(TechActivity.this, secondListOfColours);
 
         quantitiesCustomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        colourArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
         secondProductQuantityOptions.setAdapter(quantitiesCustomAdapter);
+        secondProductColourOptions.setAdapter(colourArrayAdapter);
 
         this.nextPageBtn = findViewById(R.id.nextPageBtn);
 
@@ -181,11 +185,14 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View secondButton) {
 
-                String colourErrorTitleTwo = " First Colour Menu Error";
+                String colourErrorTitleTwo = "Second Colour Menu Error";
                 String colourErrorTwoBodyMsg = "You must select a colour before adding the product to cart";
 
-                String quantityTitleErrorTwo = "First Quantity Menu Error";
+                String quantityTitleErrorTwo = "Second Quantity Menu Error";
                 String quantityErrorTwoBodyMsg = "You must select a quantity before adding the product to cart";
+
+                String[] splitTitle = quantityErrorTwoBodyMsg.split("\n");
+                String[] splitBodyMsg = quantityErrorTwoBodyMsg.split("\n");
 
 
                 if (secondButton.getId() == R.id.secondAddToBasketBtn) {
@@ -309,6 +316,12 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             secondProductCost.setText(null);
             secondProductCost.append(appended_text + quantity_two_cost);
             valueAppended = true;
+        } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[3]))) {
+            secondProductCost.setText(null);
+            secondProductCost.append(appended_text + quantity_three_cost);
+        } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[4]))) {
+            secondProductCost.setText(null);
+            secondProductCost.append(appended_text + quantity_four_cost);
         } else {
 
             valueAppended = false;
@@ -316,6 +329,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+    // Anonymous inner classes that will be used later on
     class Colours { // Anonymous inner class o
         private int index;
         private String colour;
