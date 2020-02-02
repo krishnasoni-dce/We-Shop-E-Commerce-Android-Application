@@ -42,6 +42,9 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     private Spinner firstProductColourOptions;
     private Spinner firstProductQuantityOptions;
 
+    private Spinner secondProductColourOptions;
+    private Spinner secondProductQuantityOptions;
+
     private ArrayList<Colours> listOfColours;
     private ArrayList<Quantities> listOfQuantities;
 
@@ -51,8 +54,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     private ArrayList<Colours> secondListOfColours;
     private ArrayList<Quantities> secondListOfQuantities;
 
-    private CustomArrayAdapter secondQuantitiesCustomAdapter;
-    private ColourArrayAdapter secondColourArrayAdapter;
     private Button nextPageBtn;
 
     // VARIABLES FOR THE COSTS
@@ -78,8 +79,14 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         this.firstProductQuantityOptions = findViewById(R.id.firstQuantitySpinner); // Spinner 2 -> QUANTITIES
         this.firstAddToBasketButton = findViewById(R.id.firstAddToBasketBtn); // Button: -> ADD TO BASKET BUTTON 1
 
+        this.secondProductColourOptions = findViewById(R.id.secondColourSpinner);
+        this.secondProductQuantityOptions = findViewById(R.id.secondQuantitySpinner);
+
         this.listOfColours = new ArrayList<>();
         this.listOfQuantities = new ArrayList<>();
+        // Create 2nd array list
+        this.secondListOfColours = new ArrayList<>();
+        this.secondListOfQuantities = new ArrayList<>();
 
         addToColoursList();
         addToQuantitiesList();
@@ -92,8 +99,12 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         quantitiesCustomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         firstProductQuantityOptions.setAdapter(quantitiesCustomAdapter);
 
+        // Add action listener for first product colour and first product quantity
         firstProductColourOptions.setOnItemSelectedListener(this);
         firstProductQuantityOptions.setOnItemSelectedListener(this);
+
+        secondProductColourOptions.setOnItemSelectedListener(this);
+        secondProductQuantityOptions.setOnItemSelectedListener(this);
 
 
         // Initialise components for SECOND PRODUCT
@@ -101,16 +112,27 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         this.secondProductImg = findViewById(R.id.appleWatchImg);
         this.secondProductCost = findViewById(R.id.secondProductCost);
 
+        this.secondProductColour = findViewById(R.id.secondProductColourTxt);
+        this.secondAddToBasketButton = findViewById(R.id.secondAddToBasketBtn);
 
+
+        // Create adapters for the 2nd product
+        this.quantitiesCustomAdapter = new CustomArrayAdapter(TechActivity.this, secondListOfQuantities);
+        this.colourArrayAdapter = new ColourArrayAdapter(TechActivity.this, secondListOfColours);
+
+        quantitiesCustomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        secondProductQuantityOptions.setAdapter(quantitiesCustomAdapter);
+
+        this.nextPageBtn = findViewById(R.id.nextPageBtn);
 
 
         firstAddToBasketButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String colourErrorTitleOne = "Colour Menu Error";
+                String colourErrorTitleOne = " First Colour Menu Error";
                 String colourErrorBodyMsg = "You must select a colour before adding the product to cart";
 
-                String quantityErrorTitleOne = "Quantity Menu Error";
+                String quantityErrorTitleOne = "First Quantity Menu Error";
                 String quantityErrorBodyMsg = "You must select a quantity before adding the product to cart";
 
                 if (v.getId() == R.id.firstAddToBasketBtn) { // If the first add to basket button is clicked
@@ -154,6 +176,13 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             }
         });
+
+        secondAddToBasketButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View secondButton) {
+
+            }
+        });
     }
 
     private boolean addToColoursList() {
@@ -162,6 +191,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         for (Colours colours : coloursArray) {
             listOfColours.add(colours);
+            secondListOfColours.add(colours);
             addedColours = true;
         }
 
@@ -178,6 +208,13 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         listOfQuantities.add(new Quantities(4));
         listOfQuantities.add(new Quantities(5));
 
+        secondListOfQuantities.add(new Quantities(0));
+        secondListOfQuantities.add(new Quantities(1));
+        secondListOfQuantities.add(new Quantities(2));
+        secondListOfQuantities.add(new Quantities(3));
+        secondListOfQuantities.add(new Quantities(4));
+        secondListOfQuantities.add(new Quantities(5));
+
         addedQuantities = true;
 
         return true;
@@ -192,14 +229,18 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         if (parent.getItemAtPosition(position).equals(listOfQuantities.get(0))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_zero_cost);
+
             valueAppended = true;
+
         } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(1))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_one_cost);
+
             valueAppended = true;
         } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(2))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_two_cost);
+
             valueAppended = true;
         } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(3))) {
             productCost.setText(null);
@@ -210,7 +251,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             productCost.setText(null);
             productCost.append(appended_text + quantity_four_cost);
             valueAppended = true;
-
 
         } else {
 
@@ -319,7 +359,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) { // Routine that gets an item selected from the menu
         String error_message = "Error Cause : ";
 
         try {

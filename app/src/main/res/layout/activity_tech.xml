@@ -137,7 +137,7 @@
         app:srcCompat="@drawable/applewatch" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/secondAddToBasketBtn"
         android:layout_width="449dp"
         android:layout_height="50dp"
         android:layout_marginBottom="40dp"
@@ -161,7 +161,7 @@
         android:textColor="@android:color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/secondAddToBasketBtn"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
@@ -170,7 +170,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/secondAddToBasketBtn"
         app:layout_constraintStart_toEndOf="@+id/secondProductColourTxt" />
 
     <TextView
@@ -185,7 +185,7 @@
         android:textColor="@android:color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/secondAddToBasketBtn"
         app:layout_constraintEnd_toStartOf="@+id/secondColourSpinner"
         app:layout_constraintHorizontal_bias="0.003"
         app:layout_constraintStart_toEndOf="@+id/secondColourSpinner" />
@@ -197,7 +197,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="36dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/secondAddToBasketBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toEndOf="@+id/secondProductCost" />
