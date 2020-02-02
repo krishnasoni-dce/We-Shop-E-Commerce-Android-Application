@@ -35,6 +35,9 @@ public class MainActivityTest {
     @Rule
     public ActivityTestRule<LoginActivity> loginActivityRule = new ActivityTestRule<>(LoginActivity.class);
 
+    @Rule
+    public ActivityTestRule<TechActivity> techActivityActivityTestRule = new ActivityTestRule<>(TechActivity.class);
+
 
     // Activities to be tested
     private MainActivity mainActivity = null;
@@ -66,6 +69,7 @@ public class MainActivityTest {
         mainActivity = activityRule.getActivity(); // Get the activity
         registerActivity = registerRule.getActivity();
         loginActivity = loginActivityRule.getActivity(); // Get the login activity
+        techActivity = techActivityActivityTestRule.getActivity(); // Get the tech activity
     }
 
 
@@ -99,14 +103,25 @@ public class MainActivityTest {
     }
 
     @Test
-    public void testEmailAddressEntryTwo() { // Routine to test another e-mail address entry
+    public void testPasswordEntryOne() {
+        assertEquals("", passwordTest.getText().toString());
+    }
 
+    @Test
+    public void testPasswordUppercase() { // 2. Test 2 for the password, it should pass because the test should not expect sabin as it does not have an upper case character, otherwise it would fail.
+        assertNotEquals("sabin", passwordTest.getText().toString());
     }
 
     @Test
     public void testRegisterActivityLauncher() {
         View registerView = registerActivity.findViewById(R.id.registerTxt);
         assertNotNull(registerView);
+    }
+
+    @Test
+    public void testTechActivityLauncher() {
+        View activityView = techActivity.findViewById(R.id.firstProductImg);
+        assertNotNull(activityView);
     }
 
     @Test

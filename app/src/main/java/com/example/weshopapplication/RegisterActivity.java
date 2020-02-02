@@ -164,9 +164,8 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             usernameField.setText(""); // Flush the empty field out
             isEmpty = true; // The field is empty
 
-            isValid = !usernameInputField.isEmpty();
+            isValid = false;
 
-            return false; // Return false
         }
 
         for (int i = 0; i < usernameInputField.length(); i++) { // Loop over the username
@@ -225,7 +224,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         return true;
     }
 
-    private void validateEmailAddress() { // Routine that validates the e-mail address.
+    private boolean validateEmailAddress() { // Routine that validates the e-mail address.
 
         String emailAddressInputField = emailAddressField.getText().toString().trim(); // Get the input for the emailAddress
 
@@ -246,13 +245,15 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
             emailAddressField.setError("E-mail Field cannot be left empty");
             isEmpty = true;
+            isValid = false;
+            return true;
         }
 
         if (emailAddressInputField.length() > 25) { // If the e-mail length is bigger than 25 characters
             emailAddressField.setError("E-mail can't have less than 0 characters or more than 25"); // Display error
 
             isValid = false; // Not valid
-            return; // Return.
+            return false;
         }
 
         if (!regexPatterns.matcher(emailAddressInputField).find()) { // If there is no regex characters matched including the @ symbol that is needed
@@ -272,7 +273,11 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
             emailRegexWarning.show();
             emailAddressField.setText("");
-            return;
+            isValid = false;
+            return false;
+        } else {
+            isValid = true;
+            return true;
         }
     }
 
@@ -297,6 +302,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             passwordField.setError("Password cannot be left empty & must contain special characters");
             isEmpty = true;
             hasRegex = false;
+            isValid = false;
             return false;
         }
 
@@ -316,7 +322,10 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 pwUpperCase.show();
                 passwordField.setText("");
                 passwordField.setError("Password must start with upper case character");
+                isValid = false;
                 break;
+            } else {
+                isValid = true;
             }
         }
 
@@ -340,16 +349,20 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
             boxError.show(); // Show the error
             termsAndConditions.setError("Must be ticked");
+            isValid = false;
         }
 
         if (termsAndConditions.isChecked() && isValid) { // If the terms and conditions box is checked and the validation is all valid
-
             sendNotification(); // CALL METHOD TO SEND NOTIFICATION
             writeToDatabase(); // Write registration data to database
             writeToFirestore();
             transitionToLogin(); // Take user to login page
 
+            isRegistered = true;
+
         } else {
+
+            isRegistered = false;
             termsAndConditions.setError(null); // Otherwise set no error
 
             return false; // Otherwise return false
