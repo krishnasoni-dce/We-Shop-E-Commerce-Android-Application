@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_dark"
+    android:background="@drawable/woods"
     tools:context=".LoginActivity">
 
     <TextView
@@ -62,7 +62,6 @@
         android:text="Login"
         android:textColor="@android:color/white"
         android:textStyle="bold"
-        android:onClick="addLogoutButtonToMainActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

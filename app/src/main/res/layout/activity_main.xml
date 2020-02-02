@@ -2,30 +2,22 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_dark"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/woods"
     tools:context=".MainActivity">
-
-    <ImageView
-        android:id="@+id/welcomeImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="340dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/welcome" />
 
     <TextView
         android:id="@+id/welcomeTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="300dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="336dp"
         android:fontFamily="sans-serif-medium"
         android:text="Don't have an account? Register today"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -34,7 +26,7 @@
         android:layout_width="112dp"
         android:layout_height="41dp"
         android:layout_marginStart="76dp"
-        android:layout_marginBottom="196dp"
+        android:layout_marginBottom="224dp"
         android:background="@drawable/button_round"
         android:text="Register"
         android:textColor="@android:color/white"
@@ -48,12 +40,26 @@
         android:layout_width="112dp"
         android:layout_height="41dp"
         android:layout_marginStart="40dp"
-        android:layout_marginBottom="196dp"
+        android:layout_marginBottom="224dp"
         android:background="@drawable/button_round"
         android:text="Login"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/registerBtn" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="264dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="We Shop E-Commerce"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/welcomeTxt"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

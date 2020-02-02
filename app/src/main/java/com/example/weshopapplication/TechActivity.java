@@ -223,35 +223,50 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         boolean valueAppended = false;
+        int[] indexes = {0, 1, 2, 3, 4};
 
         String appended_text = "Product Cost : £";
 
-        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(0))) {
+        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[0]))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_zero_cost);
 
             valueAppended = true;
 
-        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(1))) {
+        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[1]))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_one_cost);
 
             valueAppended = true;
-        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(2))) {
+        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[2]))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_two_cost);
 
             valueAppended = true;
-        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(3))) {
+        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[3]))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_three_cost);
             valueAppended = true;
 
-        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(4))) {
+        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[4]))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_four_cost);
             valueAppended = true;
 
+        }
+
+        if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[0]))) {
+            secondProductCost.setText(null);
+            secondProductCost.append(appended_text + quantity_zero_cost);
+            valueAppended = true;
+        } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[1]))) {
+            secondProductCost.setText(null);
+            secondProductCost.append(appended_text + quantity_one_cost);
+            valueAppended = true;
+        } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[2]))) {
+            secondProductCost.setText(null);
+            secondProductCost.append(appended_text + quantity_two_cost);
+            valueAppended = true;
         } else {
 
             valueAppended = false;
@@ -315,16 +330,18 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onBackPressed() {
         try {
             startActivity(new Intent(TechActivity.this, MainActivity.class));
+
         } catch (ActivityNotFoundException exc) {
-            Log.d("Error : ", exc.getMessage());
+
+            Log.d("Error : ", exc.toString());
         }
     }
 
-    public void onDestroy() {
+    public void onDestroy() { // On destroy method
         super.onDestroy();
     }
 
-    public void onResume() {
+    public void onResume() { // On resume method
         super.onResume();
     }
 
