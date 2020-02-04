@@ -63,7 +63,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     private int quantity_zero_cost = 0;
     private int quantity_one_cost = 500;
 
-    private int quantity_two_cost = 3 * quantity_one_cost;
+    private int quantity_two_cost = 3 * quantity_one_cost; // Quantity 2 is 3 times the price of 1 quantity.
     private int quantity_three_cost = 4 * quantity_one_cost;
     private int quantity_four_cost = 5 * quantity_one_cost;
 
@@ -88,6 +88,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         this.listOfColours = new ArrayList<>();
         this.listOfQuantities = new ArrayList<>();
+
         // Create 2nd array list
         this.secondListOfColours = new ArrayList<>();
         this.secondListOfQuantities = new ArrayList<>();
@@ -95,9 +96,9 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         addToColoursList();
         addToQuantitiesList();
 
-        this.colourArrayAdapter = new ColourArrayAdapter(TechActivity.this, listOfColours);
+        this.colourArrayAdapter = new ColourArrayAdapter(TechActivity.this, listOfColours); // Create an array adapter for the colours drop down menu
         colourArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        firstProductColourOptions.setAdapter(colourArrayAdapter);
+        firstProductColourOptions.setAdapter(colourArrayAdapter); // Set its adapter
 
         this.quantitiesCustomAdapter = new CustomArrayAdapter(TechActivity.this, listOfQuantities);
         quantitiesCustomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -109,7 +110,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         secondProductColourOptions.setOnItemSelectedListener(this);
         secondProductQuantityOptions.setOnItemSelectedListener(this);
-
 
         // Initialise components for SECOND PRODUCT
         this.secondProductText = findViewById(R.id.secondProductTxt);
@@ -133,12 +133,13 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         this.nextPageBtn = findViewById(R.id.nextPageBtn);
 
-        this.nextPageBtn.setOnClickListener(new View.OnClickListener() {
+        this.nextPageBtn.setOnClickListener(new View.OnClickListener() { // Add a listener for the next page button
             @Override
             public void onClick(View v) {
                 // Create intent for next Tech Activity
                 try {
 
+                    // Start the next intent
                     Intent techActivityTwo = new Intent(TechActivity.this, TechActivityTwo.class);
                     startActivity(techActivityTwo);
 
@@ -149,7 +150,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         });
 
 
-        firstAddToBasketButton.setOnClickListener(new View.OnClickListener() {
+        firstAddToBasketButton.setOnClickListener(new View.OnClickListener() { // Adds a listener for the first add to basket button
             @Override
             public void onClick(View v) {
                 String colourErrorTitleOne = " First Colour Menu Error";
@@ -196,7 +197,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                                     }
                                 });
 
-                        quantityErrorOne.show();
+                        quantityErrorOne.show(); // Show the error
                         quantityErrorOne.setCancelable(true);
                     }
                 }
@@ -266,7 +267,9 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private boolean addToColoursList() {
         boolean addedColours = false;
+
         String msgAdded = "Colours Added";
+        
         Colours[] coloursArray = {new Colours(0, "Choose Colour Please"), new Colours(1, "Space Gray"), new Colours(2, "Silver"), new Colours(3, "Gold")};
 
         for (Colours colours : coloursArray) { // For each colour in the array
@@ -276,6 +279,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             addedColours = true;
         }
 
+        // Portion of code used for debugging sake.
         if (addedColours) {
             Toast.makeText(TechActivity.this, msgAdded, Toast.LENGTH_SHORT).show();
         }
@@ -301,11 +305,13 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         for (Quantities quantities : firstProductQuantities) { // For each quantity in the array
             listOfQuantities.add(quantities); // Add it to the array list
+
             addedQuantities = true;
         }
 
         for (Quantities secondQuantities : secondProductQuantities) { // For each quantities in the second list of quantities
             secondListOfQuantities.add(secondQuantities); // Add it to the list
+
             addedQuantities = true;
         }
 
@@ -374,9 +380,9 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             valueAppended = true;
         }
 
-        else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[3]))) {
-            secondProductCost.setText(null);
-            secondProductCost.append(appended_text + quantity_three_cost);
+        else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[3]))) { // If the item at index 3 is chosen
+            secondProductCost.setText(null); // Set text to null
+            secondProductCost.append(appended_text + quantity_three_cost); // Then append the cost + string.
         }
 
         else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[4]))) {
@@ -385,9 +391,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
         else {
-
             valueAppended = false;
-            return;
         }
     }
 
@@ -405,10 +409,10 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
                     return true; // Returns true
 
-                case R.id.techCategory:
-                    Intent techCategory = new Intent(TechActivity.this, TechActivity.class);
+                case R.id.techCategory: // If the tech category is chosen
+                    Intent techCategory = new Intent(TechActivity.this, TechActivity.class); // Go to the tech category
                     Thread.sleep(1);
-                    startActivity(techCategory);
+                    startActivity(techCategory); // Start that activity
 
                     return true;
 
@@ -428,13 +432,13 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                     return true;
 
                 default:
-                    return super.onOptionsItemSelected(item); // Return basae item
+                    return super.onOptionsItemSelected(item); // Return base item if no option is chosen
 
             }
 
-        } catch (ActivityNotFoundException act) {
+        } catch (ActivityNotFoundException act) { // Catch error
 
-            Log.d(error_message, act.toString());
+            Log.d(error_message, act.toString()); // Log error if there is a problem.
 
 
         } catch (InterruptedException excp) {
@@ -445,14 +449,15 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         return true;
     }
 
+    // Anonymous inner class Quantities that is used to add the quantities to the drop-down menu. This class will be reused throughout other activities in order to retrieve specific data.
     class Quantities {
-        private int quantity;
+        private int quantity; // Quantity variable
 
-        public Quantities(int quantity) {
+        public Quantities(int quantity) { // Parameterised constructor that creates the object and the data when this is called.
             this.quantity = quantity;
         }
 
-        public int getQuantity() {
+        public int getQuantity() { // Gets the quantity
             return this.quantity;
         }
 
@@ -460,7 +465,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             this.quantity = quantity;
         }
 
-        public String toString() {
+        public String toString() { // Returns the data.
             return " " + this.quantity;
         }
     }
@@ -480,8 +485,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onDestroy();
     }
 
-    public void onResume() { // On resume method
-        super.onResume();
+    public void onResume() { // On resume method when the activity resumes
     }
 
     @Override
