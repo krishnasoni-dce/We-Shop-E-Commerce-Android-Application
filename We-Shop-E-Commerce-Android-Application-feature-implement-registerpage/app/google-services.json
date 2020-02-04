@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "271359503714",
+    "firebase_url": "https://weshopapplication-74eec.firebaseio.com",
+    "project_id": "weshopapplication-74eec",
+    "storage_bucket": "weshopapplication-74eec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271359503714:android:d2f46f869dac5ea9f4d03b",
+        "android_client_info": {
+          "package_name": "com.example.weshopapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271359503714-2593n3v7op50v7mu4hnq6fineh4khrvi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBr4GUvhbd-Ew2GAX0tJWhIz6OBykmr9s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "271359503714-2593n3v7op50v7mu4hnq6fineh4khrvi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

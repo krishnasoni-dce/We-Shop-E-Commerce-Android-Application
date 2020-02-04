@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/woods"
+    tools:context=".TechActivity">
+
+    <TextView
+        android:id="@+id/firstProductText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="696dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="iPhone X"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/firstProductImg"
+        android:layout_width="254dp"
+        android:layout_height="202dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="488dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/iphonex" />
+
+    <TextView
+        android:id="@+id/firstProductCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="164dp"
+        android:layout_marginBottom="464dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Product Cost: £"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/firstColourSpinner"
+        android:layout_width="128dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="432dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/firstProductQuantityText" />
+
+    <TextView
+        android:id="@+id/firstProductColorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="432dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Colour"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/firstQuantitySpinner"
+        android:layout_width="117dp"
+        android:layout_height="22dp"
+        android:layout_marginBottom="432dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/firstProductQuantityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="432dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Quantity"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/firstQuantitySpinner" />
+
+    <Button
+        android:id="@+id/firstAddToBasketBtn"
+        android:layout_width="449dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="360dp"
+        android:background="@drawable/button_round"
+        android:fontFamily="sans-serif-medium"
+        android:text="Add To Basket"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/secondProductTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="89dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="332dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Apple Watch Series 5"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.283"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/appleWatchImg"
+        android:layout_width="282dp"
+        android:layout_height="177dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="152dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/applewatch" />
+
+    <Button
+        android:id="@+id/secondAddToBasketBtn"
+        android:layout_width="449dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/button_round"
+        android:fontFamily="sans-serif-medium"
+        android:text="Add To Basket"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/secondProductColourTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Colour"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/secondAddToBasketBtn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/secondColourSpinner"
+        android:layout_width="93dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/secondAddToBasketBtn"
+        app:layout_constraintStart_toEndOf="@+id/secondProductColourTxt" />
+
+    <TextView
+        android:id="@+id/secondQuantityTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Quantity"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/secondAddToBasketBtn"
+        app:layout_constraintEnd_toStartOf="@+id/secondColourSpinner"
+        app:layout_constraintHorizontal_bias="0.003"
+        app:layout_constraintStart_toEndOf="@+id/secondColourSpinner" />
+
+    <Spinner
+        android:id="@+id/secondQuantitySpinner"
+        android:layout_width="113dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/secondAddToBasketBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toEndOf="@+id/secondProductCost" />
+
+    <TextView
+        android:id="@+id/secondProductCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Product Cost: £"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/secondQuantityTxt"
+        app:layout_constraintStart_toEndOf="@+id/secondColourSpinner" />
+
+    <Button
+        android:id="@+id/nextPageBtn"
+        android:layout_width="124dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="298dp"
+        android:background="@android:color/white"
+        android:fontFamily="sans-serif-medium"
+        android:text="Next Page"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
