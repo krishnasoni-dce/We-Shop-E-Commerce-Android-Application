@@ -240,6 +240,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         for (Colours colours : coloursArray) {
             listOfColours.add(colours);
+
             secondListOfColours.add(colours);
             addedColours = true;
         }
@@ -286,6 +287,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             productCost.setText(null);
             productCost.append(appended_text + quantity_one_cost);
 
+
             valueAppended = true;
         } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[2]))) {
             productCost.setText(null);
@@ -315,6 +317,8 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[2]))) {
             secondProductCost.setText(null);
             secondProductCost.append(appended_text + quantity_two_cost);
+
+
             valueAppended = true;
         } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[3]))) {
             secondProductCost.setText(null);

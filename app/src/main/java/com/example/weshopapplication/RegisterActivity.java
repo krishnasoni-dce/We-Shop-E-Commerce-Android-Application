@@ -274,8 +274,11 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             emailRegexWarning.show();
             emailAddressField.setText("");
             isValid = false;
+
             return false;
+
         } else {
+
             isValid = true;
             return true;
         }
@@ -302,6 +305,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             passwordField.setError("Password cannot be left empty & must contain special characters");
             isEmpty = true;
             hasRegex = false;
+
             isValid = false;
             return false;
         }
@@ -324,7 +328,9 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 passwordField.setError("Password must start with upper case character");
                 isValid = false;
                 break;
+
             } else {
+
                 isValid = true;
             }
         }
