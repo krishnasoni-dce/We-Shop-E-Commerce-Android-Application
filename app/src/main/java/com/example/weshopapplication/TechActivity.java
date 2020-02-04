@@ -1,5 +1,6 @@
 package com.example.weshopapplication;
 
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -181,6 +183,10 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                         colourErrorOne.setCancelable(true);
                     }
 
+                    else {
+                        addToBasket();
+                    }
+
                     if (firstProductQuantityOptions.getSelectedItemPosition() == 0) {
 
                         AlertDialog.Builder quantityErrorOne = new AlertDialog.Builder(TechActivity.this)
@@ -199,6 +205,10 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
                         quantityErrorOne.show(); // Show the error
                         quantityErrorOne.setCancelable(true);
+                    }
+
+                    else {
+                        addToBasket();
                     }
                 }
             }
@@ -241,6 +251,10 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                         secondProductColourError.setCancelable(true); // User can click outside the Window to cancel the dialogue
                     }
 
+                    else {
+                        addToBasket();
+                    }
+
                     if (secondProductQuantityOptions.getSelectedItemPosition() == 0) { // If the selected item is at position 0
 
                         AlertDialog.Builder secondProductQuantityError = new AlertDialog.Builder(TechActivity.this)
@@ -260,9 +274,39 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                         secondProductQuantityError.show();
                         secondProductQuantityError.setCancelable(true);
                     }
+
+                    else {
+                        addToBasket();
+                    }
                 }
             }
         });
+    }
+
+    private void addToBasket() {
+        // Create the progress dialogue
+        final ProgressDialog dialog = new ProgressDialog(TechActivity.this);
+        dialog.setTitle("Adding to Basket..");
+        dialog.setMessage("Please Wait");
+
+        dialog.setCancelable(false);
+
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        new Thread(new Runnable() { // Create a new thread
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1900);
+                } catch (InterruptedException exc) {
+                    Log.d("Error : ", exc.toString());
+                }
+
+                dialog.dismiss();
+            }
+        }).start();
+
+        dialog.show(); // Show the progress bar
     }
 
     private boolean addToColoursList() {
@@ -486,6 +530,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void onResume() { // On resume method when the activity resumes
+        super.onResume();
     }
 
     @Override
