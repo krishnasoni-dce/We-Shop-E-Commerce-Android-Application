@@ -19,8 +19,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.nex3z.notificationbadge.NotificationBadge;
-
 import java.util.ArrayList;
 
 // Author: Sabin Constantin Lungu
@@ -43,7 +41,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     private Button secondAddToBasketButton;
 
 
-    private NotificationBadge badge;
     private ImageView cartIcon; // Cart Icon should be red once a product is added
     private Spinner firstProductColourOptions;
     private Spinner firstProductQuantityOptions;
@@ -276,24 +273,24 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private boolean addToQuantitiesList() { // Routine to add the quantities to the array list
         boolean addedQuantities = false;
+        String msgQtyAdded = "Quantities added";
 
-        listOfQuantities.add(new Quantities(0));
-        listOfQuantities.add(new Quantities(1));
-        listOfQuantities.add(new Quantities(2));
+        Quantities[] firstProductQuantities = {
+                new Quantities(0), new Quantities(1), new Quantities(2)
+                , new Quantities(3), new Quantities(4), new Quantities(5)};
 
-        listOfQuantities.add(new Quantities(3));
-        listOfQuantities.add(new Quantities(4));
-        listOfQuantities.add(new Quantities(5));
+        Quantities[] secondProductQuantities = {new Quantities(0), new Quantities(1), new Quantities(2),
+                new Quantities(3), new Quantities(4), new Quantities(5)};
 
-        secondListOfQuantities.add(new Quantities(0));
-        secondListOfQuantities.add(new Quantities(1));
-        secondListOfQuantities.add(new Quantities(2));
+        for (Quantities quantities : firstProductQuantities) {
+            listOfQuantities.add(quantities);
+            addedQuantities = true;
+        }
 
-        secondListOfQuantities.add(new Quantities(3));
-        secondListOfQuantities.add(new Quantities(4));
-        secondListOfQuantities.add(new Quantities(5));
-
-        addedQuantities = true;
+        for (Quantities secondQuantities : secondProductQuantities) {
+            secondListOfQuantities.add(secondQuantities);
+            addedQuantities = true;
+        }
 
         return true;
     }
@@ -310,7 +307,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             productCost.append(appended_text + quantity_zero_cost);
 
             valueAppended = true;
-
         } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[1]))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_one_cost);
@@ -470,7 +466,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         View view = menu.findItem(R.id.cart_menu).getActionView();
 
-        badge = view.findViewById(R.id.badge);
         cartIcon = view.findViewById(R.id.cart_icon);
 
         cartIcon.setOnClickListener(new View.OnClickListener() {
