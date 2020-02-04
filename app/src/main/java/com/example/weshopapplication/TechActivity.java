@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
+
+// Author: Sabin Constantin Lungu
+// Purpose of Activity: Shows the products in stock for the tech activity along with the colour to choose from and quantities.
+// Date of Last Modified: 4/2/2020
+// Any Bugs?: Currently none. Unit tested recently. 11/11 Tests completed
 
 public class TechActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private TextView firstProductText;
@@ -59,6 +65,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     // VARIABLES FOR THE COSTS
     private int quantity_zero_cost = 0;
     private int quantity_one_cost = 500;
+
     private int quantity_two_cost = 3 * quantity_one_cost;
     private int quantity_three_cost = 4 * quantity_one_cost;
     private int quantity_four_cost = 5 * quantity_one_cost;
@@ -147,8 +154,11 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                                 .setTitle(colourErrorTitleOne)
                                 .setMessage(colourErrorBodyMsg).setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
+
                                     public void onClick(DialogInterface dialog, int which) {
+
                                         if (dialog != null) {
+
                                             dialog.dismiss();
                                         }
                                     }
@@ -196,12 +206,17 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
                 if (secondButton.getId() == R.id.secondAddToBasketBtn) {
+
                     if (secondProductColourOptions.getSelectedItemPosition() == 0) {
+
                         AlertDialog.Builder secondProductColourError = new AlertDialog.Builder(TechActivity.this)
                                 .setTitle(colourErrorTitleTwo)
+
                                 .setMessage(colourErrorTwoBodyMsg)
+
                                 .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
+
                                     public void onClick(DialogInterface dialog, int which) {
                                         if (dialog != null) {
                                             dialog.dismiss();
@@ -214,12 +229,15 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                     }
 
                     if (secondProductQuantityOptions.getSelectedItemPosition() == 0) {
+
                         AlertDialog.Builder secondProductQuantityError = new AlertDialog.Builder(TechActivity.this)
                                 .setTitle(quantityTitleErrorTwo)
+
                                 .setMessage(quantityErrorTwoBodyMsg)
                                 .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+
                                         if (dialog != null) {
                                             dialog.dismiss();
                                         }
@@ -236,13 +254,21 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private boolean addToColoursList() {
         boolean addedColours = false;
+        String msgAdded = "Colours Added";
         Colours[] coloursArray = {new Colours(0, "Choose Colour Please"), new Colours(1, "Space Gray"), new Colours(2, "Silver"), new Colours(3, "Gold")};
 
-        for (Colours colours : coloursArray) {
-            listOfColours.add(colours);
-
+        for (Colours colours : coloursArray) { // For each colour in the array
+            listOfColours.add(colours); // Add it to the array list
+            
             secondListOfColours.add(colours);
             addedColours = true;
+        }
+
+        if (addedColours) {
+            Toast.makeText(TechActivity.this, msgAdded, Toast.LENGTH_SHORT).show();
+        } else {
+
+            Toast.makeText(TechActivity.this, "Could not add", Toast.LENGTH_SHORT).show();
         }
 
         return true;
@@ -254,6 +280,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         listOfQuantities.add(new Quantities(0));
         listOfQuantities.add(new Quantities(1));
         listOfQuantities.add(new Quantities(2));
+
         listOfQuantities.add(new Quantities(3));
         listOfQuantities.add(new Quantities(4));
         listOfQuantities.add(new Quantities(5));
@@ -261,6 +288,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         secondListOfQuantities.add(new Quantities(0));
         secondListOfQuantities.add(new Quantities(1));
         secondListOfQuantities.add(new Quantities(2));
+
         secondListOfQuantities.add(new Quantities(3));
         secondListOfQuantities.add(new Quantities(4));
         secondListOfQuantities.add(new Quantities(5));
@@ -273,7 +301,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         boolean valueAppended = false;
-        int[] indexes = {0, 1, 2, 3, 4};
+        int[] indexes = {0, 1, 2, 3, 4}; // Array of indexes
 
         String appended_text = "Product Cost : £";
 
@@ -333,36 +361,58 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
-    // Anonymous inner classes that will be used later on
-    class Colours { // Anonymous inner class o
-        private int index;
-        private String colour;
+    public boolean onOptionsItemSelected(MenuItem item) { // Routine that gets an item selected from the menu
+        String error_message = "Error Cause : ";
 
-        public Colours(int index, String colour) {
-            this.index = index;
-            this.colour = colour;
+        try {
+
+            switch (item.getItemId()) {
+
+                case R.id.sportsAndOutdoorsCategory: // When the sports and activity category is chosen
+                    Intent sportsAndOutdoors = new Intent(TechActivity.this, SportsAndOutdoorsActivity.class); // Create intent for sports and outdoors
+                    Thread.sleep(1); // Sleep for 1ms
+                    startActivity(sportsAndOutdoors); // Start the activity
+
+                    return true; // Returns true
+
+                case R.id.techCategory:
+                    Intent techCategory = new Intent(TechActivity.this, TechActivity.class);
+                    Thread.sleep(1);
+                    startActivity(techCategory);
+
+                    return true;
+
+                case R.id.clothingCategory:
+                    Intent clothingCategory = new Intent(TechActivity.this, ClothingCategory.class);
+                    Thread.sleep(1);
+                    startActivity(clothingCategory);
+
+                    return true;
+
+
+                case R.id.diyCategory:
+                    Intent diyCategory = new Intent(TechActivity.this, DIYActivity.class);
+                    Thread.sleep(1);
+                    startActivity(diyCategory);
+
+                    return true;
+
+                default:
+                    return super.onOptionsItemSelected(item); // Return basae item
+
+            }
+
+        } catch (ActivityNotFoundException act) {
+
+            Log.d(error_message, act.toString());
+
+
+        } catch (InterruptedException excp) {
+
+            Log.d(error_message, excp.toString());
         }
 
-        public int getIndex() {
-            return index;
-        }
-
-        public void setIndex(int index) {
-            this.index = index;
-        }
-
-        public String getColour() {
-            return colour;
-        }
-
-        public void setColour(String colour) {
-            this.colour = colour;
-        }
-
-        @Override
-        public String toString() {
-            return " " + colour;
-        }
+        return true;
     }
 
     class Quantities {
@@ -384,7 +434,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             return " " + this.quantity;
         }
     }
-
 
     @Override
     public void onBackPressed() {
@@ -436,57 +485,35 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) { // Routine that gets an item selected from the menu
-        String error_message = "Error Cause : ";
+    // Anonymous inner classes that will be used later on
+    class Colours { // Anonymous inner class o
+        private int index;
+        private String colour;
 
-        try {
-
-            switch (item.getItemId()) {
-
-                case R.id.sportsAndOutdoorsCategory:
-                    Intent sportsAndOutdoors = new Intent(TechActivity.this, SportsAndOutdoorsActivity.class);
-                    Thread.sleep(1);
-                    startActivity(sportsAndOutdoors);
-
-                    return true;
-
-                case R.id.techCategory:
-                    Intent techCategory = new Intent(TechActivity.this, TechActivity.class);
-                    Thread.sleep(1);
-                    startActivity(techCategory);
-
-                    return true;
-
-                case R.id.clothingCategory:
-                    Intent clothingCategory = new Intent(TechActivity.this, ClothingCategory.class);
-                    Thread.sleep(1);
-                    startActivity(clothingCategory);
-
-                    return true;
-
-
-                case R.id.diyCategory:
-                    Intent diyCategory = new Intent(TechActivity.this, DIYActivity.class);
-                    Thread.sleep(1);
-                    startActivity(diyCategory);
-
-                    return true;
-
-                default:
-                    return super.onOptionsItemSelected(item); // Return basae item
-
-            }
-
-        } catch (ActivityNotFoundException act) {
-
-            Log.d(error_message, act.toString());
-
-
-        } catch (InterruptedException excp) {
-
-            Log.d(error_message, excp.toString());
+        public Colours(int index, String colour) {
+            this.index = index;
+            this.colour = colour;
         }
 
-        return true;
+        public int getIndex() {
+            return this.index;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
+        public String getColour() {
+            return this.colour;
+        }
+
+        public void setColour(String colour) {
+            this.colour = colour;
+        }
+
+        @Override
+        public String toString() {
+            return " " + colour;
+        }
     }
 }

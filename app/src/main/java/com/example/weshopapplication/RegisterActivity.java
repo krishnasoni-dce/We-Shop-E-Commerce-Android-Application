@@ -149,6 +149,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         String usernameInputField = usernameField.getText().toString().trim();
 
         if (usernameInputField.isEmpty()) { // If the input field is left empty
+
             AlertDialog.Builder emptyDialog = new AlertDialog.Builder(RegisterActivity.this).setTitle("Username Error")
                     .setMessage("Re-enter username please").setNegativeButton("ok", new DialogInterface.OnClickListener() {
                         @Override
@@ -193,7 +194,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 break;
             }
 
-            if (Character.isDigit(usernameInputField.charAt(i)) && usernameInputField.length() != 20) {
+            if (Character.isDigit(usernameInputField.charAt(i)) && usernameInputField.length() != 20) { // If the username field contains characters and the length is not 20
                 isValid = true;
             }
 
@@ -215,6 +216,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 isValid = false;
 
             } else {
+
                 isValid = true;
                 usernameField.setError(null);
             }
@@ -250,7 +252,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         }
 
         if (emailAddressInputField.length() > 25) { // If the e-mail length is bigger than 25 characters
-            emailAddressField.setError("E-mail can't have less than 0 characters or more than 25"); // Display error
+            emailAddressField.setError("E-mail can't have more than 25 characters"); // Display error
 
             isValid = false; // Not valid
             return false;
@@ -265,6 +267,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             if (dialog != null) { // If the dialog is not empty
+
                                 dialog.dismiss();
                                 dialog.cancel();
                             }
@@ -312,8 +315,10 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
         for (int i = 0; i < passwordEntryField.length(); i++) { // Loop over the password entry
 
-            if (!Character.isUpperCase(passwordEntryField.charAt(0))) { // If the password does not start with an upper case character
+            if (!Character.isUpperCase(passwordEntryField.charAt(0))) { // If the password does not start with an upper case character.
+
                 AlertDialog.Builder pwUpperCase = new AlertDialog.Builder(RegisterActivity.this).setTitle("Password Error")
+
                         .setMessage("Re-enter Password").setNegativeButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -325,7 +330,9 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
                 pwUpperCase.show();
                 passwordField.setText("");
+
                 passwordField.setError("Password must start with upper case character");
+                startsWithUppercase = false;
                 isValid = false;
                 break;
 
@@ -383,6 +390,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID) // Create the notification builder by passing the context to display it in and the channel id
                 .setSmallIcon(R.drawable.ic_message_black_24dp) // Give the notification an icon
                 .setContentTitle("Registration Status") // Set the content title of it
+
                 .setContentText("You have registered Success!") // Give the message to be displayed
                 .setPriority(NotificationCompat.PRIORITY_HIGH) // Set the priority of the notification
                 .setColor(Color.BLACK) // Give the notification a colour

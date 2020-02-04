@@ -45,11 +45,12 @@ public class MainActivityTest {
     private MainActivity mainActivity = null;
     private RegisterActivity registerActivity = null;
     private LoginActivity loginActivity = null;
+
     private SportsAndOutdoorsActivity sportsAndOutdoorsActivity = null;
     private TechActivity techActivity = null;
+
     private ClothingCategory clothingCategory = null;
     private DIYActivity diyActivity = null;
-
     private BasketActivity productsBasket = null;
 
     // Retrieve the data from the fields
@@ -70,6 +71,7 @@ public class MainActivityTest {
     public void getActivities() {
         mainActivity = activityRule.getActivity(); // Get the activity
         registerActivity = registerRule.getActivity();
+
         loginActivity = loginActivityRule.getActivity(); // Get the login activity
         techActivity = techActivityActivityTestRule.getActivity(); // Get the tech activity
         productsBasket = basketActivityActivityTestRule.getActivity();
@@ -103,6 +105,11 @@ public class MainActivityTest {
     @Test
     public void testEmailAddressEntryOne() { // 1. Test one for the e-mail address
         assertNotEquals("sabinlungu293@f", emailAddressTest.getText().toString()); // Will pass because this value is unexpected
+    }
+
+    @Test
+    public void testEmailAddressEntryTwo() {
+        assertNotEquals("oerkgoierjg09erjg0e9rjg09@yahoo.com", emailAddressTest.getText().toString());
     }
 
     @Test
@@ -144,6 +151,7 @@ public class MainActivityTest {
         mainActivity = null;
         registerActivity = null;
         loginActivity = null;
+
         techActivity = null;
         productsBasket = null;
     }
