@@ -128,7 +128,8 @@ public class MainActivity extends AppCompatActivity {
                     return true; // Return true;
 
                 case R.id.logout_button:
-                    logout();
+
+                    logout(); // Logs the user out
                     return true;
 
                 default:

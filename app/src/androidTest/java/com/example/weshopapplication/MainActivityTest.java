@@ -19,6 +19,8 @@ import static org.junit.Assert.assertNotNull;
 
 // Purpose of Test: To test if the MainActivity loads
 // Author of Test: Sabin Constantin Lungu
+// Date of Last Modification: 4/2/2020
+// Tests Pass? : Yes
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest

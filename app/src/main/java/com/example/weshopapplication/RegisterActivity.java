@@ -429,7 +429,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         });
     }
 
-    private void writeToFirestore() { // ROutin
+    private void writeToFirestore() { // Routine to write to firestore
 
         String usernameEntry = usernameField.getText().toString();
         String emailEntry = emailAddressField.getText().toString();
