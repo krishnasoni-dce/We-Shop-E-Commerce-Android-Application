@@ -269,7 +269,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         boolean addedColours = false;
 
         String msgAdded = "Colours Added";
-        
+
         Colours[] coloursArray = {new Colours(0, "Choose Colour Please"), new Colours(1, "Space Gray"), new Colours(2, "Silver"), new Colours(3, "Gold")};
 
         for (Colours colours : coloursArray) { // For each colour in the array
