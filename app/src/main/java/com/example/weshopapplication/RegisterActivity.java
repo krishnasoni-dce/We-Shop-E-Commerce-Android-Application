@@ -55,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private boolean startsWithUppercase; // True or false if the inputs start with an upper case.
     private boolean hasCharacters; // True or false if the input has characters
     private boolean hasRegex;
+    private boolean test;
 
     private boolean isEmpty;
     private boolean isValid;
