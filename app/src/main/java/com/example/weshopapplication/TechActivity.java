@@ -133,6 +133,21 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         this.nextPageBtn = findViewById(R.id.nextPageBtn);
 
+        this.nextPageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create intent for next Tech Activity
+                try {
+
+                    Intent techActivityTwo = new Intent(TechActivity.this, TechActivityTwo.class);
+                    startActivity(techActivityTwo);
+
+                } catch (ActivityNotFoundException not) {
+                    Log.d("Error : ", not.toString());
+                }
+            }
+        });
+
 
         firstAddToBasketButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,7 +240,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                         secondProductColourError.setCancelable(true); // User can click outside the Window to cancel the dialogue
                     }
 
-                    if (secondProductQuantityOptions.getSelectedItemPosition() == 0) {
+                    if (secondProductQuantityOptions.getSelectedItemPosition() == 0) { // If the selected item is at position 0
 
                         AlertDialog.Builder secondProductQuantityError = new AlertDialog.Builder(TechActivity.this)
                                 .setTitle(quantityTitleErrorTwo)
@@ -289,8 +304,8 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             addedQuantities = true;
         }
 
-        for (Quantities secondQuantities : secondProductQuantities) {
-            secondListOfQuantities.add(secondQuantities);
+        for (Quantities secondQuantities : secondProductQuantities) { // For each quantities in the second list of quantities
+            secondListOfQuantities.add(secondQuantities); // Add it to the list
             addedQuantities = true;
         }
 
@@ -311,10 +326,9 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             valueAppended = true;
         }
 
-        else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[1]))) {
-            productCost.setText(null);
-            productCost.append(appended_text + quantity_one_cost);
-
+        else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[1]))) { // If the value at index 1 is chosen
+            productCost.setText(null); // Flush out the product cost
+            productCost.append(appended_text + quantity_one_cost); // Append the cost
 
             valueAppended = true;
         }
@@ -471,9 +485,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
+    public void onNothingSelected(AdapterView<?> parent) { }
 
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -496,11 +508,11 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-
         return true;
     }
 
-    // Anonymous inner classes that will be used later on
+    // Anonymous inner classes that will be used later on in the basket activity and the payment form
+
     class Colours { // Anonymous inner class o
         private int index;
         private String colour;
@@ -528,7 +540,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         @Override
         public String toString() {
-            return " " + colour;
+            return " " + this.colour;
         }
     }
 }

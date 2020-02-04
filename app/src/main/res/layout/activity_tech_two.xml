@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
-        android:layout_marginBottom="656dp"
+        android:layout_marginBottom="676dp"
         android:fontFamily="sans-serif-medium"
         android:text="Airpods Pro"
         android:textColor="@color/white"
@@ -25,9 +25,81 @@
         android:id="@+id/airpodsProImg"
         android:layout_width="281dp"
         android:layout_height="215dp"
-        android:layout_marginStart="79dp"
-        android:layout_marginBottom="428dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginBottom="448dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/airpodspro" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginBottom="416dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Product Cost £: "
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="384dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Colour"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="111dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginBottom="39dp"
+        app:layout_constraintBottom_toTopOf="@+id/firstAddToBasketBtn"
+        app:layout_constraintStart_toEndOf="@+id/textView4" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="122dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="384dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/firstAddToBasketBtn"
+        android:layout_width="449dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="296dp"
+        android:background="@drawable/button_round"
+        android:fontFamily="sans-serif-medium"
+        android:text="Add To Basket"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="39dp"
+        android:text="Quantity"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/firstAddToBasketBtn"
+        app:layout_constraintStart_toEndOf="@+id/spinner" />
 </androidx.constraintlayout.widget.ConstraintLayout>
