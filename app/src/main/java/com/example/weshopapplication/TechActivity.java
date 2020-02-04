@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +40,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private TextView secondProductColour;
     private Button secondAddToBasketButton;
-
 
     private ImageView cartIcon; // Cart Icon should be red once a product is added
     private Spinner firstProductColourOptions;
@@ -516,13 +514,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onBackPressed() {
-        try {
-            startActivity(new Intent(TechActivity.this, MainActivity.class));
-
-        } catch (ActivityNotFoundException exc) {
-
-            Log.d("Error : ", exc.toString());
-        }
+        super.onBackPressed();
     }
 
     public void onDestroy() { // On destroy method

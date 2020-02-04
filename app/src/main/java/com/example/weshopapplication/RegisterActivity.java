@@ -1,22 +1,26 @@
 package com.example.weshopapplication;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -70,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         // Initialise components
         this.usernameField = findViewById(R.id.usernameField);
         this.emailAddressField = findViewById(R.id.emailAddressField);
+
         this.registerText = findViewById(R.id.registerTxt);
         this.passwordField = findViewById(R.id.passwordField);
 
@@ -204,8 +209,10 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                 AlertDialog.Builder regexWarning = new AlertDialog.Builder(RegisterActivity.this).setMessage("Please re-enter Username.")
                         .setTitle("Username Regex Warning").setNegativeButton("OK", new DialogInterface.OnClickListener() {
                             @Override
+
                             public void onClick(DialogInterface dialog, int which) {
                                 if (dialog != null) {
+
                                     dialog.dismiss();
                                 }
                             }
@@ -374,8 +381,9 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         if (termsAndConditions.isChecked() && isValid) { // If the terms and conditions box is checked and the validation is all valid
             sendNotification(); // CALL METHOD TO SEND NOTIFICATION
             writeToDatabase(); // Write registration data to database
-            writeToFirestore();
 
+            writeToFirestore(); // Writes to firestore database
+            showSpinningDialogue();
             transitionToLogin(); // Take user to login page
 
             isRegistered = true;
@@ -389,6 +397,32 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         }
 
         return true; // Fallback onto previous statement and return true
+    }
+
+    private void showSpinningDialogue() {
+        // Create the progress dialogue
+        final ProgressDialog dialog = new ProgressDialog(RegisterActivity.this);
+        dialog.setTitle("Creating Account...");
+        dialog.setMessage("Please Wait..");
+
+        dialog.setCancelable(false);
+
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        new Thread(new Runnable() { // Create a new thread
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2100);
+                } catch (InterruptedException exc) {
+                    Log.d("Error : ", exc.toString());
+                }
+
+                dialog.dismiss();
+            }
+        }).start();
+
+        dialog.show(); // Show the progress bar
     }
 
 
@@ -444,9 +478,11 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
         db.collection("user_data").add(user_data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
+
             public void onSuccess(DocumentReference documentReference) {
                 Toast.makeText(RegisterActivity.this, "Added data to firestore", Toast.LENGTH_LONG).show();
             }
+
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {

@@ -1,5 +1,6 @@
 package com.example.weshopapplication;
 
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordField;
     private Button loginButton;
     private FirebaseFirestore firebaseFirestore;
+
     private FirebaseAuth auth;
     private Pattern regexPatterns = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]"); // Regex patterns
     private final int logout_button_id = 101;
@@ -178,23 +180,54 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             passwordField.setError(null);
             login();
+            showLoginDialogue();
             return true;
         }
     }
 
+    private void showLoginDialogue() {
+        // Create the progress dialogue
+        final ProgressDialog dialog = new ProgressDialog(LoginActivity.this);
+        dialog.setTitle("Logging in..");
+        dialog.setMessage("Please Wait..");
+
+        dialog.setCancelable(false);
+
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        new Thread(new Runnable() { // Create a new thread
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2400);
+
+                } catch (InterruptedException exc) {
+
+                    Log.d("Error : ", exc.toString());
+                }
+
+                dialog.dismiss();
+            }
+        }).start();
+
+        dialog.show(); // Show the progress bar
+    }
+
     private void login() { // Logs the user in
-        final String emailInput = emailAddressField.getText().toString();
-        String passwordInput = passwordField.getText().toString();
+        final String emailInput = emailAddressField.getText().toString(); // Get the e-mail input
+        String passwordInput = passwordField.getText().toString(); // Get the password input
 
         auth.signInWithEmailAndPassword(emailInput, passwordInput).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+
                     Toast.makeText(LoginActivity.this, "You are logged in as " + emailInput, Toast.LENGTH_LONG).show();
                     transitionToHomepage();
 
-                } else if (!task.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_LONG).show();
+
+                } else if (!task.isSuccessful()) { // If the task is not successful, i.e the credentials do not match
+                    Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_LONG).show(); // Show error message
                 }
             }
         });
