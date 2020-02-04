@@ -414,7 +414,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                     return true;
 
                 default:
-                    
+
                     return super.onOptionsItemSelected(item); // Return basae item
 
             }

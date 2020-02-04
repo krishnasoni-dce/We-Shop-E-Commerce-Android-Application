@@ -16,12 +16,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,7 +28,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
@@ -53,10 +50,11 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
     private boolean hasDigits; // True or false if the inputs have numbers
     private boolean startsWithUppercase; // True or false if the inputs start with an upper case.
+
     private boolean hasCharacters; // True or false if the input has characters
     private boolean hasRegex;
 
-    private boolean isEmpty;
+    private boolean isEmpty; // Variable that determines if any of the
     private boolean isValid;
     private boolean isRegistered;
 
@@ -152,6 +150,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
             AlertDialog.Builder emptyDialog = new AlertDialog.Builder(RegisterActivity.this).setTitle("Username Error")
                     .setMessage("Re-enter username please").setNegativeButton("ok", new DialogInterface.OnClickListener() {
+
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             if (dialog != null) {
@@ -162,6 +161,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
             emptyDialog.show();
             usernameField.setError("Can't be left empty");
+
             usernameField.setText(""); // Flush the empty field out
             isEmpty = true; // The field is empty
 
@@ -232,22 +232,26 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
 
         if (emailAddressInputField.isEmpty()) {
+
             AlertDialog.Builder emailError = new AlertDialog.Builder(RegisterActivity.this).setTitle("E-mail Error").setMessage("Re-Enter E-mail")
                     .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                         @Override
+
                         public void onClick(DialogInterface dialog, int which) {
                             if (dialog != null) {
-                                dialog.dismiss();
+
+                                dialog.dismiss(); // Dismiss the dialogue if the dialog is not shown
                             }
                         }
                     });
 
             emailError.show();
-            emailError.setCancelable(true);
+            emailError.setCancelable(true); // User can click outside the window to cancel the error dialogue
 
             emailAddressField.setError("E-mail Field cannot be left empty");
             isEmpty = true;
             isValid = false;
+
             return true;
         }
 
@@ -275,14 +279,14 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                     });
 
             emailRegexWarning.show();
-            emailAddressField.setText("");
+            emailAddressField.setText(""); // Set the field to empty
             isValid = false;
 
             return false;
 
         } else {
 
-            isValid = true;
+            isValid = true; // Otherwise the
             return true;
         }
     }
@@ -348,8 +352,10 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     private boolean validateTermsAndConditions() {
 
         if (!termsAndConditions.isChecked()) { // If the terms and conditions box is not checked
+
             AlertDialog.Builder boxError = new AlertDialog.Builder(RegisterActivity.this).setTitle("T&C Box Not Checked")
                     .setMessage("Please tick terms and conditions box")
+
                     .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                         @Override
 
@@ -369,6 +375,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             sendNotification(); // CALL METHOD TO SEND NOTIFICATION
             writeToDatabase(); // Write registration data to database
             writeToFirestore();
+
             transitionToLogin(); // Take user to login page
 
             isRegistered = true;
@@ -422,7 +429,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         });
     }
 
-    private void writeToFirestore() {
+    private void writeToFirestore() { // ROutin
 
         String usernameEntry = usernameField.getText().toString();
         String emailEntry = emailAddressField.getText().toString();

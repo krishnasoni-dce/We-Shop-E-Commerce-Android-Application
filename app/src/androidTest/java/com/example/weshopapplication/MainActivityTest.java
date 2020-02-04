@@ -40,6 +40,8 @@ public class MainActivityTest {
     @Rule
     public ActivityTestRule<BasketActivity> basketActivityActivityTestRule = new ActivityTestRule<>(BasketActivity.class);
 
+     @Rule
+     public ActivityTestRule<ClothingCategory> clothingCategoryActivityTestRule = new ActivityTestRule<>(ClothingCategory.class);
 
     // Activities to be tested
     private MainActivity mainActivity = null;
@@ -60,7 +62,7 @@ public class MainActivityTest {
 
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() { // Sets up the tests
         getActivities();
         // Get the edit text fields
         usernameTest = registerActivity.findViewById(R.id.usernameField);
@@ -68,9 +70,10 @@ public class MainActivityTest {
         passwordTest = registerActivity.findViewById(R.id.passwordField);
     }
 
-    public void getActivities() {
+    public void getActivities() { // Retrieves the activities
         mainActivity = activityRule.getActivity(); // Get the activity
         registerActivity = registerRule.getActivity();
+        clothingCategory = clothingCategoryActivityTestRule.getActivity(); // Get the clothing activity
 
         loginActivity = loginActivityRule.getActivity(); // Get the login activity
         techActivity = techActivityActivityTestRule.getActivity(); // Get the tech activity
@@ -85,7 +88,7 @@ public class MainActivityTest {
         assertNotNull(view);
     }
 
-    public void testPreconditions() {
+    public void testPreconditions() { // Test preconditions
         assertNotNull(usernameTest);
         assertNotNull(emailAddressTest);
         assertNotNull(passwordTest);
@@ -135,6 +138,12 @@ public class MainActivityTest {
     }
 
     @Test
+    public void testClothingActivityLauncher() { // Tests to see if the clothing activity is loaded
+        View activityView = clothingCategory.findViewById(R.id.clothingCategory);
+        assertNotNull(activityView);
+    }
+
+    @Test
     public void testLoadBasketActivity() { // Tests to see if the basket loads correctly.
         View basketView = productsBasket.findViewById(R.id.placeOrderBtn);
         assertNotNull(basketView);
@@ -147,7 +156,8 @@ public class MainActivityTest {
     }
 
     @After
-    public void tearDown() { // After test
+    public void tearDown() { // After testing
+        // Empty activities after testing
         mainActivity = null;
         registerActivity = null;
         loginActivity = null;
