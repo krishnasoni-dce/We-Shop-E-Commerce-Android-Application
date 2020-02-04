@@ -15,10 +15,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
 
 // Author: Sabin Constantin Lungu
@@ -31,12 +29,14 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     private Thread firstActivityThread;
     private ImageView firstProductImg;
     private TextView productCost;
+
     private TextView firstProductColour;
     private Button firstAddToBasketButton;
 
     private TextView secondProductText;
     private ImageView secondProductImg;
     private TextView secondProductCost;
+
     private TextView secondProductColour;
     private Button secondAddToBasketButton;
 
@@ -257,13 +257,15 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         for (Colours colours : coloursArray) { // For each colour in the array
             listOfColours.add(colours); // Add it to the array list
             
-            secondListOfColours.add(colours);
+            secondListOfColours.add(colours); // Add the second colours
             addedColours = true;
         }
 
         if (addedColours) {
             Toast.makeText(TechActivity.this, msgAdded, Toast.LENGTH_SHORT).show();
-        } else {
+        }
+
+        else {
 
             Toast.makeText(TechActivity.this, "Could not add", Toast.LENGTH_SHORT).show();
         }
@@ -275,15 +277,15 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         boolean addedQuantities = false;
         String msgQtyAdded = "Quantities added";
 
-        Quantities[] firstProductQuantities = {
+        Quantities[] firstProductQuantities = { // Create quantities array of objects
                 new Quantities(0), new Quantities(1), new Quantities(2)
                 , new Quantities(3), new Quantities(4), new Quantities(5)};
 
         Quantities[] secondProductQuantities = {new Quantities(0), new Quantities(1), new Quantities(2),
                 new Quantities(3), new Quantities(4), new Quantities(5)};
 
-        for (Quantities quantities : firstProductQuantities) {
-            listOfQuantities.add(quantities);
+        for (Quantities quantities : firstProductQuantities) { // For each quantity in the array
+            listOfQuantities.add(quantities); // Add it to the array list
             addedQuantities = true;
         }
 
@@ -307,23 +309,31 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             productCost.append(appended_text + quantity_zero_cost);
 
             valueAppended = true;
-        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[1]))) {
+        }
+
+        else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[1]))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_one_cost);
 
 
             valueAppended = true;
-        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[2]))) {
+        }
+
+        else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[2]))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_two_cost);
 
             valueAppended = true;
-        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[3]))) {
+        }
+
+        else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[3]))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_three_cost);
             valueAppended = true;
 
-        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[4]))) {
+        }
+
+        else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(indexes[4]))) {
             productCost.setText(null);
             productCost.append(appended_text + quantity_four_cost);
             valueAppended = true;
@@ -334,23 +344,33 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             secondProductCost.setText(null);
             secondProductCost.append(appended_text + quantity_zero_cost);
             valueAppended = true;
-        } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[1]))) {
+        }
+
+        else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[1]))) {
             secondProductCost.setText(null);
             secondProductCost.append(appended_text + quantity_one_cost);
             valueAppended = true;
-        } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[2]))) {
+        }
+
+        else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[2]))) {
             secondProductCost.setText(null);
             secondProductCost.append(appended_text + quantity_two_cost);
 
 
             valueAppended = true;
-        } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[3]))) {
+        }
+
+        else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[3]))) {
             secondProductCost.setText(null);
             secondProductCost.append(appended_text + quantity_three_cost);
-        } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[4]))) {
+        }
+
+        else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[4]))) {
             secondProductCost.setText(null);
             secondProductCost.append(appended_text + quantity_four_cost);
-        } else {
+        }
+
+        else {
 
             valueAppended = false;
             return;
@@ -394,6 +414,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                     return true;
 
                 default:
+                    
                     return super.onOptionsItemSelected(item); // Return basae item
 
             }
@@ -490,7 +511,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             this.colour = colour;
         }
 
-        public int getIndex() {
+        public int getIndex() { // Returns the index
             return this.index;
         }
 
