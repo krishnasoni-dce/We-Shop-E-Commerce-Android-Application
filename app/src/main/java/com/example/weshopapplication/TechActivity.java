@@ -12,8 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +31,8 @@ import java.util.Map;
 // Any Bugs?: Currently none. Unit tested recently. 11/11 Tests completed
 
 public class TechActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+
     private TextView firstProductText;
     private Thread firstActivityThread;
     private ImageView firstProductImg;
@@ -316,19 +320,21 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         // CODE TO ACTUALLY ADD TO BASKET VIEW
-
-        Spinner spinner = findViewById(R.id.firstColourSpinner);
-
         int current_product_id = 1;
         Products firstProduct = new Products(current_product_id, firstProductText.toString(), firstProductColour.toString(), (int)firstProductQuantityOptions.getSelectedItemId(), productCost.toString());
 
         listOfProductsToAddToBasket.put(current_product_id, firstProduct);
+        Intent basketIntent = new Intent(TechActivity.this, BasketActivity.class);
 
-        Intent intent = new Intent(TechActivity.this, BasketActivity.class);
+        basketIntent.putExtra("ProductID", current_product_id);
+        basketIntent.putExtra("ProductName", firstProduct.getProductName());
+        basketIntent.putExtra("ProductColour", firstProduct.getColour());
+        basketIntent.putExtra("ProductQuantity", firstProduct.getQuantity());
 
-         for(int i = 0; i < listOfProductsToAddToBasket.size(); i++) {
-             intent.putExtra("Product Data : ", firstProduct.toString());
-         }
+        ListView view = findViewById(R.id.listViewBasket);
+
+        setResult(RESULT_OK);
+
     }
 
 
@@ -570,7 +576,8 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(TechActivity.this, BasketActivity.class));
+                Intent basketIntent = new Intent(TechActivity.this, BasketActivity.class);
+                startActivity(basketIntent);
             }
         });
 
