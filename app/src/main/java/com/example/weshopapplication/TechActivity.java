@@ -21,6 +21,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 // Author: Sabin Constantin Lungu
 // Purpose of Activity: Shows the products in stock for the tech activity along with the colour to choose from and quantities.
@@ -186,7 +187,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                     }
 
                     else {
-                        addToBasket();
+                        addToBasketOne();
                     }
 
                     if (firstProductQuantityOptions.getSelectedItemPosition() == 0) {
@@ -210,7 +211,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                     }
 
                     else {
-                        addToBasket();
+                        addToBasketOne();
                     }
                 }
             }
@@ -254,7 +255,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                     }
 
                     else {
-                        addToBasket();
+                        addToBasketOne();
                     }
 
                     if (secondProductQuantityOptions.getSelectedItemPosition() == 0) { // If the selected item is at position 0
@@ -278,14 +279,14 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                     }
 
                     else {
-                        addToBasket();
+                       // addToBasketTwo();
                     }
                 }
             }
         });
     }
 
-    private void addToBasket() {
+    private void addToBasketOne() {
 
         // SECTION 1
         // Create the progress dialogue
@@ -316,8 +317,20 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         // CODE TO ACTUALLY ADD TO BASKET VIEW
 
+        Spinner spinner = findViewById(R.id.firstColourSpinner);
 
+        int current_product_id = 1;
+        Products firstProduct = new Products(current_product_id, firstProductText.toString(), firstProductColour.toString(), (int)firstProductQuantityOptions.getSelectedItemId(), productCost.toString());
+
+        listOfProductsToAddToBasket.put(current_product_id, firstProduct);
+
+        Intent intent = new Intent(TechActivity.this, BasketActivity.class);
+
+         for(int i = 0; i < listOfProductsToAddToBasket.size(); i++) {
+             intent.putExtra("Product Data : ", firstProduct.toString());
+         }
     }
+
 
     private boolean addToColoursList() {
         boolean addedColours = false;
