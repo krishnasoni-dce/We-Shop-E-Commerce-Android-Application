@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 // Author: Sabin Constantin Lungu
 // Purpose of Activity: Shows the products in stock for the tech activity along with the colour to choose from and quantities.
@@ -66,6 +68,8 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     private int quantity_two_cost = 3 * quantity_one_cost; // Quantity 2 is 3 times the price of 1 quantity.
     private int quantity_three_cost = 4 * quantity_one_cost;
     private int quantity_four_cost = 5 * quantity_one_cost;
+
+    private HashMap<Integer, Products> listOfProductsToAddToBasket = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -282,6 +286,8 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void addToBasket() {
+
+        // SECTION 1
         // Create the progress dialogue
         final ProgressDialog dialog = new ProgressDialog(TechActivity.this);
         dialog.setTitle("Adding to Basket..");
@@ -292,6 +298,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
         new Thread(new Runnable() { // Create a new thread
+
             @Override
             public void run() {
                 try {
@@ -305,6 +312,11 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         }).start();
 
         dialog.show(); // Show the progress bar
+
+
+        // CODE TO ACTUALLY ADD TO BASKET VIEW
+
+
     }
 
     private boolean addToColoursList() {

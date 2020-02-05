@@ -225,7 +225,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             } else {
 
                 isValid = true;
-                usernameField.setError(null);
+                usernameField.setError(null); // Set username error to null if no errors occur
             }
 
         }
@@ -356,7 +356,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         return true;
     }
 
-    private boolean validateTermsAndConditions() {
+    private boolean validateTermsAndConditions() { // Validates the terms and conditions box
 
         if (!termsAndConditions.isChecked()) { // If the terms and conditions box is not checked
 
@@ -399,7 +399,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         return true; // Fallback onto previous statement and return true
     }
 
-    private void showSpinningDialogue() {
+    private void showSpinningDialogue() { // Routine that shows the spinning dialogue when register button is clicked
         // Create the progress dialogue
         final ProgressDialog dialog = new ProgressDialog(RegisterActivity.this);
         dialog.setTitle("Creating Account...");
@@ -412,13 +412,16 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         new Thread(new Runnable() { // Create a new thread
             @Override
             public void run() {
+
                 try {
+
                     Thread.sleep(2100);
                 } catch (InterruptedException exc) {
                     Log.d("Error : ", exc.toString());
                 }
 
-                dialog.dismiss();
+
+                dialog.dismiss(); // Dismiss the dialogue
             }
         }).start();
 
@@ -476,7 +479,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
         user_data.put("email_address", emailEntry);
         user_data.put("password", passwordEntry);
 
-        db.collection("user_data").add(user_data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db.collection("user_data_two").add(user_data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
 
             public void onSuccess(DocumentReference documentReference) {

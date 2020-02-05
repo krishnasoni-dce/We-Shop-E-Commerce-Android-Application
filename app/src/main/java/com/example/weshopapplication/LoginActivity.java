@@ -2,16 +2,19 @@ package com.example.weshopapplication;
 
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,13 +39,17 @@ public class LoginActivity extends AppCompatActivity {
     private TextView loginText; // The login text at the top of the application
     private EditText emailAddressField;
     private EditText passwordField;
+
     private Button loginButton;
     private FirebaseFirestore firebaseFirestore;
 
-    private FirebaseAuth auth;
+    private FirebaseAuth auth; // Firebase authentication variable
     private Pattern regexPatterns = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]"); // Regex patterns
     private final int logout_button_id = 101;
     private boolean isAdded = false;
+    public boolean isLoggedIn = false;
+
+    private Button logoutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +62,8 @@ public class LoginActivity extends AppCompatActivity {
 
         this.firebaseFirestore = FirebaseFirestore.getInstance();
         this.auth = FirebaseAuth.getInstance();
+
+        this.logoutBtn = findViewById(R.id.logout_button);
 
         this.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +86,6 @@ public class LoginActivity extends AppCompatActivity {
         String errorMessage = "Error Caused By : ";
 
         try {
-
 
             switch (item.getItemId()) {
 
@@ -115,8 +123,10 @@ public class LoginActivity extends AppCompatActivity {
                     return super.onOptionsItemSelected(item);
             }
 
-        } catch (ActivityNotFoundException act) {
-            Log.d(errorMessage, act.toString());
+        }
+        // Catch the activity not found exception
+        catch (ActivityNotFoundException act) {
+            Log.d(errorMessage, act.toString()); // Log the error as to why it occurred.
         }
 
         return true;
@@ -142,6 +152,7 @@ public class LoginActivity extends AppCompatActivity {
 
             emailError.show();
             emailAddressField.setError("E-mail must contain @ symbol");
+
             emailAddressField.setText("");
             return false;
 
@@ -220,21 +231,38 @@ public class LoginActivity extends AppCompatActivity {
         auth.signInWithEmailAndPassword(emailInput, passwordInput).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
+                if (task.isSuccessful()) { // If the task is successful
+                    isLoggedIn = true;
 
                     Toast.makeText(LoginActivity.this, "You are logged in as " + emailInput, Toast.LENGTH_LONG).show();
-                    transitionToHomepage();
+                    transitionToHomepage(); // Take user to homepage
+                    setVisibilityOfLogout();
 
+                }
 
-                } else if (!task.isSuccessful()) { // If the task is not successful, i.e the credentials do not match
+                else if (!task.isSuccessful()) { // If the task is not successful, i.e the credentials do not match
                     Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_LONG).show(); // Show error message
+                    isLoggedIn = false;
                 }
             }
         });
     }
 
+    private void setVisibilityOfLogout() {
 
-    public void transitionToHomepage() {
+         if(isLoggedIn) {
+
+             LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+             //layout = (LinearLayout)inflater.inflate(R.menu.logout_menu);
+
+             logoutBtn = findViewById(R.id.logout_button);
+             logoutBtn.setVisibility(View.VISIBLE);
+         }
+
+    }
+
+    public void transitionToHomepage() { // Routine that takes user to home page
         try {
             Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(homeIntent);

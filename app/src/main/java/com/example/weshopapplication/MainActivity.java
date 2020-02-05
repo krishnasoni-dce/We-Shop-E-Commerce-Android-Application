@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         logoutInflater.inflate(R.menu.logout_menu, menu);
 
         MenuItem logout = menu.findItem(R.id.logout_button);
-        logout.setVisible(true); // Set the logout button to be initially true. Will be changed to false
+        logout.setVisible(false); // Set the logout button to be initially true. Will be changed to false
 
         return true;
     }
