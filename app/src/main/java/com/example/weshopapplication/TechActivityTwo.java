@@ -172,7 +172,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
 
                         AlertDialog.Builder colourError = new AlertDialog.Builder(TechActivityTwo.this).setTitle("Colour Error")
-                                .setMessage("You must select a colour before adding to the cart")
+                                .setMessage("You must select a colour before adding to the basket.")
                                 .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
 
                                     @Override
@@ -184,12 +184,42 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
                                     }
                                 });
 
-                        colourError.show();
-                        colourError.setCancelable(true);
+                        colourError.show(); // Show the error
+                        colourError.setCancelable(true); // Set cancelable to true
+                    } else {
+                        addProductThreeToBasket();
+                    }
+
+                    if (thirdQuantityDropDown.getSelectedItemPosition() == 0) { // If no value is chosen for the quantity
+
+                        AlertDialog.Builder quantityError = new AlertDialog.Builder(TechActivityTwo.this).setTitle("Quantity Error") // Create an alert dialogue
+
+                                .setMessage("You must select a quantity before adding to the basket")
+
+                                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+
+                                    @Override
+
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (dialog != null) { // If there is no dialogue
+
+                                            dialog.dismiss(); // Delete it
+                                        }
+                                    }
+                                });
+
+                        quantityError.show(); // Show the quantity error.
+                        quantityError.setCancelable(true);
+                    } else {
+                        addProductThreeToBasket();
                     }
                 }
             }
         });
+    }
+
+    private void addProductThreeToBasket() {
+        
     }
 
     private void addToColoursList() { // Routine that adds the colours to the array list
