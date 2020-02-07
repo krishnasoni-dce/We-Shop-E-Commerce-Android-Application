@@ -1,5 +1,6 @@
 package com.example.weshopapplication;
 
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -233,7 +234,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
                 if (view.getId() == R.id.fourthAddToBasketButton) {
 
 
-                    if (fourthProductColourSpinner.getSelectedItemPosition() == 0 && fourthProductMemoryDropDown.getSelectedItemPosition() == 0 && fourthProductQuantityDropDown.getSelectedItemPosition() == 0) {
+                    if (fourthProductColourSpinner.getSelectedItemPosition() == 0 || fourthProductMemoryDropDown.getSelectedItemPosition() == 0 || fourthProductQuantityDropDown.getSelectedItemPosition() == 0) {
                         AlertDialog.Builder error = new AlertDialog.Builder(TechActivityTwo.this).setTitle("Error")
 
                                 .setMessage("You must select a colour, capacity and quantity in order to add to basket")
@@ -259,11 +260,58 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     }
 
     private void addProductThreeToBasket() { // Adds the third product to basket
+        // SECTION 1
+        // Create the progress dialogue
+        final ProgressDialog dialog = new ProgressDialog(TechActivityTwo.this);
+        dialog.setTitle("Adding to Basket..");
+        dialog.setMessage("Please Wait");
 
+        dialog.setCancelable(false);
+
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        new Thread(new Runnable() { // Create a new thread
+
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1900);
+                } catch (InterruptedException exc) {
+                    Log.d("Error : ", exc.toString());
+                }
+
+                dialog.dismiss();
+            }
+        }).start();
+
+        dialog.show(); // Show the progress bar
     }
 
     private void addProductFourToBasket() { // Adds the fourth product to the basket
+     
+        final ProgressDialog dialog = new ProgressDialog(TechActivityTwo.this);
+        dialog.setTitle("Adding to Basket..");
+        dialog.setMessage("Please Wait");
 
+        dialog.setCancelable(false);
+
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        new Thread(new Runnable() { // Create a new thread
+
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1900);
+                } catch (InterruptedException exc) {
+                    Log.d("Error : ", exc.toString());
+                }
+
+                dialog.dismiss();
+            }
+        }).start();
+
+        dialog.show(); // Show the progress bar
     }
 
     private void addToColoursList() { // Routine that adds the colours to the array list
@@ -335,7 +383,8 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { // Routine that determines which item has been selected
-
+        boolean valueSelected = false;
+        int[] indexes = {0, 1, 2, 3, 4};
     }
 
     @Override

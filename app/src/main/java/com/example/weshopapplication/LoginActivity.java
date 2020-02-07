@@ -2,19 +2,16 @@ package com.example.weshopapplication;
 
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -250,15 +247,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setVisibilityOfLogout() {
 
-         if(isLoggedIn) {
-
-             LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-             //layout = (LinearLayout)inflater.inflate(R.menu.logout_menu);
-
-             logoutBtn = findViewById(R.id.logout_button);
-             logoutBtn.setVisibility(View.VISIBLE);
-         }
 
     }
 
