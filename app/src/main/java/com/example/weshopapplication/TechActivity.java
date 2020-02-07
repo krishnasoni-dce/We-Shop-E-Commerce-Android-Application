@@ -519,7 +519,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         return true;
     }
 
-    public class Quantities {
+    public static class Quantities {
         private int quantity; // Quantity variable
 
         public Quantities(int quantity) { // Parameterised constructor that creates the object and the data when this is called.

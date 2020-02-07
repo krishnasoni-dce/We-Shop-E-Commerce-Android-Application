@@ -1,26 +1,25 @@
 package com.example.weshopapplication;
 
-
 // Author of Application: Sabin Constantin Lungu
 // Purpose of Class: To store the data for the capacities.
 // Date of last modification: 07/02/2020
 // Any errors ? NO
 
 public class Capacity { // Capacity class
-    private int colour;
+    private int index;
     private int productCapacity;
 
-    public Capacity(int colour, int productCapacity) {
-        this.colour = colour;
+    public Capacity(int index, int productCapacity) { // Parameter constructor. Method called when the object is being created and added on the heap
+        this.index = index;
         this.productCapacity = productCapacity;
     }
 
-    public int getColour() {
-        return colour;
+    public int getIndex() { // Method returns the index
+        return this.index;
     }
 
-    public void setColour(int colour) {
-        this.colour = colour;
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public int getProductCapacity() {
@@ -33,9 +32,6 @@ public class Capacity { // Capacity class
 
     @Override
     public String toString() {
-        return "Capacity{" +
-                "colour=" + colour +
-                ", productCapacity=" + productCapacity +
-                '}';
+        return " " + this.index + " " + this.productCapacity;
     }
 }

@@ -42,6 +42,9 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     private ArrayList<TechActivity.Quantities> listOfQuantities;
     private ArrayList<Capacity> listOfCapacities;
 
+    private ArrayList<TechActivity.Colours> secondListOfColours;
+    private ArrayList<TechActivity.Quantities> secondListOfQuantities;
+
     private int quantity_zero_cost = 0;
     private int quantity_one_cost = 750;
 
@@ -105,6 +108,9 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
         this.listOfQuantities = new ArrayList<>();
         this.listOfCapacities = new ArrayList<>();
 
+        this.secondListOfColours = new ArrayList<>();
+        this.secondListOfQuantities = new ArrayList<>();
+
         addToColoursList(); // Method to add to the colours array list
         addToQuantitiesList();
         addToCapacityList();
@@ -121,26 +127,70 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
         thirdProductDropDown.setAdapter(colourArrayAdapter);
         thirdProductDropDown.setOnItemSelectedListener(TechActivityTwo.this);
 
-        // SET UP THE THIRD PRODUCT CAPACITY SPINNER TO SHOW
+        // SET UP THE FOURTH PRODUCT CAPACITY SPINNER TO SHOW
+        this.capacityArrayAdapter = new CapacityArrayAdapter(TechActivityTwo.this, listOfCapacities);
+        capacityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        fourthProductCapacityDropDown.setAdapter(capacityArrayAdapter);
+        fourthProductCapacityDropDown.setOnItemSelectedListener(TechActivityTwo.this);
+
+        // SET UP THE FOURTH PRODUCT COLOUR DROP DOWN MENU TO SHOW
+        this.colourArrayAdapter = new ColourArrayAdapter(TechActivityTwo.this, listOfColours);
+        colourArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        fourthProductColourSpinner.setAdapter(colourArrayAdapter);
+        fourthProductColourSpinner.setOnItemSelectedListener(TechActivityTwo.this);
+
+        // SET UP MEMORY CAPACITY FOR THE FOURTH PRODUCT
+        this.capacityArrayAdapter = new CapacityArrayAdapter(TechActivityTwo.this, listOfCapacities);
+        capacityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        fourthProductCapacityDropDown.setAdapter(capacityArrayAdapter);
+        fourthProductCapacityDropDown.setOnItemSelectedListener(TechActivityTwo.this);
+
+
     }
 
     private void addToColoursList() { // Routine that adds the colours to the array list
-        String coloursMsgAdded = "Colours Added Success";
 
         TechActivity.Colours[] firstColoursArray = {new TechActivity.Colours(0, "Please Choose Colour"), new TechActivity.Colours(1, "White"), new TechActivity.Colours(2, "Black")};
+        TechActivity.Colours[] secondColoursArray = {new TechActivity.Colours(0, "Please Choose Colour"), new TechActivity.Colours(1, "Salmon Pink"), new TechActivity.Colours(2, "Lime Green"),
+                new TechActivity.Colours(3, "Ruby Red"), new TechActivity.Colours(4, "Midnight Black")};
 
         for (TechActivity.Colours colours : firstColoursArray) {
             listOfColours.add(colours);
             addedColours = true;
         }
+
+        for (TechActivity.Colours secondColours : secondColoursArray) {
+            secondListOfColours.add(secondColours);
+            addedColours = true;
+        }
+
+
     }
 
     private void addToQuantitiesList() { // Routine that adds the quantities to the array list
         String quantitiesAddedMsg = "Quantities Added Success";
+
+        TechActivity.Quantities[] quantitiesArray = {new TechActivity.Quantities(0), new TechActivity.Quantities(1), new TechActivity.Quantities(2),
+                new TechActivity.Quantities(3), new TechActivity.Quantities(4), new TechActivity.Quantities(5)};
+
+        for (TechActivity.Quantities qty : quantitiesArray) {
+            listOfQuantities.add(qty);
+            addedQuantities = true;
+        }
+
+        for (TechActivity.Quantities qty2 : quantitiesArray) {
+            secondListOfQuantities.add(qty2);
+            addedQuantities = true;
+        }
     }
 
     private void addToCapacityList() { // Routine that adds the capacity to the array list
         String capacityAddedMsg = "Capacity Added";
+
+
     }
 
     @Override
