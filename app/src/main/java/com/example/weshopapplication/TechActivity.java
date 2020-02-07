@@ -6,24 +6,23 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 // Author: Sabin Constantin Lungu
 // Purpose of Activity: Shows the products in stock for the tech activity along with the colour to choose from and quantities.
@@ -31,7 +30,6 @@ import java.util.Map;
 // Any Bugs?: Currently none. Unit tested recently. 11/11 Tests completed
 
 public class TechActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
 
     private TextView firstProductText;
     private Thread firstActivityThread;
@@ -90,7 +88,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         this.firstProductColourOptions = findViewById(R.id.firstColourSpinner); // Spinner 1. -> COLOURS
         this.firstProductQuantityOptions = findViewById(R.id.firstQuantitySpinner); // Spinner 2 -> QUANTITIES
-        this.firstAddToBasketButton = findViewById(R.id.firstAddToBasketBtn); // Button: -> ADD TO BASKET BUTTON 1
+        this.firstAddToBasketButton = findViewById(R.id.thirdAddToBasketBtn); // Button: -> ADD TO BASKET BUTTON 1
 
         this.secondProductColourOptions = findViewById(R.id.secondColourSpinner);
         this.secondProductQuantityOptions = findViewById(R.id.secondQuantitySpinner);
@@ -136,7 +134,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         quantitiesCustomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         colourArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-
         secondProductQuantityOptions.setAdapter(quantitiesCustomAdapter);
         secondProductColourOptions.setAdapter(colourArrayAdapter);
 
@@ -168,7 +165,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                 String quantityErrorTitleOne = "First Quantity Menu Error";
                 String quantityErrorBodyMsg = "You must select a quantity before adding the product to cart";
 
-                if (v.getId() == R.id.firstAddToBasketBtn) { // If the first add to basket button is clicked
+                if (v.getId() == R.id.thirdAddToBasketBtn) { // If the first add to basket button is clicked
 
                     if (firstProductColourOptions.getSelectedItemPosition() == 0) { //
 
@@ -522,8 +519,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         return true;
     }
 
-    // Anonymous inner class Quantities that is used to add the quantities to the drop-down menu. This class will be reused throughout other activities in order to retrieve specific data.
-    class Quantities {
+    public class Quantities {
         private int quantity; // Quantity variable
 
         public Quantities(int quantity) { // Parameterised constructor that creates the object and the data when this is called.
@@ -542,6 +538,8 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             return " " + this.quantity;
         }
     }
+
+    // Anonymous inner class Quantities that is used to add the quantities to the drop-down menu. This class will be reused throughout other activities in order to retrieve specific data.
 
     @Override
     public void onBackPressed() {
@@ -586,7 +584,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     // Anonymous inner classes that will be used later on in the basket activity and the payment form
 
-    class Colours { // Anonymous inner class o
+    public class Colours { // Anonymous inner class o
         private int index;
         private String colour;
 

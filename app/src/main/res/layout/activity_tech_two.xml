@@ -8,7 +8,7 @@
     tools:context=".TechActivityTwo">
 
     <TextView
-        android:id="@+id/airpodsProTxtView"
+        android:id="@+id/thirdProductTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="172dp"
@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/airpodsProImg"
+        android:id="@+id/thirdProductImg"
         android:layout_width="272dp"
         android:layout_height="185dp"
         android:layout_marginStart="88dp"
@@ -32,7 +32,7 @@
         app:srcCompat="@drawable/airpodspro" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/thirdProductCostTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
@@ -46,7 +46,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/thirdColourLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -56,19 +56,19 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/firstAddToBasketBtn"
+        app:layout_constraintBottom_toTopOf="@+id/thirdAddToBasketBtn"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/thirdColourDropDownMenu"
         android:layout_width="118dp"
         android:layout_height="20dp"
         android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/firstAddToBasketBtn"
-        app:layout_constraintStart_toEndOf="@+id/textView4" />
+        app:layout_constraintBottom_toTopOf="@+id/thirdAddToBasketBtn"
+        app:layout_constraintStart_toEndOf="@+id/thirdColourLbl" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/thirdQuantityDropDownMenu"
         android:layout_width="114dp"
         android:layout_height="19dp"
         android:layout_marginEnd="8dp"
@@ -77,7 +77,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/firstAddToBasketBtn"
+        android:id="@+id/thirdAddToBasketBtn"
         android:layout_width="449dp"
         android:layout_height="50dp"
         android:layout_marginBottom="368dp"
@@ -91,7 +91,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/thirdQuantityLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -101,11 +101,11 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/firstAddToBasketBtn"
-        app:layout_constraintStart_toEndOf="@+id/spinner" />
+        app:layout_constraintBottom_toTopOf="@+id/thirdAddToBasketBtn"
+        app:layout_constraintStart_toEndOf="@+id/thirdColourDropDownMenu" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/fourthProductTitleLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="108dp"
@@ -119,16 +119,16 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/fourthProductImg"
         android:layout_width="194dp"
         android:layout_height="176dp"
         android:layout_marginStart="108dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintBottom_toTopOf="@+id/fourthProductImgCost"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/galaxys" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/fourthProductImgCost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
@@ -138,11 +138,11 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/spinner4"
+        app:layout_constraintBottom_toTopOf="@+id/fourthProductMemoryDropDownMenu"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/fourthProductColourLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -156,15 +156,15 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner3"
+        android:id="@+id/fourthProductDropDownMenu"
         android:layout_width="76dp"
         android:layout_height="19dp"
         android:layout_marginBottom="11dp"
         app:layout_constraintBottom_toTopOf="@+id/fourthAddToBasketButton"
-        app:layout_constraintStart_toEndOf="@+id/textView7" />
+        app:layout_constraintStart_toEndOf="@+id/fourthProductColourLabel" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/fourthProductMemoryLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -175,19 +175,19 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinner3" />
+        app:layout_constraintStart_toEndOf="@+id/fourthProductDropDownMenu" />
 
     <Spinner
-        android:id="@+id/spinner4"
+        android:id="@+id/fourthProductMemoryDropDownMenu"
         android:layout_width="63dp"
         android:layout_height="20dp"
         android:layout_marginStart="4dp"
         android:layout_marginBottom="104dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView8" />
+        app:layout_constraintStart_toEndOf="@+id/fourthProductMemoryLabel" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/fourthProductCapacityLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -198,15 +198,15 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinner4" />
+        app:layout_constraintStart_toEndOf="@+id/fourthProductMemoryDropDownMenu" />
 
     <Spinner
-        android:id="@+id/spinner5"
+        android:id="@+id/fourthProductCapacityDropDown"
         android:layout_width="75dp"
         android:layout_height="21dp"
         android:layout_marginBottom="104dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView9" />
+        app:layout_constraintStart_toEndOf="@+id/fourthProductCapacityLbl" />
 
     <Button
         android:id="@+id/fourthAddToBasketButton"

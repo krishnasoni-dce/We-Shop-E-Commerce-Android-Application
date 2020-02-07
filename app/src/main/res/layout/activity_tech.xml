@@ -92,7 +92,7 @@
         app:layout_constraintEnd_toStartOf="@+id/firstQuantitySpinner" />
 
     <Button
-        android:id="@+id/firstAddToBasketBtn"
+        android:id="@+id/thirdAddToBasketBtn"
         android:layout_width="449dp"
         android:layout_height="50dp"
         android:layout_marginBottom="360dp"
