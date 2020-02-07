@@ -584,7 +584,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     // Anonymous inner classes that will be used later on in the basket activity and the payment form
 
-    public class Colours { // Anonymous inner class o
+    public static class Colours { // Anonymous inner class o
         private int index;
         private String colour;
 

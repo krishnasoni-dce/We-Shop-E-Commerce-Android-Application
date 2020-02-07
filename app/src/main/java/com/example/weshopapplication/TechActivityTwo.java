@@ -1,6 +1,8 @@
 package com.example.weshopapplication;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -11,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TechActivityTwo extends AppCompatActivity {
+public class TechActivityTwo extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     // Components for the Third Product
     private TextView thirdProductTextView;
     private ImageView thirdProductImage;
@@ -103,27 +105,42 @@ public class TechActivityTwo extends AppCompatActivity {
         this.listOfQuantities = new ArrayList<>();
         this.listOfCapacities = new ArrayList<>();
 
-        addToColoursList();
+        addToColoursList(); // Method to add to the colours array list
         addToQuantitiesList();
         addToCapacityList();
 
+        // SET UP THE THIRD PRODUCT QUANTITIES DROP DOWN MENU TO SHOW
         this.quantitiesAdapter = new CustomArrayAdapter(TechActivityTwo.this, listOfQuantities);
         quantitiesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Add the adapter
         thirdQuantityDropDown.setAdapter(quantitiesAdapter);
+        thirdQuantityDropDown.setOnItemSelectedListener(TechActivityTwo.this);
+
+        // SET UP THE THIRD PRODUCT COLOUR SPINNER DROP DOWN MENU TO SHOW
+        this.colourArrayAdapter = new ColourArrayAdapter(TechActivityTwo.this, listOfColours);
+        colourArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        thirdProductDropDown.setAdapter(colourArrayAdapter);
+        thirdProductDropDown.setOnItemSelectedListener(TechActivityTwo.this);
+
+        // SET UP THE THIRD PRODUCT CAPACITY SPINNER TO SHOW
     }
 
     private void addToColoursList() { // Routine that adds the colours to the array list
         String coloursMsgAdded = "Colours Added Success";
+
+        TechActivity.Colours[] firstColoursArray = {new TechActivity.Colours(0, "Please Choose Colour"), new TechActivity.Colours(1, "White"), new TechActivity.Colours(2, "Black")};
+
+        for (TechActivity.Colours colours : firstColoursArray) {
+            listOfColours.add(colours);
+            addedColours = true;
+        }
     }
 
     private void addToQuantitiesList() { // Routine that adds the quantities to the array list
-
+        String quantitiesAddedMsg = "Quantities Added Success";
     }
 
-    private void addToCapacityList() {
-
+    private void addToCapacityList() { // Routine that adds the capacity to the array list
+        String capacityAddedMsg = "Capacity Added";
     }
 
     @Override
@@ -144,5 +161,20 @@ public class TechActivityTwo extends AppCompatActivity {
     @Override
     protected void onRestart() { // When restarted.
         super.onRestart();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }
