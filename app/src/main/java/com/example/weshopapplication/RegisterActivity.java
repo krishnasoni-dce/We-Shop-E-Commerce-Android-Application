@@ -6,24 +6,23 @@ import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,6 +31,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
@@ -146,6 +146,36 @@ public class RegisterActivity extends AppCompatActivity { // Register class
 
     public void onStart() { // Android Lifecycle method 2.
         super.onStart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    public boolean onNavigateUp() {
+        return super.onNavigateUp();
     }
 
     private boolean validateUsername() { // Routine that validates the username entered by the user against specific criteria
@@ -299,7 +329,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
     }
 
     private boolean validatePassword() { // Routine to validate the password
-        String passwordEntryField = passwordField.getText().toString().trim();
+        String passwordEntryField = passwordField.getText().toString().trim(); // Get the password input and trim it
 
         if (passwordEntryField.isEmpty() && !regexPatterns.matcher(passwordEntryField).matches()) { // If the password is empty and there are no regex characters found
 
@@ -307,8 +337,8 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                     .setMessage("Re-enter Password Please").setNegativeButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            if (dialog != null) {
-                                dialog.dismiss();
+                            if (dialog != null) { // If the dialog is empty
+                                dialog.dismiss(); // Dismiss it
                             }
                         }
                     });
@@ -317,11 +347,11 @@ public class RegisterActivity extends AppCompatActivity { // Register class
             passwordField.setText("");
 
             passwordField.setError("Password cannot be left empty & must contain special characters");
-            isEmpty = true;
+            isEmpty = true; // Is empty is true
             hasRegex = false;
 
-            isValid = false;
-            return false;
+            isValid = false; // Not valid
+            return false; // Return false
         }
 
         for (int i = 0; i < passwordEntryField.length(); i++) { // Loop over the password entry
@@ -340,7 +370,7 @@ public class RegisterActivity extends AppCompatActivity { // Register class
                         });
 
                 pwUpperCase.show();
-                passwordField.setText("");
+                passwordField.setText(""); // Set the field empty
 
                 passwordField.setError("Password must start with upper case character");
                 startsWithUppercase = false;

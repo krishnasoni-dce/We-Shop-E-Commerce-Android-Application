@@ -190,6 +190,13 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     private void addToCapacityList() { // Routine that adds the capacity to the array list
         String capacityAddedMsg = "Capacity Added";
 
+        Capacity[] capacities = {new Capacity(0, 64), new Capacity(1, 128), new Capacity(2, 256), new Capacity(3, 512)};
+
+        for (Capacity capacity : capacities) {
+            listOfCapacities.add(capacity);
+            addedCapacities = true;
+        }
+
 
     }
 
