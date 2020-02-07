@@ -34,8 +34,9 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
     private TextView fourthProductMemoryLbl;
     private Spinner fourthProductMemoryDropDown;
-    private TextView fourthProductCapacity;
-    private Spinner fourthProductCapacityDropDown;
+
+    private TextView fourthProductQuantity;
+    private Spinner fourthProductQuantityDropDown;
 
     // An array list of colours, quantities and capacity
     private ArrayList<TechActivity.Colours> listOfColours;
@@ -99,9 +100,9 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
         this.fourthProductColourSpinner = findViewById(R.id.fourthProductDropDownMenu);
         this.fourthProductMemoryLbl = findViewById(R.id.fourthProductMemoryLabel);
         this.fourthProductMemoryDropDown = findViewById(R.id.fourthProductMemoryDropDownMenu);
-        this.fourthProductCapacity = findViewById(R.id.fourthProductCapacityLbl);
+        this.fourthProductQuantity = findViewById(R.id.fourthProductQuantityLbl);
 
-        this.fourthProductCapacityDropDown = findViewById(R.id.fourthProductCapacityDropDown);
+        this.fourthProductQuantityDropDown = findViewById(R.id.fourthProductQuantityDropDown);
 
         // Put array list on the heap
         this.listOfColours = new ArrayList<>();
@@ -127,13 +128,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
         thirdProductDropDown.setAdapter(colourArrayAdapter);
         thirdProductDropDown.setOnItemSelectedListener(TechActivityTwo.this);
 
-        // SET UP THE FOURTH PRODUCT CAPACITY SPINNER TO SHOW
-        this.capacityArrayAdapter = new CapacityArrayAdapter(TechActivityTwo.this, listOfCapacities);
-        capacityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        fourthProductCapacityDropDown.setAdapter(capacityArrayAdapter);
-        fourthProductCapacityDropDown.setOnItemSelectedListener(TechActivityTwo.this);
-
         // SET UP THE FOURTH PRODUCT COLOUR DROP DOWN MENU TO SHOW
         this.colourArrayAdapter = new ColourArrayAdapter(TechActivityTwo.this, listOfColours);
         colourArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -145,10 +139,8 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
         this.capacityArrayAdapter = new CapacityArrayAdapter(TechActivityTwo.this, listOfCapacities);
         capacityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        fourthProductCapacityDropDown.setAdapter(capacityArrayAdapter);
-        fourthProductCapacityDropDown.setOnItemSelectedListener(TechActivityTwo.this);
-
-
+        fourthProductMemoryDropDown.setAdapter(capacityArrayAdapter);
+        fourthProductMemoryDropDown.setOnItemSelectedListener(TechActivityTwo.this);
     }
 
     private void addToColoursList() { // Routine that adds the colours to the array list

@@ -32,6 +32,6 @@ public class Capacity { // Capacity class
 
     @Override
     public String toString() {
-        return " " + this.index + " " + this.productCapacity;
+        return " " + this.productCapacity;
     }
 }

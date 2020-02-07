@@ -11,15 +11,13 @@ public class Products { // Products Class
     private String colour; // Product Colour
     private int quantity;
     private String cost;
-    private int productCapacity;
 
-    public Products(int productID, String productName, String colour, int quantity, String cost, int productCapacity) {
+    public Products(int productID, String productName, String colour, int quantity, String cost) {
         this.productID = productID;
         this.productName = productName;
         this.colour = colour;
         this.quantity = quantity;
         this.cost = cost;
-        this.productCapacity = productCapacity;
     }
 
     public int getProductID() {
@@ -62,14 +60,6 @@ public class Products { // Products Class
         this.cost = cost;
     }
 
-    public int getProductCapacity() {
-        return productCapacity;
-    }
-
-    public void setProductCapacity(int productCapacity) {
-        this.productCapacity = productCapacity;
-    }
-
     @Override
     public String toString() {
         return "Products{" +
@@ -78,7 +68,7 @@ public class Products { // Products Class
                 ", colour='" + colour + '\'' +
                 ", quantity=" + quantity +
                 ", cost='" + cost + '\'' +
-                ", productCapacity=" + productCapacity +
+                ", productCapacity=" +
                 '}';
     }
 }
