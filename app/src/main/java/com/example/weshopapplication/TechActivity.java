@@ -555,7 +555,9 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) { }
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 
     public boolean onCreateOptionsMenu(Menu menu) {
 

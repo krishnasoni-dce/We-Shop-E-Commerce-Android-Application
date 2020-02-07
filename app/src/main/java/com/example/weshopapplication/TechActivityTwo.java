@@ -1,6 +1,12 @@
 package com.example.weshopapplication;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -8,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -129,7 +136,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
         thirdProductDropDown.setOnItemSelectedListener(TechActivityTwo.this);
 
         // SET UP THE FOURTH PRODUCT COLOUR DROP DOWN MENU TO SHOW
-        this.colourArrayAdapter = new ColourArrayAdapter(TechActivityTwo.this, listOfColours);
+        this.colourArrayAdapter = new ColourArrayAdapter(TechActivityTwo.this, secondListOfColours);
         colourArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         fourthProductColourSpinner.setAdapter(colourArrayAdapter);
@@ -213,7 +220,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { // Routine that determines which item has been selected
 
     }
 
@@ -225,5 +232,79 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater activityInflater = getMenuInflater();
+        activityInflater.inflate(R.menu.homepagemenu, menu);
+
+        MenuInflater basketButtonInflater = getMenuInflater();
+        basketButtonInflater.inflate(R.menu.basket_action_button, menu);
+
+        View cartView = findViewById(R.id.cart_icon);
+
+        cartView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+
+                    Intent basketIntent = new Intent(TechActivityTwo.this, BasketActivity.class);
+                    startActivity(basketIntent); // Start the basket intent
+
+                } catch (ActivityNotFoundException exc) {
+                    Log.d("Error : ", exc.toString());
+                }
+            }
+        });
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        try {
+
+            switch (item.getItemId()) {
+
+                case R.id.sportsAndOutdoorsCategory:
+                    Intent sportsAndOutdoorsActivity = new Intent(TechActivityTwo.this, SportsAndOutdoorsActivity.class);
+                    startActivity(sportsAndOutdoorsActivity);
+
+                    return true;
+
+                case R.id.techCategory:
+                    Intent techCategory = new Intent(TechActivityTwo.this, TechActivity.class);
+                    startActivity(techCategory);
+
+                    return true;
+
+                case R.id.clothingCategory:
+                    Intent clothingCategory = new Intent(TechActivityTwo.this, ClothingCategory.class);
+                    startActivity(clothingCategory);
+
+                    return true;
+
+                case R.id.diyCategory:
+
+                    Intent diyCategory = new Intent(TechActivityTwo.this, DIYActivity.class);
+                    startActivity(diyCategory);
+
+                    return true;
+
+                default:
+                    return super.onOptionsItemSelected(item);
+
+            }
+
+
+        } catch (ActivityNotFoundException exc) {
+
+            Log.d("Error : ", exc.toString());
+        }
+
+        return true;
     }
 }
