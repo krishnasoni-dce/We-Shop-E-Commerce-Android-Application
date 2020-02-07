@@ -48,6 +48,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
     private TextView fourthProductQuantity;
     private Spinner fourthProductQuantityDropDown;
+    private Button fourthAddToBasketButton;
 
     // An array list of colours, quantities and capacity
     private ArrayList<TechActivity.Colours> listOfColours;
@@ -108,10 +109,13 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
         this.fourthProductImage = findViewById(R.id.fourthProductImg);
         this.fourthProductCost = findViewById(R.id.fourthProductImgCost);
         this.fourthProductColourLbl = findViewById(R.id.fourthProductColourLabel);
+
         this.fourthProductColourSpinner = findViewById(R.id.fourthProductDropDownMenu);
         this.fourthProductMemoryLbl = findViewById(R.id.fourthProductMemoryLabel);
         this.fourthProductMemoryDropDown = findViewById(R.id.fourthProductMemoryDropDownMenu);
+
         this.fourthProductQuantity = findViewById(R.id.fourthProductQuantityLbl);
+        this.fourthAddToBasketButton = findViewById(R.id.fourthAddToBasketButton);
 
         this.fourthProductQuantityDropDown = findViewById(R.id.fourthProductQuantityDropDown);
 
@@ -187,6 +191,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
                         colourError.show(); // Show the error
                         colourError.setCancelable(true); // Set cancelable to true
                     } else {
+
                         addProductThreeToBasket();
                     }
 
@@ -210,16 +215,55 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
                         quantityError.show(); // Show the quantity error.
                         quantityError.setCancelable(true);
+
+
                     } else {
+
                         addProductThreeToBasket();
+                    }
+                }
+            }
+        });
+
+
+        this.fourthAddToBasketButton.setOnClickListener(new View.OnClickListener() { // Add action listener to the fourth button
+            @Override
+
+            public void onClick(View view) {
+                if (view.getId() == R.id.fourthAddToBasketButton) {
+
+
+                    if (fourthProductColourSpinner.getSelectedItemPosition() == 0 && fourthProductMemoryDropDown.getSelectedItemPosition() == 0 && fourthProductQuantityDropDown.getSelectedItemPosition() == 0) {
+                        AlertDialog.Builder error = new AlertDialog.Builder(TechActivityTwo.this).setTitle("Error")
+
+                                .setMessage("You must select a colour, capacity and quantity in order to add to basket")
+
+
+                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (dialog != null) {
+                                            dialog.dismiss();
+                                        }
+                                    }
+                                });
+
+                        error.show();
+                        error.setCancelable(true);
+                    } else {
+                        addProductFourToBasket();
                     }
                 }
             }
         });
     }
 
-    private void addProductThreeToBasket() {
-        
+    private void addProductThreeToBasket() { // Adds the third product to basket
+
+    }
+
+    private void addProductFourToBasket() { // Adds the fourth product to the basket
+
     }
 
     private void addToColoursList() { // Routine that adds the colours to the array list
