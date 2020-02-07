@@ -288,7 +288,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     }
 
     private void addProductFourToBasket() { // Adds the fourth product to the basket
-     
+
         final ProgressDialog dialog = new ProgressDialog(TechActivityTwo.this);
         dialog.setTitle("Adding to Basket..");
         dialog.setMessage("Please Wait");
@@ -383,8 +383,25 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { // Routine that determines which item has been selected
-        boolean valueSelected = false;
+        boolean valueAppended = false;
         int[] indexes = {0, 1, 2, 3, 4};
+
+        String text_to_append = "Product Cost £: ";
+
+        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(0))) {
+            thirdProductCostTxt.setText(null);
+            thirdProductCostTxt.append(text_to_append + quantity_zero_cost);
+
+            valueAppended = true;
+        }
+
+        // If the quantity at index 1 is chosen
+        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(1))) {
+            thirdProductCostTxt.setText(null);
+            thirdProductCostTxt.append(text_to_append + quantity_one_cost);
+
+            valueAppended = true; // Value is appended
+        }
     }
 
     @Override
