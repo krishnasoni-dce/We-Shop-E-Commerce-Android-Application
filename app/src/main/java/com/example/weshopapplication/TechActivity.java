@@ -65,12 +65,12 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     private Button nextPageBtn;
 
     // VARIABLES FOR THE COSTS
-    private int quantity_zero_cost = 0;
-    private int quantity_one_cost = 500;
+    private double quantity_zero_cost = 0.00;
+    private double quantity_one_cost = 500.00;
 
-    private int quantity_two_cost = 3 * quantity_one_cost; // Quantity 2 is 3 times the price of 1 quantity.
-    private int quantity_three_cost = 4 * quantity_one_cost;
-    private int quantity_four_cost = 5 * quantity_one_cost;
+    private double quantity_two_cost = 3 * quantity_one_cost; // Quantity 2 is 3 times the price of 1 quantity.
+    private double quantity_three_cost = 4 * quantity_one_cost;
+    private double quantity_four_cost = 5 * quantity_one_cost;
 
     private HashMap<Integer, Products> listOfProductsToAddToBasket = new HashMap<>();
 

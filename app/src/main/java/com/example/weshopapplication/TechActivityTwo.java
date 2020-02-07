@@ -59,19 +59,20 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     private ArrayList<TechActivity.Colours> secondListOfColours;
     private ArrayList<TechActivity.Quantities> secondListOfQuantities;
 
-    private int quantity_zero_cost = 0;
-    private int quantity_one_cost = 750;
+    private double quantity_zero_cost = 0.0;
+    private double quantity_one_cost = 249.99;
 
     // Formulae to calculate price & Capacity
-    private int quantity_two_cost = 3 * quantity_one_cost; // Quantity 2 is 3 times the price of 1 quantity.
-    private int quantity_three_cost = 4 * quantity_one_cost;
-    private int quantity_four_cost = 5 * quantity_one_cost;
+    private double quantity_two_cost = 2 * quantity_one_cost; // Quantity 2 is 3 times the price of 1 quantity.
+    private double quantity_three_cost = 3 * quantity_one_cost;
+    private double quantity_four_cost = 4 * quantity_one_cost;
+    private double quantity_five_cost = 5 * quantity_one_cost;
 
     // Formulae for the cost of different capacities
-    private int sixtyFourGBCost = quantity_one_cost * 2;
-    private int oneTwoEightGbCost = quantity_two_cost * 3;
-    private int twoFiveSixGbCost = quantity_four_cost * 2;
-    private int fiveTwelveGbCost = quantity_three_cost * quantity_four_cost;
+    private double sixtyFourGBCost = quantity_one_cost * 2;
+    private double oneTwoEightGbCost = quantity_two_cost * 3;
+    private double twoFiveSixGbCost = quantity_four_cost * 2;
+    private double fiveTwelveGbCost = quantity_three_cost * quantity_four_cost;
 
     // Hashmap to store the products that will be added to the basket
     private HashMap<Integer, Products> listOfProductsToAdd = new HashMap<>();
@@ -384,24 +385,55 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { // Routine that determines which item has been selected
         boolean valueAppended = false;
-        int[] indexes = {0, 1, 2, 3, 4};
+        int[] quantityIndexes = {0, 1, 2, 3, 4, 5};
 
         String text_to_append = "Product Cost £: ";
 
-        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(0))) {
+        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(quantityIndexes[0]))) {
             thirdProductCostTxt.setText(null);
             thirdProductCostTxt.append(text_to_append + quantity_zero_cost);
 
             valueAppended = true;
         }
 
+
         // If the quantity at index 1 is chosen
-        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(1))) {
+        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(quantityIndexes[1]))) {
             thirdProductCostTxt.setText(null);
             thirdProductCostTxt.append(text_to_append + quantity_one_cost);
 
             valueAppended = true; // Value is appended
         }
+
+        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(quantityIndexes[2]))) {
+            thirdProductCostTxt.setText(null);
+            thirdProductCostTxt.append(text_to_append + quantity_two_cost);
+
+            valueAppended = true;
+        }
+
+
+        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(quantityIndexes[3]))) {
+            thirdProductCostTxt.setText(null);
+            thirdProductCostTxt.append(text_to_append + quantity_three_cost);
+
+            valueAppended = true;
+        }
+
+        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(quantityIndexes[4]))) {
+            thirdProductCostTxt.setText(null);
+            thirdProductCostTxt.append(text_to_append + quantity_four_cost);
+
+            valueAppended = true;
+        }
+
+        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(quantityIndexes[5]))) {
+            thirdProductCostTxt.setText(null);
+            thirdProductCostTxt.append(text_to_append + quantity_five_cost);
+
+            valueAppended = true;
+        }
+
     }
 
     @Override
