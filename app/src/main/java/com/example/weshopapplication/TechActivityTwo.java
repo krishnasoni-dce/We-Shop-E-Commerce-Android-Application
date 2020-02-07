@@ -1,6 +1,7 @@
 package com.example.weshopapplication;
 
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     private ImageView thirdProductImage;
     private TextView thirdProductCostTxt;
     private TextView thirdProductColourLbl;
+
+    private ImageView cartIcon;
     private Spinner thirdProductDropDown;
 
     private TextView thirdQuantityLabel;
@@ -148,6 +152,44 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
         fourthProductMemoryDropDown.setAdapter(capacityArrayAdapter);
         fourthProductMemoryDropDown.setOnItemSelectedListener(TechActivityTwo.this);
+
+        // SET UP QUANTITY FOR FOURTH PRODUCT
+        this.quantitiesAdapter = new CustomArrayAdapter(TechActivityTwo.this, listOfQuantities);
+        quantitiesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        fourthProductQuantityDropDown.setAdapter(quantitiesAdapter);
+        fourthProductQuantityDropDown.setOnItemSelectedListener(TechActivityTwo.this);
+
+
+        this.thirdAddToBasketButton.setOnClickListener(new View.OnClickListener() { // Add Listener for third button
+            @Override
+
+            public void onClick(View v) {
+
+                if (v.getId() == R.id.thirdAddToBasketBtn) {
+
+
+                    if (thirdProductDropDown.getSelectedItemPosition() == 0) {
+
+
+                        AlertDialog.Builder colourError = new AlertDialog.Builder(TechActivityTwo.this).setTitle("Colour Error")
+                                .setMessage("You must select a colour before adding to the cart")
+                                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (dialog != null) {
+
+                                            dialog.dismiss();
+                                        }
+                                    }
+                                });
+
+                        colourError.show();
+                        colourError.setCancelable(true);
+                    }
+                }
+            }
+        });
     }
 
     private void addToColoursList() { // Routine that adds the colours to the array list
@@ -195,8 +237,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
             listOfCapacities.add(capacity);
             addedCapacities = true;
         }
-
-
     }
 
     @Override
@@ -242,9 +282,11 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
         MenuInflater basketButtonInflater = getMenuInflater();
         basketButtonInflater.inflate(R.menu.basket_action_button, menu);
 
-        View cartView = findViewById(R.id.cart_icon);
+        View cartView = menu.findItem(R.id.cart_menu).getActionView();
 
-        cartView.setOnClickListener(new View.OnClickListener() {
+        cartIcon = cartView.findViewById(R.id.cart_icon);
+
+        cartIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

@@ -334,7 +334,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-
     private boolean addToColoursList() {
         boolean addedColours = false;
 
