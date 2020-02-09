@@ -65,7 +65,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     private Button nextPageBtn;
 
     // VARIABLES FOR THE COSTS
-    private double quantity_zero_cost = 0.00;
+    private double quantity_zero_cost = 0.0;
     private double quantity_one_cost = 500.00;
 
     private double quantity_two_cost = 3 * quantity_one_cost; // Quantity 2 is 3 times the price of 1 quantity.
