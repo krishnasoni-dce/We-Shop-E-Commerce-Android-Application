@@ -45,6 +45,9 @@ public class MainActivityTest {
      @Rule
      public ActivityTestRule<ClothingCategory> clothingCategoryActivityTestRule = new ActivityTestRule<>(ClothingCategory.class);
 
+    @Rule
+    public ActivityTestRule<SportsAndOutdoorsActivity> sportsAndOutdoorsActivityActivityTestRule = new ActivityTestRule<>(SportsAndOutdoorsActivity.class);
+
     // Activities to be tested
     private MainActivity mainActivity = null;
     private RegisterActivity registerActivity = null;
@@ -80,6 +83,8 @@ public class MainActivityTest {
         loginActivity = loginActivityRule.getActivity(); // Get the login activity
         techActivity = techActivityActivityTestRule.getActivity(); // Get the tech activity
         productsBasket = basketActivityActivityTestRule.getActivity();
+
+        sportsAndOutdoorsActivity = sportsAndOutdoorsActivityActivityTestRule.getActivity(); // Get the sports and outdoors activity
     }
 
 
@@ -131,6 +136,12 @@ public class MainActivityTest {
     public void testRegisterActivityLauncher() {
         View registerView = registerActivity.findViewById(R.id.registerTxt);
         assertNotNull(registerView);
+    }
+
+    @Test
+    public void testSportsAndOutdoorsActivityLauncher() {
+        View sportsView = sportsAndOutdoorsActivity.findViewById(R.id.sportsOutdoorsCostLbl);
+        assertNotNull(sportsView);
     }
 
     @Test

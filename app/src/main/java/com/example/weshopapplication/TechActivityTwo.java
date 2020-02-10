@@ -460,20 +460,20 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
             fourthProductCost.append(text_to_append + quantity_five_cost);
         } else if (parent.getItemAtPosition(position).equals(listOfCapacities.get(capacityIndexes[0]))) {
             fourthProductCost.setText(null);
-            fourthProductCost.append(text_to_append + quantity_zero_cost);
-        } else if (parent.getItemAtPosition(position).equals(listOfCapacities.get(capacityIndexes[1]))) {
-            fourthProductCost.setText(null);
             fourthProductCost.append(text_to_append + sixtyFourGBCost);
-
-            valueAppended = true;
-        } else if (parent.getItemAtPosition(position).equals(listOfCapacities.get(capacityIndexes[2]))) {
+        } else if (parent.getItemAtPosition(position).equals(listOfCapacities.get(capacityIndexes[1]))) {
             fourthProductCost.setText(null);
             fourthProductCost.append(text_to_append + oneTwoEightGbCost);
 
             valueAppended = true;
-        } else if (parent.getItemAtPosition(position).equals(listOfCapacities.get(capacityIndexes[3]))) {
+        } else if (parent.getItemAtPosition(position).equals(listOfCapacities.get(capacityIndexes[2]))) {
             fourthProductCost.setText(null);
             fourthProductCost.append(text_to_append + twoFiveSixGbCost);
+
+            valueAppended = true;
+        } else if (parent.getItemAtPosition(position).equals(listOfCapacities.get(capacityIndexes[3]))) {
+            fourthProductCost.setText(null);
+            fourthProductCost.append(text_to_append + fiveTwelveGbCost);
 
             valueAppended = true;
         }
