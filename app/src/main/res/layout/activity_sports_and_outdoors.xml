@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
-        android:layout_marginBottom="688dp"
+        android:layout_marginBottom="700dp"
         android:text="Nike Air Max 270 Men"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -25,7 +25,7 @@
         android:layout_width="352dp"
         android:layout_height="254dp"
         android:layout_marginStart="40dp"
-        android:layout_marginBottom="432dp"
+        android:layout_marginBottom="444dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/nikemax" />
@@ -34,8 +34,8 @@
         android:id="@+id/sportsOutdoorsCostLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="164dp"
-        android:layout_marginBottom="408dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginBottom="420dp"
         android:text="Product Cost £: "
         android:textColor="@android:color/white"
         android:textSize="16sp"
@@ -48,8 +48,8 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="380dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="400dp"
         android:text="Colour"
         android:textColor="@android:color/white"
         android:textStyle="bold"
@@ -60,8 +60,8 @@
         android:id="@+id/spinner"
         android:layout_width="66dp"
         android:layout_height="18dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="380dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView4" />
 
@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginBottom="380dp"
+        android:layout_marginBottom="400dp"
         android:text="Quantity"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -81,8 +81,8 @@
         android:id="@+id/spinner2"
         android:layout_width="58dp"
         android:layout_height="18dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="380dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView5" />
 
@@ -91,7 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="380dp"
+        android:layout_marginBottom="400dp"
         android:text="Size"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -100,10 +100,10 @@
 
     <Spinner
         android:id="@+id/spinner3"
-        android:layout_width="78dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="380dp"
+        android:layout_width="72dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView6" />
 
@@ -111,7 +111,7 @@
         android:id="@+id/button"
         android:layout_width="449dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="320dp"
+        android:layout_marginBottom="348dp"
         android:background="@drawable/button_round"
         android:text="Add To Basket"
         android:textColor="@color/white"
@@ -124,8 +124,8 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
-        android:layout_marginBottom="292dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginBottom="320dp"
         android:text="Air Jordan T-Shirt Men"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -135,11 +135,110 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="326dp"
-        android:layout_height="189dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginBottom="100dp"
+        android:layout_width="269dp"
+        android:layout_height="164dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="156dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/airjordan" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="449dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_round"
+        android:text="Add To Basket"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="111dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="301dp"
+        android:background="@android:color/black"
+        android:text="Next Page"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginBottom="48dp"
+        android:text="Product Cost £:"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="332dp"
+        android:layout_marginBottom="8dp"
+        android:text="Colour"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner4"
+        android:layout_width="71dp"
+        android:layout_height="18dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginBottom="8dp"
+        android:text="Quantity"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/spinner4" />
+
+    <Spinner
+        android:id="@+id/spinner5"
+        android:layout_width="73dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="9dp"
+        android:text="Size"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/spinner5" />
+
+    <Spinner
+        android:id="@+id/spinner6"
+        android:layout_width="93dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="9dp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/textView11" />
 </androidx.constraintlayout.widget.ConstraintLayout>
