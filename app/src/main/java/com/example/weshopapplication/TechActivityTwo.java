@@ -63,6 +63,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     private double quantity_one_cost = 249.99;
 
     // Formulae to calculate price & Capacity
+    // COST FOR THE FIRST PRODUCT
     private double quantity_two_cost = 2 * quantity_one_cost; // Quantity 2 is 3 times the price of 1 quantity.
     private double quantity_three_cost = 3 * quantity_one_cost;
     private double quantity_four_cost = 4 * quantity_one_cost;
@@ -74,6 +75,11 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     private double twoFiveSixGbCost = quantity_four_cost * 2;
     private double fiveTwelveGbCost = quantity_three_cost * quantity_four_cost;
 
+    private double product_four_zero_cost = 0.00;
+    private double product_four_one_cost = 750.00;
+    private double product_four_two_cost = 2 * product_four_one_cost;
+    private double product_four_three_cost = 3 * product_four_one_cost;
+
     // Hashmap to store the products that will be added to the basket
     private HashMap<Integer, Products> listOfProductsToAdd = new HashMap<>();
 
@@ -81,7 +87,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     private CustomArrayAdapter quantitiesAdapter;
     private ColourArrayAdapter colourArrayAdapter;
     private CapacityArrayAdapter capacityArrayAdapter;
-
+    
     // Boolean variables that holds either true or false
     private boolean addedColours = false;
     private boolean addedQuantities = false;
@@ -160,7 +166,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
         fourthProductMemoryDropDown.setOnItemSelectedListener(TechActivityTwo.this);
 
         // SET UP QUANTITY FOR FOURTH PRODUCT
-        this.quantitiesAdapter = new CustomArrayAdapter(TechActivityTwo.this, listOfQuantities);
+        this.quantitiesAdapter = new CustomArrayAdapter(TechActivityTwo.this, secondListOfQuantities);
         quantitiesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fourthProductQuantityDropDown.setAdapter(quantitiesAdapter);
         fourthProductQuantityDropDown.setOnItemSelectedListener(TechActivityTwo.this);
@@ -340,12 +346,16 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
         TechActivity.Quantities[] quantitiesArray = {new TechActivity.Quantities(0), new TechActivity.Quantities(1), new TechActivity.Quantities(2),
                 new TechActivity.Quantities(3), new TechActivity.Quantities(4), new TechActivity.Quantities(5)};
 
+        TechActivity.Quantities[] secondProductQuantities = {new TechActivity.Quantities(0), new TechActivity.Quantities(1), new TechActivity.Quantities(2),
+                new TechActivity.Quantities(3), new TechActivity.Quantities(4), new TechActivity.Quantities(5)};
+
+
         for (TechActivity.Quantities qty : quantitiesArray) {
             listOfQuantities.add(qty);
             addedQuantities = true;
         }
 
-        for (TechActivity.Quantities qty2 : quantitiesArray) {
+        for (TechActivity.Quantities qty2 : secondProductQuantities) {
             secondListOfQuantities.add(qty2);
             addedQuantities = true;
         }
@@ -386,6 +396,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { // Routine that determines which item has been selected
         boolean valueAppended = false;
         int[] quantityIndexes = {0, 1, 2, 3, 4, 5};
+        int[] capacityIndexes = {0, 1, 2, 3};
 
         String text_to_append = "Product Cost £: ";
 
@@ -396,43 +407,75 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
             valueAppended = true;
         }
 
-
         // If the quantity at index 1 is chosen
-        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(quantityIndexes[1]))) {
+        else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(quantityIndexes[1]))) {
             thirdProductCostTxt.setText(null);
             thirdProductCostTxt.append(text_to_append + quantity_one_cost);
 
             valueAppended = true; // Value is appended
-        }
-
-        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(quantityIndexes[2]))) {
+        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(quantityIndexes[2]))) {
             thirdProductCostTxt.setText(null);
             thirdProductCostTxt.append(text_to_append + quantity_two_cost);
 
             valueAppended = true;
-        }
-
-
-        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(quantityIndexes[3]))) {
+        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(quantityIndexes[3]))) {
             thirdProductCostTxt.setText(null);
             thirdProductCostTxt.append(text_to_append + quantity_three_cost);
 
             valueAppended = true;
-        }
-
-        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(quantityIndexes[4]))) {
+        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(quantityIndexes[4]))) {
             thirdProductCostTxt.setText(null);
             thirdProductCostTxt.append(text_to_append + quantity_four_cost);
 
             valueAppended = true;
-        }
-
-        if (parent.getItemAtPosition(position).equals(listOfQuantities.get(quantityIndexes[5]))) {
+        } else if (parent.getItemAtPosition(position).equals(listOfQuantities.get(quantityIndexes[5]))) {
             thirdProductCostTxt.setText(null);
             thirdProductCostTxt.append(text_to_append + quantity_five_cost);
 
             valueAppended = true;
         }
+
+        if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(quantityIndexes[0]))) {
+            fourthProductCost.setText(null);
+            fourthProductCost.append(text_to_append + quantity_zero_cost);
+        } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(quantityIndexes[1]))) {
+            fourthProductCost.setText(null);
+            fourthProductCost.append(text_to_append + quantity_one_cost);
+
+            valueAppended = true;
+        } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(quantityIndexes[2]))) {
+            fourthProductCost.setText(null);
+            fourthProductCost.append(text_to_append + quantity_two_cost);
+
+            valueAppended = true;
+        } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(quantityIndexes[3]))) {
+            fourthProductCost.setText(null);
+            fourthProductCost.append(text_to_append + quantity_three_cost);
+
+            valueAppended = true;
+        } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(quantityIndexes[4]))) {
+            fourthProductCost.setText(null);
+            fourthProductCost.append(text_to_append + quantity_four_cost);
+
+            valueAppended = true;
+        } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(quantityIndexes[5]))) {
+            fourthProductCost.setText(null);
+            fourthProductCost.append(text_to_append + quantity_five_cost);
+        } else if (parent.getItemAtPosition(position).equals(listOfCapacities.get(capacityIndexes[0]))) {
+            fourthProductCost.setText(null);
+            fourthProductCost.append(text_to_append + quantity_zero_cost);
+        } else if (parent.getItemAtPosition(position).equals(listOfCapacities.get(capacityIndexes[1]))) {
+            fourthProductCost.setText(null);
+            fourthProductCost.append(text_to_append + sixtyFourGBCost);
+
+            valueAppended = true;
+        } else if (parent.getItemAtPosition(position).equals(listOfCapacities.get(capacityIndexes[2]))) {
+            fourthProductCost.setText(null);
+            fourthProductCost.append(text_to_append + oneTwoEightGbCost);
+
+            valueAppended = true;
+        }
+
 
     }
 
