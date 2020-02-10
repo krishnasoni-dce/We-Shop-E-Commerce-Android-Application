@@ -69,16 +69,17 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     private double quantity_four_cost = 4 * quantity_one_cost;
     private double quantity_five_cost = 5 * quantity_one_cost;
 
-    // Formulae for the cost of different capacities
-    private double sixtyFourGBCost = quantity_one_cost * 2;
-    private double oneTwoEightGbCost = quantity_two_cost * 3;
-    private double twoFiveSixGbCost = quantity_four_cost * 2;
-    private double fiveTwelveGbCost = quantity_three_cost * quantity_four_cost;
-
     private double product_four_zero_cost = 0.00;
     private double product_four_one_cost = 750.00;
     private double product_four_two_cost = 2 * product_four_one_cost;
     private double product_four_three_cost = 3 * product_four_one_cost;
+    private double product_four_four_cost = 4 * product_four_one_cost;
+
+    // Formulae for the cost of different capacities
+    private double sixtyFourGBCost = product_four_one_cost * 2;
+    private double oneTwoEightGbCost = product_four_two_cost * 3;
+    private double twoFiveSixGbCost = product_four_three_cost * 2;
+    private double fiveTwelveGbCost = quantity_three_cost * 4;
 
     // Hashmap to store the products that will be added to the basket
     private HashMap<Integer, Products> listOfProductsToAdd = new HashMap<>();
@@ -87,7 +88,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     private CustomArrayAdapter quantitiesAdapter;
     private ColourArrayAdapter colourArrayAdapter;
     private CapacityArrayAdapter capacityArrayAdapter;
-    
+
     // Boolean variables that holds either true or false
     private boolean addedColours = false;
     private boolean addedQuantities = false;
@@ -179,9 +180,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
                 if (v.getId() == R.id.thirdAddToBasketBtn) {
 
-
                     if (thirdProductDropDown.getSelectedItemPosition() == 0) {
-
 
                         AlertDialog.Builder colourError = new AlertDialog.Builder(TechActivityTwo.this).setTitle("Colour Error")
                                 .setMessage("You must select a colour before adding to the basket.")
@@ -336,8 +335,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
             secondListOfColours.add(secondColours);
             addedColours = true;
         }
-
-
     }
 
     private void addToQuantitiesList() { // Routine that adds the quantities to the array list
@@ -396,7 +393,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { // Routine that determines which item has been selected
         boolean valueAppended = false;
         int[] quantityIndexes = {0, 1, 2, 3, 4, 5};
-        int[] capacityIndexes = {0, 1, 2, 3};
+        int[] capacityIndexes = {0, 1, 2, 3}; // Array of capacity indexes
 
         String text_to_append = "Product Cost £: ";
 
@@ -440,12 +437,12 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
             fourthProductCost.append(text_to_append + quantity_zero_cost);
         } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(quantityIndexes[1]))) {
             fourthProductCost.setText(null);
-            fourthProductCost.append(text_to_append + quantity_one_cost);
+            fourthProductCost.append(text_to_append + product_four_one_cost);
 
             valueAppended = true;
         } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(quantityIndexes[2]))) {
             fourthProductCost.setText(null);
-            fourthProductCost.append(text_to_append + quantity_two_cost);
+            fourthProductCost.append(text_to_append + product_four_two_cost);
 
             valueAppended = true;
         } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(quantityIndexes[3]))) {
@@ -474,8 +471,12 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
             fourthProductCost.append(text_to_append + oneTwoEightGbCost);
 
             valueAppended = true;
-        }
+        } else if (parent.getItemAtPosition(position).equals(listOfCapacities.get(capacityIndexes[3]))) {
+            fourthProductCost.setText(null);
+            fourthProductCost.append(text_to_append + twoFiveSixGbCost);
 
+            valueAppended = true;
+        }
 
     }
 
@@ -490,14 +491,14 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) { // Creates the menu bar
         MenuInflater activityInflater = getMenuInflater();
         activityInflater.inflate(R.menu.homepagemenu, menu);
 
         MenuInflater basketButtonInflater = getMenuInflater();
         basketButtonInflater.inflate(R.menu.basket_action_button, menu);
 
-        View cartView = menu.findItem(R.id.cart_menu).getActionView();
+        View cartView = menu.findItem(R.id.cart_menu).getActionView(); // Get the action view for the cart
 
         cartIcon = cartView.findViewById(R.id.cart_icon);
 
