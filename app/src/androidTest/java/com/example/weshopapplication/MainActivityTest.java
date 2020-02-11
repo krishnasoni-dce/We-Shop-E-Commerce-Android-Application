@@ -65,7 +65,6 @@ public class MainActivityTest {
     private EditText emailAddressTest;
     private EditText passwordTest;
 
-
     @Before
     public void setUp() { // Sets up the tests
         getActivities();

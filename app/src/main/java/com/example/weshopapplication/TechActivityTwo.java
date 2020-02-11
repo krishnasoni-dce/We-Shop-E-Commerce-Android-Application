@@ -245,7 +245,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
                                 .setMessage("You must select a colour, capacity and quantity in order to add to basket")
 
-
                                 .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

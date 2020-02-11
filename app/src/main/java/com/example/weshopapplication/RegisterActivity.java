@@ -42,7 +42,7 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity { // Register class
     private static final String CHANNEL_ID = "register_channel";
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance(); // Get an instance of Firebase
     private EditText usernameField;
 
     private TextView registerText; // The register text
