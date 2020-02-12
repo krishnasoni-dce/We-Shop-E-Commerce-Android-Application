@@ -433,7 +433,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
         if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(quantityIndexes[0]))) {
             fourthProductCost.setText(null);
-            fourthProductCost.append(text_to_append + quantity_zero_cost);
+            fourthProductCost.append(text_to_append + product_four_zero_cost);
         } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(quantityIndexes[1]))) {
             fourthProductCost.setText(null);
             fourthProductCost.append(text_to_append + product_four_one_cost);

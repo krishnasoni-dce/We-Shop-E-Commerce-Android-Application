@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -346,16 +345,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             
             secondListOfColours.add(colours); // Add the second colours
             addedColours = true;
-        }
-
-        // Portion of code used for debugging sake.
-        if (addedColours) {
-            Toast.makeText(TechActivity.this, msgAdded, Toast.LENGTH_SHORT).show();
-        }
-
-        else {
-
-            Toast.makeText(TechActivity.this, "Could not add", Toast.LENGTH_SHORT).show();
         }
 
         return true;
