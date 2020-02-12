@@ -11,12 +11,106 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
-        android:layout_marginBottom="688dp"
-        android:text="TextView"
+        android:layout_marginStart="68dp"
+        android:layout_marginBottom="696dp"
+        android:text="Adidas Predator Women's Boots"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="211dp"
+        android:layout_height="233dp"
+        android:layout_marginStart="109dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/womenboots" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:layout_marginBottom="436dp"
+        android:text="Product Cost £:"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="404dp"
+        android:text="Color"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner7"
+        android:layout_width="77dp"
+        android:layout_height="18dp"
+        android:layout_marginBottom="404dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="404dp"
+        android:text="Size"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinner7" />
+
+    <Spinner
+        android:id="@+id/spinner8"
+        android:layout_width="77dp"
+        android:layout_height="18dp"
+        android:layout_marginBottom="404dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="404dp"
+        android:text="Quantity"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinner8" />
+
+    <Spinner
+        android:id="@+id/spinner9"
+        android:layout_width="74dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="405dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView15" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="420dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="354dp"
+        android:background="@drawable/button_round"
+        android:text="Add to Basket"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

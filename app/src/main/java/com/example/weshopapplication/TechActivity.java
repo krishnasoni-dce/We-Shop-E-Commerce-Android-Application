@@ -70,6 +70,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     private double quantity_two_cost = 3 * quantity_one_cost; // Quantity 2 is 3 times the price of 1 quantity.
     private double quantity_three_cost = 4 * quantity_one_cost;
     private double quantity_four_cost = 5 * quantity_one_cost;
+    private double quantity_five_cost = 6 * quantity_one_cost;
 
     private HashMap<Integer, Products> listOfProductsToAddToBasket = new HashMap<>();
 
@@ -459,9 +460,9 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[4]))) {
             secondProductCost.setText(null);
             secondProductCost.append(appended_text + quantity_four_cost);
-        }
-
-        else {
+        } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[5]))) {
+            secondProductCost.append(appended_text + quantity_five_cost);
+        } else {
             valueAppended = false;
         }
     }
