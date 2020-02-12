@@ -256,10 +256,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                         secondProductColourError.setCancelable(true); // User can click outside the Window to cancel the dialogue
                     }
 
-                    else {
-                        addToBasketOne();
-                    }
-
                     if (secondProductQuantityOptions.getSelectedItemPosition() == 0) { // If the selected item is at position 0
 
                         AlertDialog.Builder secondProductQuantityError = new AlertDialog.Builder(TechActivity.this)
@@ -317,24 +313,36 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         Products firstProduct = new Products(current_product_id, firstProductText.getText().toString(), firstProductColourOptions.getSelectedItem().toString(), (int) firstProductQuantityOptions.getSelectedItemId(), productCost.getText().toString());
 
         listOfProductsToAddToBasket.put(current_product_id, firstProduct); // Add the product data to the hash map
-
-        AlertDialog.Builder addedSuccess = new AlertDialog.Builder(TechActivity.this)
-                .setTitle("Basket Message")
-                .setMessage("Added to basket success")
-                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (dialog != null) {
-                            dialog.dismiss();
-                        }
-                    }
-                });
-
-        addedSuccess.show();
-
     }
 
-    private void addToBasketTwo() {
+    private void addToBasketTwo() { // Adds the second product on the First Tech Activity to the basket
+
+        final ProgressDialog dialog = new ProgressDialog(TechActivity.this);
+        dialog.setTitle("Adding to Basket..");
+        dialog.setMessage("Please Wait");
+
+        dialog.setCancelable(false);
+
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        new Thread(new Runnable() { // Create a new thread
+
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1900);
+                } catch (InterruptedException exc) {
+                    Log.d("Error : ", exc.toString());
+                }
+
+                dialog.dismiss();
+            }
+        }).start();
+
+        dialog.show();
+
+        Products secondProduct = new Products(current_product_id++, secondProductText.getText().toString(), secondProductColourOptions.getSelectedItem().toString(), (int) secondProductQuantityOptions.getSelectedItemId(), secondProductCost.getText().toString());
+        listOfProductsToAddToBasket.put(current_product_id++, secondProduct);
 
     }
 

@@ -48,6 +48,8 @@ public class BasketActivity extends AppCompatActivity {
             arrayAdapter.add(entry.toString());
         }
 
+        arrayAdapter.notifyDataSetChanged();
+
     }
 
     protected void onDestroy() {
