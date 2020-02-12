@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:theme">
-        <activity android:name=".TechActivityTwo"></activity>
+        <activity android:name=".SportsAndOutdoorsActivityTwo"></activity>
+        <activity android:name=".TechActivityTwo" />
         <activity android:name=".BasketActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".DIYActivity" />

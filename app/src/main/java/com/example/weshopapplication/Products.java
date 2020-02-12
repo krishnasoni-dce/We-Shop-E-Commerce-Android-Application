@@ -5,14 +5,16 @@ package com.example.weshopapplication;
 // Date of Last Modification: 07/02/2020
 // Any Errors? No
 
-public class Products { // Products Class
+import java.io.Serializable;
+
+public class Products implements Serializable { // Products Class
     private int productID; // The Product ID
     private String productName; // The Product Name
     private String colour; // Product Colour
     private int quantity;
     private String cost;
 
-    public Products(int productID, String productName, String colour, int quantity, String cost) {
+    public Products(int productID, String productName, String colour, int quantity, String cost) { // Parameterised constructor
         this.productID = productID;
         this.productName = productName;
         this.colour = colour;
@@ -28,7 +30,7 @@ public class Products { // Products Class
         this.productID = productID;
     }
 
-    public String getProductName() {
+    public String getProductName() { // Gets the product name
         return productName;
     }
 
@@ -61,14 +63,7 @@ public class Products { // Products Class
     }
 
     @Override
-    public String toString() {
-        return "Products{" +
-                "productID=" + productID +
-                ", productName='" + productName + '\'' +
-                ", colour='" + colour + '\'' +
-                ", quantity=" + quantity +
-                ", cost='" + cost + '\'' +
-                ", productCapacity=" +
-                '}';
+    public String toString() { // To string method returns all of the data from the instance
+        return "Product Name : " + this.productName + "\n " + "Product Colour " + colour + "\n " + "Product Quantity : " + this.quantity + "\n " + "Product Cost : " + cost;
     }
 }

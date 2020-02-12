@@ -13,9 +13,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +40,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private TextView secondProductText;
     private ImageView secondProductImg;
+    public int current_product_id = 1;
     private TextView secondProductCost;
 
     private TextView secondProductColour;
@@ -288,8 +289,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void addToBasketOne() {
 
-        // SECTION 1
-        // Create the progress dialogue
         final ProgressDialog dialog = new ProgressDialog(TechActivity.this);
         dialog.setTitle("Adding to Basket..");
         dialog.setMessage("Please Wait");
@@ -314,23 +313,17 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         dialog.show(); // Show the progress bar
 
-
         // CODE TO ACTUALLY ADD TO BASKET VIEW
-        int current_product_id = 1;
-        Products firstProduct = new Products(current_product_id, firstProductText.toString(), firstProductColour.toString(), (int)firstProductQuantityOptions.getSelectedItemId(), productCost.toString());
 
-        listOfProductsToAddToBasket.put(current_product_id, firstProduct);
-        Intent basketIntent = new Intent(TechActivity.this, BasketActivity.class);
+        Products firstProduct = new Products(current_product_id, firstProductText.getText().toString(), firstProductColour.getText().toString(), (int) firstProductQuantityOptions.getSelectedItemId(), productCost.getText().toString());
 
-        basketIntent.putExtra("ProductID", current_product_id);
-        basketIntent.putExtra("ProductName", firstProduct.getProductName());
-        basketIntent.putExtra("ProductColour", firstProduct.getColour());
-        basketIntent.putExtra("ProductQuantity", firstProduct.getQuantity());
+        Log.i("Product", firstProduct.toString());
 
-        ListView view = findViewById(R.id.listViewBasket);
+        listOfProductsToAddToBasket.put(current_product_id, firstProduct); // Add the product data to the hash map
 
-        setResult(RESULT_OK);
+        Toast.makeText(TechActivity.this, listOfProductsToAddToBasket.get(1).toString(), Toast.LENGTH_SHORT).show();
 
+        // SECTION 1
     }
 
     private boolean addToColoursList() {
@@ -564,7 +557,9 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
 
+
                 Intent basketIntent = new Intent(TechActivity.this, BasketActivity.class);
+                basketIntent.putExtra("map", listOfProductsToAddToBasket);
                 startActivity(basketIntent);
             }
         });

@@ -23,8 +23,9 @@
 
     <ListView
         android:id="@+id/listViewBasket"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/placeOrderBtn" />
+        android:layout_width="387dp"
+        android:layout_height="643dp"
+        android:layout_above="@+id/placeOrderBtn"
+        android:cacheColorHint="@color/white" />
 
 </RelativeLayout>
