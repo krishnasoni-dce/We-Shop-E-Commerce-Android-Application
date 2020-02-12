@@ -24,7 +24,6 @@ public class BasketActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         HashMap<Integer, Products> hashMap = (HashMap<Integer, Products>) intent.getSerializableExtra("map"); // Get the hash map from the tech activity
-
         ArrayList<String> prod = new ArrayList<>();
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(BasketActivity.this, android.R.layout.simple_list_item_1, prod) {

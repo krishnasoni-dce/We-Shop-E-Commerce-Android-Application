@@ -393,7 +393,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         boolean valueAppended = false;
-        int[] indexes = {0, 1, 2, 3, 4}; // Array of indexes
+        int[] indexes = {0, 1, 2, 3, 4, 5}; // Array of indexes
 
         String appended_text = "Product Cost : £";
 
@@ -461,6 +461,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             secondProductCost.setText(null);
             secondProductCost.append(appended_text + quantity_four_cost);
         } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(indexes[5]))) {
+            secondProductCost.setText(null);
             secondProductCost.append(appended_text + quantity_five_cost);
         } else {
             valueAppended = false;

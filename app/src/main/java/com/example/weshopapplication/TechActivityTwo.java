@@ -81,8 +81,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     private double twoFiveSixGbCost = product_four_three_cost * 2;
     private double fiveTwelveGbCost = quantity_three_cost * 4;
 
-    // Hashmap to store the products that will be added to the basket
-    private HashMap<Integer, Products> listOfProductsToAdd = new HashMap<>();
 
     // Array adapters to aid the addition of colours, capacity and colours to the array list
     private CustomArrayAdapter quantitiesAdapter;
@@ -93,6 +91,9 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     private boolean addedColours = false;
     private boolean addedQuantities = false;
     private boolean addedCapacities = false;
+
+    public int current_product_id = 1;
+    private HashMap<Integer, Products> listOfProductsToAdd = new HashMap<>();
 
 
     @Override
@@ -290,6 +291,10 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
         }).start();
 
         dialog.show(); // Show the progress bar
+
+
+        Products thirdTechProduct = new Products(current_product_id, thirdProductTextView.getText().toString(), thirdProductDropDown.getSelectedItem().toString(), (int) thirdQuantityDropDown.getSelectedItemId(), thirdProductCostTxt.getText().toString());
+        listOfProductsToAdd.put(current_product_id, thirdTechProduct);
     }
 
     private void addProductFourToBasket() { // Adds the fourth product to the basket
@@ -508,6 +513,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
                 try {
 
                     Intent basketIntent = new Intent(TechActivityTwo.this, BasketActivity.class);
+                    basketIntent.putExtra("map", listOfProductsToAdd);
                     startActivity(basketIntent); // Start the basket intent
 
                 } catch (ActivityNotFoundException exc) {
