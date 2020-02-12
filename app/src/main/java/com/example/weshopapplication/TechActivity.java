@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -84,6 +83,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         this.firstProductText = findViewById(R.id.firstProductText);
         this.firstProductImg = findViewById(R.id.firstProductImg);
         this.productCost = findViewById(R.id.firstProductCost);
+        this.firstProductColourOptions = findViewById(R.id.firstColourSpinner);
         this.firstProductColour = findViewById(R.id.firstProductColorText); // Text View for Product Cost £: (1)
 
         this.firstProductColourOptions = findViewById(R.id.firstColourSpinner); // Spinner 1. -> COLOURS
@@ -188,6 +188,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                     }
 
                     else {
+
                         addToBasketOne();
                     }
 
@@ -280,7 +281,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                     }
 
                     else {
-                       // addToBasketTwo();
+                        addToBasketTwo();
                     }
                 }
             }
@@ -311,19 +312,30 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         }).start();
 
-        dialog.show(); // Show the progress bar
+        dialog.show();
 
-        // CODE TO ACTUALLY ADD TO BASKET VIEW
-
-        Products firstProduct = new Products(current_product_id, firstProductText.getText().toString(), firstProductColour.getText().toString(), (int) firstProductQuantityOptions.getSelectedItemId(), productCost.getText().toString());
-
-        Log.i("Product", firstProduct.toString());
+        Products firstProduct = new Products(current_product_id, firstProductText.getText().toString(), firstProductColourOptions.getSelectedItem().toString(), (int) firstProductQuantityOptions.getSelectedItemId(), productCost.getText().toString());
 
         listOfProductsToAddToBasket.put(current_product_id, firstProduct); // Add the product data to the hash map
 
-        Toast.makeText(TechActivity.this, listOfProductsToAddToBasket.get(1).toString(), Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder addedSuccess = new AlertDialog.Builder(TechActivity.this)
+                .setTitle("Basket Message")
+                .setMessage("Added to basket success")
+                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (dialog != null) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
 
-        // SECTION 1
+        addedSuccess.show();
+
+    }
+
+    private void addToBasketTwo() {
+
     }
 
     private boolean addToColoursList() {
@@ -556,7 +568,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         cartIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 Intent basketIntent = new Intent(TechActivity.this, BasketActivity.class);
                 basketIntent.putExtra("map", listOfProductsToAddToBasket);
