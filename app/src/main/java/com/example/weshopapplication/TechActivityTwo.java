@@ -198,6 +198,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
                         colourError.show(); // Show the error
                         colourError.setCancelable(true); // Set cancelable to true
+                        return;
                     } else {
 
                         addProductThreeToBasket();
@@ -223,7 +224,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
                         quantityError.show(); // Show the quantity error.
                         quantityError.setCancelable(true);
-
+                        return;
 
                     } else {
 
@@ -257,6 +258,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
                         error.show();
                         error.setCancelable(true);
+                        return;
                     } else {
                         addProductFourToBasket();
                     }

@@ -64,6 +64,6 @@ public class Products implements Serializable { // Products Class
 
     @Override
     public String toString() { // To string method returns all of the data from the instance
-        return "Product Name : " + this.productName + "\n " + "Product Colour " + colour + "\n " + "Product Quantity : " + this.quantity + "\n " + "Product Cost : " + cost;
+        return "Product Name : " + this.productName + "\n " + "Product Colour " + colour + "\n " + "Product Quantity : " + this.quantity + "\n " + this.cost;
     }
 }
