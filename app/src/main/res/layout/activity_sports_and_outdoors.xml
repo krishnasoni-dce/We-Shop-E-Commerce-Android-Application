@@ -8,7 +8,7 @@
     tools:context=".SportsAndOutdoorsActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/firstSportsOutdoorTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/firstSportsOutdoorImg"
         android:layout_width="352dp"
         android:layout_height="254dp"
         android:layout_marginStart="40dp"
@@ -31,7 +31,7 @@
         app:srcCompat="@drawable/nikemax" />
 
     <TextView
-        android:id="@+id/sportsOutdoorsCostLbl"
+        android:id="@+id/firstSportsOutdoorCostLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="156dp"
@@ -45,7 +45,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/firstSportsColourLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -57,16 +57,16 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/firstSportsOutdoorColourMenu"
         android:layout_width="66dp"
         android:layout_height="18dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView4" />
+        app:layout_constraintStart_toEndOf="@+id/firstSportsColourLbl" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/firstSportsOutdoorQuantityLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -75,16 +75,16 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinner" />
+        app:layout_constraintStart_toEndOf="@+id/firstSportsOutdoorColourMenu" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/firstSportsOutdoorQuantityMenu"
         android:layout_width="58dp"
         android:layout_height="18dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView5" />
+        app:layout_constraintStart_toEndOf="@+id/firstSportsOutdoorQuantityLbl" />
 
     <TextView
         android:id="@+id/textView6"
@@ -96,7 +96,7 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinner2" />
+        app:layout_constraintStart_toEndOf="@+id/firstSportsOutdoorQuantityMenu" />
 
     <Spinner
         android:id="@+id/spinner3"

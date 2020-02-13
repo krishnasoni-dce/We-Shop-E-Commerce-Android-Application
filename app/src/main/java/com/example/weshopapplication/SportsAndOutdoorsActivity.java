@@ -58,13 +58,14 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity {
     private boolean sizesAdded;
     private boolean addedToBasket;
 
-    private HashMap<Integer, Products> listOfProductsToAddToBasket = new HashMap<>();
-
+    private HashMap<Integer, Products> listOfProductsToAddToBasket = new HashMap<>(); // A HashMap of products to add here.
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sports_and_outdoors);
+
+        // INITIALISE COMPONENTS
     }
 }

@@ -139,7 +139,7 @@ public class MainActivityTest {
 
     @Test
     public void testSportsAndOutdoorsActivityLauncher() {
-        View sportsView = sportsAndOutdoorsActivity.findViewById(R.id.sportsOutdoorsCostLbl);
+        View sportsView = sportsAndOutdoorsActivity.findViewById(R.id.firstSportsOutdoorCostLbl);
         assertNotNull(sportsView);
     }
 
