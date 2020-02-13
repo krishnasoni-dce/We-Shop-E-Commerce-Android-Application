@@ -67,11 +67,11 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
     private CustomArrayAdapter quantitiesAdapter;
     private SizeArrayAdapter sizeArrayAdapter;
 
-    private boolean coloursAdded;
+    private boolean coloursAdded; // Flag to determine if the colours have been added to the drop-down list
     private boolean quantitiesAdded;
 
     private boolean sizesAdded;
-    private boolean addedToBasket;
+    private boolean addedToBasket; // True or false to determine if the products have been added to the basket after adding to the hash map
 
     private HashMap<Integer, Products> listOfProductsToAddToBasket = new HashMap<>(); // A HashMap of products to add here.
 
@@ -139,6 +139,19 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
         this.coloursAdapter = new ColourArrayAdapter(SportsAndOutdoorsActivity.this, listOfColoursTwo);
         coloursAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         secondSportsOutdoorsColourMenu.setAdapter(coloursAdapter);
+        secondSportsOutdoorsColourMenu.setOnItemSelectedListener(this);
+
+        // Create the Array Adapter for the quantities for the second product
+        this.quantitiesAdapter = new CustomArrayAdapter(SportsAndOutdoorsActivity.this, listOfQuantitiesTwo);
+        quantitiesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        secondSportsOutdoorQuantityMenu.setAdapter(quantitiesAdapter);
+        secondSportsOutdoorQuantityMenu.setOnItemSelectedListener(this);
+
+        // Create the sizes array adapter for the second product
+        this.sizeArrayAdapter = new SizeArrayAdapter(SportsAndOutdoorsActivity.this, listOfSizesTwo);
+        sizeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        secondSportsOutdoorSizeMenu.setAdapter(sizeArrayAdapter);
+        secondSportsOutdoorSizeMenu.setOnItemSelectedListener(this);
 
     }
 
