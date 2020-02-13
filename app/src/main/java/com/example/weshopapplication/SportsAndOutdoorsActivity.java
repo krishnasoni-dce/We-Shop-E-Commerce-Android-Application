@@ -1,7 +1,9 @@
 package com.example.weshopapplication;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -152,6 +154,23 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
         sizeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         secondSportsOutdoorSizeMenu.setAdapter(sizeArrayAdapter);
         secondSportsOutdoorSizeMenu.setOnItemSelectedListener(this);
+
+        this.nextPageBtn = findViewById(R.id.nextPageBtn);
+
+        this.nextPageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+
+                    Intent nextSportsActivity = new Intent(SportsAndOutdoorsActivity.this, SportsAndOutdoorsActivityTwo.class);
+                    startActivity(nextSportsActivity);
+
+                } catch (ActivityNotFoundException exc) {
+
+                    Log.d("Error : ", exc.toString());
+                }
+            }
+        });
 
     }
 

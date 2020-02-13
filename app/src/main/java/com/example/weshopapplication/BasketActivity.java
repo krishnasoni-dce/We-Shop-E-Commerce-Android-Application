@@ -40,7 +40,6 @@ public class BasketActivity extends AppCompatActivity {
 
                 tv.setTextColor(Color.WHITE); // Change the colour of the text
 
-
                 return view;
             }
         };
@@ -48,8 +47,8 @@ public class BasketActivity extends AppCompatActivity {
         ListView view = findViewById(R.id.listViewBasket);
         view.setAdapter(arrayAdapter);
 
-        for (Map.Entry<Integer, Products> entry : hashMap.entrySet()) {
-            arrayAdapter.add(entry.toString());
+        for (Map.Entry<Integer, Products> entry : hashMap.entrySet()) { // Loop over the hash map of products
+            arrayAdapter.add(entry.toString()); // Add the entries to the adapter list
         }
 
         arrayAdapter.notifyDataSetChanged();
