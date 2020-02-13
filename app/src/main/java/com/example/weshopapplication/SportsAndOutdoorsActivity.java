@@ -11,6 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// Author of Application & Class: Sabin Constantin Lungu
+// Purpose of Class: Stores the code needed to implement the Sports and Outdoors Activity 1.
+// Date of Last Modification: 13/02/2020
+// Any Errors? Currently None
+
 public class SportsAndOutdoorsActivity extends AppCompatActivity {
     // Set-up variables
     private int current_product_id = 1;
@@ -67,5 +72,10 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sports_and_outdoors);
 
         // INITIALISE COMPONENTS
+        this.firstSportsOutdoorTxt = findViewById(R.id.firstSportsOutdoorTxt);
+        this.firstSportsOutdoorImg = findViewById(R.id.firstSportsOutdoorImg);
+
+
+
     }
 }

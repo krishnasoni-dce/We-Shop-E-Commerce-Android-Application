@@ -87,7 +87,7 @@
         app:layout_constraintStart_toEndOf="@+id/firstSportsOutdoorQuantityLbl" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/firstSportsOutdoorSizeLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -99,16 +99,16 @@
         app:layout_constraintStart_toEndOf="@+id/firstSportsOutdoorQuantityMenu" />
 
     <Spinner
-        android:id="@+id/spinner3"
+        android:id="@+id/firstSportsOutdoorSizeMenu"
         android:layout_width="72dp"
         android:layout_height="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView6" />
+        app:layout_constraintStart_toEndOf="@+id/firstSportsOutdoorSizeLbl" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/firstAddToBasketBtn"
         android:layout_width="449dp"
         android:layout_height="50dp"
         android:layout_marginBottom="348dp"
@@ -121,7 +121,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/secondSportsOutdoorsProductTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="108dp"
@@ -134,7 +134,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/secondSportsOutdoorsImg"
         android:layout_width="269dp"
         android:layout_height="164dp"
         android:layout_marginStart="80dp"
@@ -144,19 +144,19 @@
         app:srcCompat="@drawable/airjordan" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/secondSportsOutdoorsAddToBasketBtn"
         android:layout_width="449dp"
         android:layout_height="50dp"
         android:background="@drawable/button_round"
         android:text="Add To Basket"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/nextPageBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/nextPageBtn"
         android:layout_width="111dp"
         android:layout_height="36dp"
         android:layout_marginStart="301dp"
@@ -169,7 +169,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/secondSportsOutdoorProductCostLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
@@ -178,11 +178,11 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/secondSportsOutdoorsAddToBasketBtn"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/secondSportsOutdoorsColourLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="332dp"
@@ -190,19 +190,19 @@
         android:text="Colour"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/secondSportsOutdoorsAddToBasketBtn"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner4"
+        android:id="@+id/secondSportsOutdoorsColourMenu"
         android:layout_width="71dp"
         android:layout_height="18dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintStart_toEndOf="@+id/textView9" />
+        app:layout_constraintBottom_toTopOf="@+id/secondSportsOutdoorsAddToBasketBtn"
+        app:layout_constraintStart_toEndOf="@+id/secondSportsOutdoorsColourLbl" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/secondsSportsOutdoorQuantityLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
@@ -210,19 +210,19 @@
         android:text="Quantity"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintStart_toEndOf="@+id/spinner4" />
+        app:layout_constraintBottom_toTopOf="@+id/secondSportsOutdoorsAddToBasketBtn"
+        app:layout_constraintStart_toEndOf="@+id/secondSportsOutdoorsColourMenu" />
 
     <Spinner
-        android:id="@+id/spinner5"
+        android:id="@+id/secondSportsOutdoorsQuantityMenu"
         android:layout_width="73dp"
         android:layout_height="20dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintStart_toEndOf="@+id/textView10" />
+        app:layout_constraintBottom_toTopOf="@+id/secondSportsOutdoorsAddToBasketBtn"
+        app:layout_constraintStart_toEndOf="@+id/secondsSportsOutdoorQuantityLbl" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/secondSportsOutdoorsSizeLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -230,15 +230,15 @@
         android:text="Size"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintStart_toEndOf="@+id/spinner5" />
+        app:layout_constraintBottom_toTopOf="@+id/secondSportsOutdoorsAddToBasketBtn"
+        app:layout_constraintStart_toEndOf="@+id/secondSportsOutdoorsQuantityMenu" />
 
     <Spinner
-        android:id="@+id/spinner6"
+        android:id="@+id/secondSportsOutdoorsSizeMenu"
         android:layout_width="93dp"
         android:layout_height="20dp"
         android:layout_marginStart="2dp"
         android:layout_marginBottom="9dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintStart_toEndOf="@+id/textView11" />
+        app:layout_constraintBottom_toTopOf="@+id/secondSportsOutdoorsAddToBasketBtn"
+        app:layout_constraintStart_toEndOf="@+id/secondSportsOutdoorsSizeLbl" />
 </androidx.constraintlayout.widget.ConstraintLayout>
