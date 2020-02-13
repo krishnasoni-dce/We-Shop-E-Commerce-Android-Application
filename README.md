@@ -2,7 +2,7 @@
 
 An Android Application that allows users to shop for products in different categories, users can register an account and login. The data will get saved to a Firebase Database and then the users can login with the credentials from Firebase.
 
-# Record of Progress 
+# Record of Progress :closed_book:
 
 Tuesday 14th January 2020: On this day I started to write the project proposal which describes what this Android Application will be about. 
 
