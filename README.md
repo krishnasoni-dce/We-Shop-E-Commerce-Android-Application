@@ -33,7 +33,7 @@ Tuesday 28th January 2020: Finished designing the application. I made a start on
 
 I also made a start on writing some Junit tests that tests if the activities load correctly. I also supplied some sample tests for validating the inputs, however I don’t get the results required. I will ask for some help regarding this.
 
-# Project Proposal - Version 1.0
+# Project Proposal - Version 1.0 :blue_book:
 
 I am planning on designing and implementing an e-Commerce shopping application in Android that will allow end-users to register, login to the app and browse for products in different category sections. 
 
