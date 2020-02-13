@@ -15,6 +15,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+// Author of Application: Sabin Constantin Lungu
+// Purpose of Application & Class: To store the products added to the basket in a List View.
+// Date of Last Modification: 13/02/2020.
+// Any Errors: N/A
+
 
 public class BasketActivity extends AppCompatActivity {
 
