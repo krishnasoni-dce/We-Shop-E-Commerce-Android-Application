@@ -1,6 +1,8 @@
 package com.example.weshopapplication;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -16,7 +18,7 @@ import java.util.HashMap;
 // Date of Last Modification: 13/02/2020
 // Any Errors? Currently None
 
-public class SportsAndOutdoorsActivity extends AppCompatActivity {
+public class SportsAndOutdoorsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     // Set-up variables
     private int current_product_id = 1;
     private TextView firstSportsOutdoorTxt;
@@ -63,7 +65,7 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity {
 
     private boolean coloursAdded;
     private boolean quantitiesAdded;
-    
+
     private boolean sizesAdded;
     private boolean addedToBasket;
 
@@ -105,7 +107,37 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity {
         this.nextPageBtn = findViewById(R.id.nextPageBtn); // Button for taking the user to the next page.
 
         this.listOfColoursOne = new ArrayList<>();
+        this.listOfQuantitiesOne = new ArrayList<>();
+        this.listOfSizesOne = new ArrayList<>();
 
+        this.listOfColoursTwo = new ArrayList<>();
+        this.listOfQuantitiesTwo = new ArrayList<>();
+        this.listOfSizesTwo = new ArrayList<>();
+
+        // Set up the colours adapter
+        this.coloursAdapter = new ColourArrayAdapter(SportsAndOutdoorsActivity.this, listOfColoursOne);
+        coloursAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        firstSportsOutdoorsColourMenu.setAdapter(coloursAdapter);
+        firstSportsOutdoorsColourMenu.setOnItemSelectedListener(this);
+
+        this.quantitiesAdapter = new CustomArrayAdapter(SportsAndOutdoorsActivity.this, listOfQuantitiesOne);
+
+
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
 }
