@@ -36,7 +36,7 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity {
     private ImageView secondSportsOutdoorImg;
     private TextView secondSportsOutdoorCostLbl;
     private TextView secondSportsOutdoorColourLbl;
-    private Spinner secondSportsOutdoorSpinnerTxt;
+    private Spinner secondSportsOutdoorsColourMenu;
 
     private TextView secondSportsOutdoorQuantityLbl;
     private Spinner secondSportsOutdoorQuantityMenu;
@@ -74,7 +74,23 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity {
         // INITIALISE COMPONENTS
         this.firstSportsOutdoorTxt = findViewById(R.id.firstSportsOutdoorTxt);
         this.firstSportsOutdoorImg = findViewById(R.id.firstSportsOutdoorImg);
+        this.firstSportsOutdoorCostTxt = findViewById(R.id.firstSportsOutdoorCostLbl);
+        this.firstSportsOutdoorColourLbl = findViewById(R.id.firstSportsColourLbl);
 
+        this.firstSportsOutdoorsColourMenu = findViewById(R.id.firstSportsOutdoorColourMenu);
+        this.firstSportsOutdoorQuantityLbl = findViewById(R.id.firstSportsOutdoorQuantityLbl);
+        this.firstSportsOutdoorQuantityMenu = findViewById(R.id.firstSportsOutdoorQuantityMenu);
+
+        this.firstSportsOutdoorsSizeLbl = findViewById(R.id.firstSportsOutdoorSizeLbl);
+        this.firstSportsOutdoorsSizeMenu = findViewById(R.id.firstSportsOutdoorSizeMenu);
+        this.firstSportsAddToBasketBtn = findViewById(R.id.firstAddToBasketBtn); // Button for the first product to add to the basket.
+
+
+        this.secondSportsOutdoorTxt = findViewById(R.id.secondSportsOutdoorsProductTxt);
+        this.secondSportsOutdoorImg = findViewById(R.id.secondSportsOutdoorsImg);
+        this.secondSportsOutdoorCostLbl = findViewById(R.id.secondSportsOutdoorProductCostLbl);
+        this.secondSportsOutdoorColourLbl = findViewById(R.id.secondSportsOutdoorsColourLbl);
+        this.secondSportsOutdoorsColourMenu = findViewById(R.id.secondSportsOutdoorsColourMenu);
 
 
     }
