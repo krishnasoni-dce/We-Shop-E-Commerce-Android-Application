@@ -44,15 +44,18 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity {
     private TextView secondSportsOutdoorSizeLbl;
     private Spinner secondSportsOutdoorSizeMenu;
     private Button secondSportsAddToBasketBtn;
-
     private Button nextPageBtn;
-
-    private ArrayList<TechActivity.Colours> listOfColoursOne;
-    private ArrayList<TechActivity.Quantities> listOfQuantitiesOne;
-    private ArrayList<Size> listOfSizes;
 
     private double[] productOneCosts = {0.00, 90.00, 180.00, 360.00, 720.00, 1440.00};
     private double[] productTwoCosts = {0.00, 50.00, 100.00, 150.00, 200.00, 250.00};
+
+    private ArrayList<TechActivity.Colours> listOfColoursOne;
+    private ArrayList<TechActivity.Quantities> listOfQuantitiesOne;
+    private ArrayList<Size> listOfSizesOne;
+
+    private ArrayList<TechActivity.Colours> listOfColoursTwo;
+    private ArrayList<TechActivity.Quantities> listOfQuantitiesTwo;
+    private ArrayList<Size> listOfSizesTwo;
 
     private ColourArrayAdapter coloursAdapter;
     private CustomArrayAdapter quantitiesAdapter;
@@ -60,6 +63,7 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity {
 
     private boolean coloursAdded;
     private boolean quantitiesAdded;
+    
     private boolean sizesAdded;
     private boolean addedToBasket;
 
@@ -91,6 +95,16 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity {
         this.secondSportsOutdoorCostLbl = findViewById(R.id.secondSportsOutdoorProductCostLbl);
         this.secondSportsOutdoorColourLbl = findViewById(R.id.secondSportsOutdoorsColourLbl);
         this.secondSportsOutdoorsColourMenu = findViewById(R.id.secondSportsOutdoorsColourMenu);
+
+        this.secondSportsOutdoorQuantityLbl = findViewById(R.id.secondsSportsOutdoorQuantityLbl);
+        this.secondSportsOutdoorQuantityMenu = findViewById(R.id.secondSportsOutdoorsQuantityMenu);
+        this.secondSportsOutdoorSizeLbl = findViewById(R.id.secondSportsOutdoorsSizeLbl);
+        this.secondSportsOutdoorSizeMenu = findViewById(R.id.secondSportsOutdoorsSizeMenu);
+
+        this.secondSportsAddToBasketBtn = findViewById(R.id.secondAddToBasketBtn);
+        this.nextPageBtn = findViewById(R.id.nextPageBtn); // Button for taking the user to the next page.
+
+        this.listOfColoursOne = new ArrayList<>();
 
 
     }
