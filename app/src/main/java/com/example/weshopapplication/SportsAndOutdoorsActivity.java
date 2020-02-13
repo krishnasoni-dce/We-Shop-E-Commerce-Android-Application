@@ -124,7 +124,21 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
         firstSportsOutdoorsColourMenu.setAdapter(coloursAdapter);
         firstSportsOutdoorsColourMenu.setOnItemSelectedListener(this);
 
+        // Create array adapter for the quantities for product 1
         this.quantitiesAdapter = new CustomArrayAdapter(SportsAndOutdoorsActivity.this, listOfQuantitiesOne);
+        quantitiesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        firstSportsOutdoorQuantityMenu.setAdapter(quantitiesAdapter);
+        firstSportsOutdoorQuantityMenu.setOnItemSelectedListener(this);
+
+        // Create array adapter for the sizes
+        this.sizeArrayAdapter = new SizeArrayAdapter(SportsAndOutdoorsActivity.this, listOfSizesOne);
+        sizeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        firstSportsOutdoorsSizeMenu.setAdapter(sizeArrayAdapter);
+        firstSportsOutdoorsSizeMenu.setOnItemSelectedListener(this);
+
+        this.coloursAdapter = new ColourArrayAdapter(SportsAndOutdoorsActivity.this, listOfColoursTwo);
+        coloursAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        secondSportsOutdoorsColourMenu.setAdapter(coloursAdapter);
 
     }
 
