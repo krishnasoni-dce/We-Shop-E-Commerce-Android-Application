@@ -1,6 +1,9 @@
 package com.example.weshopapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -21,6 +24,7 @@ import java.util.HashMap;
 public class SportsAndOutdoorsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     // Set-up variables
     private int current_product_id = 1;
+    private ImageView cartIcon;
     private TextView firstSportsOutdoorTxt;
     private ImageView firstSportsOutdoorImg;
     private TextView firstSportsOutdoorCostTxt;
@@ -122,8 +126,6 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
 
         this.quantitiesAdapter = new CustomArrayAdapter(SportsAndOutdoorsActivity.this, listOfQuantitiesOne);
 
-
-
     }
 
     @Override
@@ -139,5 +141,31 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) { // Add the toolbar menu
+        // Inflate the activities menu
+        MenuInflater activityInflater = getMenuInflater(); // Get the activity inflater
+        activityInflater.inflate(R.menu.homepagemenu, menu);
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.basket_action_button, menu);
+
+        View view = menu.findItem(R.id.cart_menu).getActionView();
+
+        cartIcon = view.findViewById(R.id.cart_icon);
+
+        cartIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent basketIntent = new Intent(SportsAndOutdoorsActivity.this, BasketActivity.class);
+                basketIntent.putExtra("map", listOfProductsToAddToBasket);
+                startActivity(basketIntent);
+            }
+        });
+
+        return true;
     }
 }
