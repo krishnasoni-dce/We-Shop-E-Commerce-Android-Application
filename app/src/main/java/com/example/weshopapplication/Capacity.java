@@ -5,7 +5,9 @@ package com.example.weshopapplication;
 // Date of last modification: 07/02/2020
 // Any errors ? NO
 
-public class Capacity { // Capacity class
+import java.io.Serializable;
+
+public class Capacity implements Serializable { // Capacity class
     private int index;
     private String productCapacity;
 
