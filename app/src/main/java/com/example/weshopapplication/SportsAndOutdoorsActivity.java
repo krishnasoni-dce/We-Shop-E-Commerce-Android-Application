@@ -54,6 +54,7 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
     private Button secondSportsAddToBasketBtn;
     private Button nextPageBtn;
 
+    // The costs of the products
     private double[] productOneCosts = {0.00, 90.00, 180.00, 360.00, 720.00, 1440.00};
     private double[] productTwoCosts = {0.00, 50.00, 100.00, 150.00, 200.00, 250.00};
 
@@ -77,7 +78,6 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
 
     private HashMap<Integer, Products> listOfProductsToAddToBasket = new HashMap<>(); // A HashMap of products to add here.
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +97,6 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
         this.firstSportsOutdoorsSizeMenu = findViewById(R.id.firstSportsOutdoorSizeMenu);
         this.firstSportsAddToBasketBtn = findViewById(R.id.firstAddToBasketBtn); // Button for the first product to add to the basket.
 
-
         this.secondSportsOutdoorTxt = findViewById(R.id.secondSportsOutdoorsProductTxt);
         this.secondSportsOutdoorImg = findViewById(R.id.secondSportsOutdoorsImg);
         this.secondSportsOutdoorCostLbl = findViewById(R.id.secondSportsOutdoorProductCostLbl);
@@ -112,6 +111,7 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
         this.secondSportsAddToBasketBtn = findViewById(R.id.secondAddToBasketBtn);
         this.nextPageBtn = findViewById(R.id.nextPageBtn); // Button for taking the user to the next page.
 
+        // Create the array lists
         this.listOfColoursOne = new ArrayList<>();
         this.listOfQuantitiesOne = new ArrayList<>();
         this.listOfSizesOne = new ArrayList<>();
@@ -119,6 +119,10 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
         this.listOfColoursTwo = new ArrayList<>();
         this.listOfQuantitiesTwo = new ArrayList<>();
         this.listOfSizesTwo = new ArrayList<>();
+
+        addToColoursList();
+        addToQuantitiesList();
+        addToSizesList();
 
         // Set up the colours adapter
         this.coloursAdapter = new ColourArrayAdapter(SportsAndOutdoorsActivity.this, listOfColoursOne);
@@ -172,6 +176,67 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
             }
         });
 
+        this.firstSportsAddToBasketBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (v.getId() == R.id.firstAddToBasketBtn) {
+
+                    if (firstSportsOutdoorsColourMenu.getSelectedItemPosition() == 0) {
+
+                    }
+                }
+
+            }
+        });
+
+        this.secondSportsAddToBasketBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (v.getId() == R.id.secondAddToBasketBtn) {
+
+                    if (secondSportsOutdoorsColourMenu.getSelectedItemPosition() == 0) {
+
+                    }
+                }
+            }
+        });
+    }
+
+    private boolean addToColoursList() {
+        TechActivity.Colours[] colours = {new TechActivity.Colours(0, "Choose colour please"), new TechActivity.Colours(1, "Honey Yellow"),
+                new TechActivity.Colours(2, "Graphite Gray"), new TechActivity.Colours(3, "Midnight Black"),
+                new TechActivity.Colours(4, "Orange")};
+
+        for (TechActivity.Colours productColours : colours) {
+            listOfColoursOne.add(productColours);
+
+            listOfColoursTwo.add(productColours);
+            coloursAdded = true;
+        }
+
+        return true;
+    }
+
+    private boolean addToQuantitiesList() {
+        TechActivity.Quantities[] quantities = {new TechActivity.Quantities(0), new TechActivity.Quantities(1), new TechActivity.Quantities(2)
+                , new TechActivity.Quantities(3), new TechActivity.Quantities(4), new TechActivity.Quantities(5)};
+
+        for (TechActivity.Quantities quantitiesArray : quantities) {
+            listOfQuantitiesOne.add(quantitiesArray);
+            listOfQuantitiesTwo.add(quantitiesArray);
+
+            quantitiesAdded = true;
+        }
+
+        return true;
+    }
+
+    private boolean addToSizesList() {
+
+
+        return true;
     }
 
     @Override
