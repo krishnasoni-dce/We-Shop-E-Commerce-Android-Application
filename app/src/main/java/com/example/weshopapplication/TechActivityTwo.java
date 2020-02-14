@@ -235,7 +235,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
             }
         });
 
-
         this.fourthAddToBasketButton.setOnClickListener(new View.OnClickListener() { // Add action listener to the fourth button
             @Override
 
@@ -259,7 +258,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
                         error.show();
                         error.setCancelable(true);
-                        return;
                     } else {
                         addProductFourToBasket();
                     }
@@ -525,6 +523,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
                     Intent basketIntent = new Intent(TechActivityTwo.this, BasketActivity.class);
                     basketIntent.putExtra("map", listOfProductsToAdd);
+                    basketIntent.putExtra("map", samsungProduct);
                     startActivity(basketIntent); // Start the basket intent
 
                 } catch (ActivityNotFoundException exc) {
