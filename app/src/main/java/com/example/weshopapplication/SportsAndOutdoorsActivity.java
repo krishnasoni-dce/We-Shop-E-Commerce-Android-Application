@@ -1,6 +1,7 @@
 package com.example.weshopapplication;
 
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -176,14 +178,27 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
             }
         });
 
-        this.firstSportsAddToBasketBtn.setOnClickListener(new View.OnClickListener() {
+        this.firstSportsAddToBasketBtn.setOnClickListener(new View.OnClickListener() { // Add action listener to the first button
             @Override
             public void onClick(View v) {
 
                 if (v.getId() == R.id.firstAddToBasketBtn) {
 
                     if (firstSportsOutdoorsColourMenu.getSelectedItemPosition() == 0) {
+                        AlertDialog.Builder coloursError = new AlertDialog.Builder(SportsAndOutdoorsActivity.this)
+                                .setTitle("Error")
+                                .setMessage("You must select a colour before adding to basket")
+                                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (dialog != null) {
+                                            dialog.dismiss();
+                                        }
+                                    }
+                                });
 
+                        coloursError.show();
+                        coloursError.setCancelable(true);
                     }
                 }
 
@@ -224,6 +239,7 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
                 , new TechActivity.Quantities(3), new TechActivity.Quantities(4), new TechActivity.Quantities(5)};
 
         for (TechActivity.Quantities quantitiesArray : quantities) {
+            // Add the quantities to the list
             listOfQuantitiesOne.add(quantitiesArray);
             listOfQuantitiesTwo.add(quantitiesArray);
 
@@ -234,7 +250,14 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
     }
 
     private boolean addToSizesList() {
+        Size[] sizes = {new Size(0, 'S'), new Size(1, 'M'), new Size(2, 'L')};
 
+        for (Size theSizes : sizes) {
+            listOfSizesOne.add(theSizes);
+            listOfSizesTwo.add(theSizes);
+
+            sizesAdded = true;
+        }
 
         return true;
     }
