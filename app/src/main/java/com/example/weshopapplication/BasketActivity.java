@@ -51,28 +51,6 @@ public class BasketActivity extends AppCompatActivity {
             arrayAdapter.add(entry.toString()); // Add the entries to the adapter list
         }
 
-        arrayAdapter.notifyDataSetChanged();
-
-        HashMap<Integer, Capacity> capacityHashMap = (HashMap<Integer, Capacity>) intent.getSerializableExtra("map");
-        ArrayList<String> samsungProduct = new ArrayList<>();
-
-        ArrayAdapter<String> arrayAdapterString = new ArrayAdapter<String>(BasketActivity.this, android.R.layout.simple_list_item_1, samsungProduct) {
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View theView = super.getView(position, convertView, parent);
-
-                TextView viewText = theView.findViewById(android.R.id.text1);
-                viewText.setTextColor(Color.WHITE);
-
-                return viewText;
-            }
-        };
-
-        ListView listView = findViewById(R.id.listViewBasket);
-        listView.setAdapter(arrayAdapterString);
-
-        for (Map.Entry<Integer, Capacity> capacities : capacityHashMap.entrySet()) {
-            arrayAdapterString.add(capacities.toString());
-        }
 
     }
 

@@ -132,21 +132,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginEnd="138dp"
+        android:layout_marginBottom="20dp"
         android:fontFamily="sans-serif-medium"
         android:text="Product Cost £:"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/fourthProductMemoryDropDownMenu"
+        app:layout_constraintBottom_toTopOf="@+id/fourthProductQuantityLbl"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/fourthProductColourLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="104dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginBottom="100dp"
         android:fontFamily="sans-serif-medium"
         android:text="Colour"
         android:textColor="@color/white"
@@ -157,20 +159,20 @@
 
     <Spinner
         android:id="@+id/fourthProductDropDownMenu"
-        android:layout_width="76dp"
-        android:layout_height="19dp"
-        android:layout_marginBottom="11dp"
+        android:layout_width="106dp"
+        android:layout_height="21dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/fourthAddToBasketButton"
         app:layout_constraintStart_toEndOf="@+id/fourthProductColourLabel" />
 
     <TextView
-        android:id="@+id/fourthProductMemoryLabel"
+        android:id="@+id/fourthProductQuantityLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="104dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginBottom="100dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Memory"
+        android:text="Quantity"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -178,33 +180,10 @@
         app:layout_constraintStart_toEndOf="@+id/fourthProductDropDownMenu" />
 
     <Spinner
-        android:id="@+id/fourthProductMemoryDropDownMenu"
-        android:layout_width="63dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="104dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fourthProductMemoryLabel" />
-
-    <TextView
-        android:id="@+id/fourthProductQuantityLbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="104dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Quantity"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fourthProductMemoryDropDownMenu" />
-
-    <Spinner
         android:id="@+id/fourthProductQuantityDropDown"
         android:layout_width="75dp"
         android:layout_height="21dp"
-        android:layout_marginBottom="104dp"
+        android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fourthProductQuantityLbl" />
 

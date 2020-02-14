@@ -44,9 +44,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     private TextView fourthProductColourLbl;
     private Spinner fourthProductColourSpinner;
 
-    private TextView fourthProductMemoryLbl;
-    private Spinner fourthProductMemoryDropDown;
-
     private TextView fourthProductQuantity;
     private Spinner fourthProductQuantityDropDown;
     private Button fourthAddToBasketButton;
@@ -54,7 +51,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     // An array list of colours, quantities and capacity
     private ArrayList<TechActivity.Colours> listOfColours;
     private ArrayList<TechActivity.Quantities> listOfQuantities;
-    private ArrayList<Capacity> listOfCapacities;
 
     private ArrayList<TechActivity.Colours> secondListOfColours;
     private ArrayList<TechActivity.Quantities> secondListOfQuantities;
@@ -75,17 +71,9 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
     private double product_four_three_cost = 3 * product_four_one_cost;
     private double product_four_four_cost = 4 * product_four_one_cost;
 
-    // Formulae for the cost of different capacities
-    private double sixtyFourGBCost = product_four_one_cost * 2;
-    private double oneTwoEightGbCost = product_four_two_cost * 3;
-    private double twoFiveSixGbCost = product_four_three_cost * 2;
-    private double fiveTwelveGbCost = quantity_three_cost * 4;
-
-
     // Array adapters to aid the addition of colours, capacity and colours to the array list
     private CustomArrayAdapter quantitiesAdapter;
     private ColourArrayAdapter colourArrayAdapter;
-    private CapacityArrayAdapter capacityArrayAdapter;
 
     // Boolean variables that holds either true or false
     private boolean addedColours = false;
@@ -94,7 +82,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
     public int current_product_id = 1;
     private HashMap<Integer, Products> listOfProductsToAdd = new HashMap<>();
-    private HashMap<Integer, Capacity> samsungProduct = new HashMap<>();
 
 
     @Override
@@ -122,8 +109,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
         this.fourthProductColourLbl = findViewById(R.id.fourthProductColourLabel);
 
         this.fourthProductColourSpinner = findViewById(R.id.fourthProductDropDownMenu);
-        this.fourthProductMemoryLbl = findViewById(R.id.fourthProductMemoryLabel);
-        this.fourthProductMemoryDropDown = findViewById(R.id.fourthProductMemoryDropDownMenu);
 
         this.fourthProductQuantity = findViewById(R.id.fourthProductQuantityLbl);
         this.fourthAddToBasketButton = findViewById(R.id.fourthAddToBasketButton);
@@ -133,14 +118,12 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
         // Put array list on the heap
         this.listOfColours = new ArrayList<>();
         this.listOfQuantities = new ArrayList<>();
-        this.listOfCapacities = new ArrayList<>();
 
         this.secondListOfColours = new ArrayList<>();
         this.secondListOfQuantities = new ArrayList<>();
 
         addToColoursList(); // Method to add to the colours array list
         addToQuantitiesList();
-        addToCapacityList();
 
         // SET UP THE THIRD PRODUCT QUANTITIES DROP DOWN MENU TO SHOW
         this.quantitiesAdapter = new CustomArrayAdapter(TechActivityTwo.this, listOfQuantities);
@@ -160,13 +143,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
         fourthProductColourSpinner.setAdapter(colourArrayAdapter);
         fourthProductColourSpinner.setOnItemSelectedListener(TechActivityTwo.this);
-
-        // SET UP MEMORY CAPACITY FOR THE FOURTH PRODUCT
-        this.capacityArrayAdapter = new CapacityArrayAdapter(TechActivityTwo.this, listOfCapacities);
-        capacityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        fourthProductMemoryDropDown.setAdapter(capacityArrayAdapter);
-        fourthProductMemoryDropDown.setOnItemSelectedListener(TechActivityTwo.this);
 
         // SET UP QUANTITY FOR FOURTH PRODUCT
         this.quantitiesAdapter = new CustomArrayAdapter(TechActivityTwo.this, secondListOfQuantities);
@@ -242,7 +218,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
                 if (view.getId() == R.id.fourthAddToBasketButton) {
 
 
-                    if (fourthProductColourSpinner.getSelectedItemPosition() == 0 || fourthProductMemoryDropDown.getSelectedItemPosition() == 0 || fourthProductQuantityDropDown.getSelectedItemPosition() == 0) {
+                    if (fourthProductColourSpinner.getSelectedItemPosition() == 0 || fourthProductQuantityDropDown.getSelectedItemPosition() == 0) {
                         AlertDialog.Builder error = new AlertDialog.Builder(TechActivityTwo.this).setTitle("Error")
 
                                 .setMessage("You must select a colour, capacity and quantity in order to add to basket")
@@ -323,8 +299,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
         dialog.show(); // Show the progress bar
 
-        Capacity capProduct = new Capacity(current_product_id, fourthProductMemoryLbl.getText().toString());
-        samsungProduct.put(current_product_id, capProduct);
     }
 
     private boolean addToColoursList() { // Routine that adds the colours to the array list
@@ -364,19 +338,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
         for (TechActivity.Quantities qty2 : secondProductQuantities) {
             secondListOfQuantities.add(qty2);
             addedQuantities = true;
-        }
-
-        return true;
-    }
-
-    private boolean addToCapacityList() { // Routine that adds the capacity to the array list
-        String capacityAddedMsg = "Capacity Added";
-
-        Capacity[] capacities = {new Capacity(0, "64"), new Capacity(1, "128"), new Capacity(2, "256"), new Capacity(3, "512")};
-
-        for (Capacity capacity : capacities) {
-            listOfCapacities.add(capacity);
-            addedCapacities = true;
         }
 
         return true;
@@ -471,24 +432,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
         } else if (parent.getItemAtPosition(position).equals(secondListOfQuantities.get(quantityIndexes[5]))) {
             fourthProductCost.setText(null);
             fourthProductCost.append(text_to_append + quantity_five_cost);
-        } else if (parent.getItemAtPosition(position).equals(listOfCapacities.get(capacityIndexes[0]))) {
-            fourthProductCost.setText(null);
-            fourthProductCost.append(text_to_append + sixtyFourGBCost);
-        } else if (parent.getItemAtPosition(position).equals(listOfCapacities.get(capacityIndexes[1]))) {
-            fourthProductCost.setText(null);
-            fourthProductCost.append(text_to_append + oneTwoEightGbCost);
-
-            valueAppended = true;
-        } else if (parent.getItemAtPosition(position).equals(listOfCapacities.get(capacityIndexes[2]))) {
-            fourthProductCost.setText(null);
-            fourthProductCost.append(text_to_append + twoFiveSixGbCost);
-
-            valueAppended = true;
-        } else if (parent.getItemAtPosition(position).equals(listOfCapacities.get(capacityIndexes[3]))) {
-            fourthProductCost.setText(null);
-            fourthProductCost.append(text_to_append + fiveTwelveGbCost);
-
-            valueAppended = true;
         }
 
     }
@@ -523,7 +466,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
                     Intent basketIntent = new Intent(TechActivityTwo.this, BasketActivity.class);
                     basketIntent.putExtra("map", listOfProductsToAdd);
-                    basketIntent.putExtra("map", samsungProduct);
                     startActivity(basketIntent); // Start the basket intent
 
                 } catch (ActivityNotFoundException exc) {
