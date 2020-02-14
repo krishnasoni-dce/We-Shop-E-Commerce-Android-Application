@@ -299,6 +299,9 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
         dialog.show(); // Show the progress bar
 
+        Products fourthTechProduct = new Products(current_product_id++, fourthProductTextView.getText().toString(), fourthProductColourSpinner.getSelectedItem().toString(), (int) fourthProductQuantityDropDown.getSelectedItemId(), fourthProductCost.getText().toString());
+        listOfProductsToAdd.put(current_product_id, fourthTechProduct);
+
     }
 
     private boolean addToColoursList() { // Routine that adds the colours to the array list
