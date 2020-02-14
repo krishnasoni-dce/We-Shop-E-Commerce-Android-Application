@@ -94,6 +94,7 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
     public int current_product_id = 1;
     private HashMap<Integer, Products> listOfProductsToAdd = new HashMap<>();
+    private HashMap<Integer, Capacity> samsungProduct = new HashMap<>();
 
 
     @Override
@@ -294,7 +295,6 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
 
         dialog.show(); // Show the progress bar
 
-
         Products thirdTechProduct = new Products(current_product_id, thirdProductTextView.getText().toString(), thirdProductDropDown.getSelectedItem().toString(), (int) thirdQuantityDropDown.getSelectedItemId(), thirdProductCostTxt.getText().toString());
         listOfProductsToAdd.put(current_product_id, thirdTechProduct);
     }
@@ -324,9 +324,12 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
         }).start();
 
         dialog.show(); // Show the progress bar
+
+        Capacity capProduct = new Capacity(current_product_id, fourthProductMemoryLbl.getText().toString());
+        samsungProduct.put(current_product_id, capProduct);
     }
 
-    private void addToColoursList() { // Routine that adds the colours to the array list
+    private boolean addToColoursList() { // Routine that adds the colours to the array list
 
         TechActivity.Colours[] firstColoursArray = {new TechActivity.Colours(0, "Please Choose Colour"), new TechActivity.Colours(1, "White"), new TechActivity.Colours(2, "Black")};
         TechActivity.Colours[] secondColoursArray = {new TechActivity.Colours(0, "Please Choose Colour"), new TechActivity.Colours(1, "Salmon Pink"), new TechActivity.Colours(2, "Lime Green"),
@@ -341,9 +344,11 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
             secondListOfColours.add(secondColours);
             addedColours = true;
         }
+
+        return true;
     }
 
-    private void addToQuantitiesList() { // Routine that adds the quantities to the array list
+    private boolean addToQuantitiesList() { // Routine that adds the quantities to the array list
         String quantitiesAddedMsg = "Quantities Added Success";
 
         TechActivity.Quantities[] quantitiesArray = {new TechActivity.Quantities(0), new TechActivity.Quantities(1), new TechActivity.Quantities(2),
@@ -362,17 +367,21 @@ public class TechActivityTwo extends AppCompatActivity implements AdapterView.On
             secondListOfQuantities.add(qty2);
             addedQuantities = true;
         }
+
+        return true;
     }
 
-    private void addToCapacityList() { // Routine that adds the capacity to the array list
+    private boolean addToCapacityList() { // Routine that adds the capacity to the array list
         String capacityAddedMsg = "Capacity Added";
 
-        Capacity[] capacities = {new Capacity(0, 64), new Capacity(1, 128), new Capacity(2, 256), new Capacity(3, 512)};
+        Capacity[] capacities = {new Capacity(0, "64"), new Capacity(1, "128"), new Capacity(2, "256"), new Capacity(3, "512")};
 
         for (Capacity capacity : capacities) {
             listOfCapacities.add(capacity);
             addedCapacities = true;
         }
+
+        return true;
     }
 
     @Override

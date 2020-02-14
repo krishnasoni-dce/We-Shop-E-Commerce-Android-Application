@@ -199,6 +199,8 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
 
                         coloursError.show();
                         coloursError.setCancelable(true);
+                    } else {
+                        addToBasketOne();
                     }
                 }
 
@@ -250,7 +252,8 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
     }
 
     private boolean addToSizesList() {
-        Size[] sizes = {new Size(0, 'S'), new Size(1, 'M'), new Size(2, 'L')};
+        Size[] sizes = {new Size(0, "Please choose Size"), new Size(1, "S"), new Size(2, "M"),
+                new Size(3, "L"), new Size(4, "XL")};
 
         for (Size theSizes : sizes) {
             listOfSizesOne.add(theSizes);
@@ -260,6 +263,14 @@ public class SportsAndOutdoorsActivity extends AppCompatActivity implements Adap
         }
 
         return true;
+    }
+
+    private void addToBasketOne() {
+
+    }
+
+    private void addToBasketTwo() {
+
     }
 
     @Override

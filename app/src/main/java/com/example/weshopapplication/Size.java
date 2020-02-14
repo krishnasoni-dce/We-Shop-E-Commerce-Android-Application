@@ -2,9 +2,9 @@ package com.example.weshopapplication;
 
 public class Size {
     private int index;
-    private char productSize;
+    private String productSize;
 
-    public Size(int index, char productSize) {
+    public Size(int index, String productSize) {
         this.index = index;
         this.productSize = productSize;
     }
@@ -17,19 +17,16 @@ public class Size {
         this.index = index;
     }
 
-    public char getProductSize() {
+    public String getProductSize() {
         return productSize;
     }
 
-    public void setProductSize(char productSize) {
+    public void setProductSize(String productSize) {
         this.productSize = productSize;
     }
 
     @Override
     public String toString() {
-        return "Size{" +
-                "index=" + index +
-                ", productSize=" + productSize +
-                '}';
+        return this.productSize;
     }
 }

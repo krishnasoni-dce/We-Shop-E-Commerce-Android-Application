@@ -105,8 +105,8 @@
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="420dp"
-        android:layout_height="47dp"
+        android:layout_width="442dp"
+        android:layout_height="44dp"
         android:layout_marginBottom="354dp"
         android:background="@drawable/button_round"
         android:text="Add to Basket"
@@ -214,11 +214,11 @@
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="425dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="13dp"
+        android:layout_width="443dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/button_round"
-        android:text="Button"
+        android:text="Add to Basket"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

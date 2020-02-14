@@ -7,26 +7,26 @@ package com.example.weshopapplication;
 
 public class Capacity { // Capacity class
     private int index;
-    private int productCapacity;
+    private String productCapacity;
 
-    public Capacity(int index, int productCapacity) { // Parameter constructor. Method called when the object is being created and added on the heap
+    public Capacity(int index, String productCapacity) {
         this.index = index;
         this.productCapacity = productCapacity;
     }
 
-    public int getIndex() { // Method returns the index
-        return this.index;
+    public int getIndex() {
+        return index;
     }
 
     public void setIndex(int index) {
         this.index = index;
     }
 
-    public int getProductCapacity() {
+    public String getProductCapacity() {
         return productCapacity;
     }
 
-    public void setProductCapacity(int productCapacity) {
+    public void setProductCapacity(String productCapacity) {
         this.productCapacity = productCapacity;
     }
 
