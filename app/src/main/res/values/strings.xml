@@ -9,10 +9,10 @@
     <string name="main_submit_complaint">"Submit Complaint"</string>
     <string name="main_check_complaints">"Check Complaints"</string>
     <string name="add_data_title">Fill Information Below Please</string>
-    <string name="add_data_field_username">Username:</string>
-    <string name="add_data_field_email_address">E-mail Address:</string>
-    <string name="add_data_field_phone_number">Phone Number:</string>
-    <string name="add_data_field_problem">Problem:</string>
+    <string name="add_data_field_username">Username</string>
+    <string name="add_data_field_email_address">E-mail Address</string>
+    <string name="add_data_field_phone_number">Phone Number</string>
+    <string name="add_data_field_problem">Problem</string>
     <string name="add_data_button_save">Submit</string>
     <string name="add_data_button_back">Back</string>
 
