@@ -7,4 +7,35 @@
     android:orientation="vertical"
     tools:context=".ContactUsActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="90dp"
+        android:text="@string/main_title"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnAddData"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/button_round"
+        android:text="@string/main_submit_complaint"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnCheckData"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_round"
+        android:text="@string/main_check_complaints"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
 </LinearLayout>
