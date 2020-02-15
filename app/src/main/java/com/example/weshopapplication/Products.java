@@ -15,6 +15,7 @@ public class Products implements Serializable { // Products Class
     private String cost;
     private String size;
 
+    // Products constructor
     public Products(int productID, String productName, String colour, int quantity, String cost, String size) {
         this.productID = productID;
         this.productName = productName;
@@ -75,6 +76,6 @@ public class Products implements Serializable { // Products Class
     @Override
     public String toString() { // To string method returns all of the data from the instance
         return "Product Name : " + this.productName + "\n " + "Product Colour " + colour + "\n " + "Product Quantity : " + this.quantity + "\n " + this.cost
-                + "\n Product Size : " + "\n " + this.size;
+                + "\n Product Size : " + this.size;
     }
 }
