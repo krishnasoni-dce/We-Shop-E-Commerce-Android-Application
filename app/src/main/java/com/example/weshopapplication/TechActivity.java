@@ -36,14 +36,20 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private TextView firstProductColour;
     private Button firstAddToBasketButton;
+    private TextView firstProductSizes;
+    private Spinner firstProductSizesMenu;
 
     private TextView secondProductText;
     private ImageView secondProductImg;
+
     public int current_product_id = 1;
     private TextView secondProductCost;
 
     private TextView secondProductColour;
     private Button secondAddToBasketButton;
+
+    private TextView secondProductSizes;
+    private Spinner secondProductSizesMenu;
 
     private ImageView cartIcon; // Cart Icon should be red once a product is added
     private Spinner firstProductColourOptions;
@@ -54,12 +60,15 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private ArrayList<Colours> listOfColours;
     private ArrayList<Quantities> listOfQuantities;
+    private ArrayList<Size> listOfSizes;
 
     private CustomArrayAdapter quantitiesCustomAdapter;
     private ColourArrayAdapter colourArrayAdapter;
+    private SizesAdapter sizesAdapter;
 
     private ArrayList<Colours> secondListOfColours;
     private ArrayList<Quantities> secondListOfQuantities;
+    private ArrayList<Size> secondListOfSizes;
 
     private Button nextPageBtn;
 
@@ -69,6 +78,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private double quantity_two_cost = 3 * quantity_one_cost; // Quantity 2 is 3 times the price of 1 quantity.
     private double quantity_three_cost = 4 * quantity_one_cost;
+
     private double quantity_four_cost = 5 * quantity_one_cost;
     private double quantity_five_cost = 6 * quantity_one_cost;
 
@@ -84,8 +94,16 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         this.firstProductText = findViewById(R.id.firstProductText);
         this.firstProductImg = findViewById(R.id.firstProductImg);
         this.productCost = findViewById(R.id.firstProductCost);
+
         this.firstProductColourOptions = findViewById(R.id.firstColourSpinner);
         this.firstProductColour = findViewById(R.id.firstProductColorText); // Text View for Product Cost £: (1)
+
+        this.firstProductSizes = findViewById(R.id.firstTechProductSizeLabel);
+        this.firstProductSizesMenu = findViewById(R.id.firstProductSizeDropDownMenu);
+
+        this.sizesAdapter = new SizesAdapter(TechActivity.this, listOfSizes);
+        sizesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        firstProductSizesMenu.setAdapter(sizesAdapter);
 
         this.firstProductColourOptions = findViewById(R.id.firstColourSpinner); // Spinner 1. -> COLOURS
         this.firstProductQuantityOptions = findViewById(R.id.firstQuantitySpinner); // Spinner 2 -> QUANTITIES
@@ -94,8 +112,12 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         this.secondProductColourOptions = findViewById(R.id.secondColourSpinner);
         this.secondProductQuantityOptions = findViewById(R.id.secondQuantitySpinner);
 
+        this.secondProductSizes = findViewById(R.id.secondProductSizeLabel);
+        this.secondProductSizesMenu = findViewById(R.id.secondProductSizeDropDownMenu);
+
         this.listOfColours = new ArrayList<>();
         this.listOfQuantities = new ArrayList<>();
+        this.listOfSizes = new ArrayList<>();
 
         // Create 2nd array list
         this.secondListOfColours = new ArrayList<>();
@@ -103,6 +125,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         addToColoursList();
         addToQuantitiesList();
+        addToSizesList();
 
         this.colourArrayAdapter = new ColourArrayAdapter(TechActivity.this, listOfColours); // Create an array adapter for the colours drop down menu
         colourArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -230,10 +253,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
                 String quantityTitleErrorTwo = "Second Quantity Menu Error";
                 String quantityErrorTwoBodyMsg = "You must select a quantity before adding the product to cart";
 
-                String[] splitTitle = quantityErrorTwoBodyMsg.split("\n");
-                String[] splitBodyMsg = quantityErrorTwoBodyMsg.split("\n");
-
-
                 if (secondButton.getId() == R.id.secondAddToBasketBtn) {
 
                     if (secondProductColourOptions.getSelectedItemPosition() == 0) {
@@ -311,7 +330,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         dialog.show();
 
-        Products firstProduct = new Products(current_product_id, firstProductText.getText().toString(), firstProductColourOptions.getSelectedItem().toString(), (int) firstProductQuantityOptions.getSelectedItemId(), productCost.getText().toString());
+        Products firstProduct = new Products(current_product_id, firstProductText.getText().toString(), firstProductColourOptions.getSelectedItem().toString(), (int) firstProductQuantityOptions.getSelectedItemId(), productCost.getText().toString(), firstProductSizes.getText().toString());
 
         listOfProductsToAddToBasket.put(current_product_id, firstProduct); // Add the product data to the hash map
     }
@@ -342,15 +361,13 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         dialog.show();
 
-        Products secondProduct = new Products(current_product_id++, secondProductText.getText().toString(), secondProductColourOptions.getSelectedItem().toString(), (int) secondProductQuantityOptions.getSelectedItemId(), secondProductCost.getText().toString());
+        Products secondProduct = new Products(current_product_id++, secondProductText.getText().toString(), secondProductColourOptions.getSelectedItem().toString(), (int) secondProductQuantityOptions.getSelectedItemId(), secondProductCost.getText().toString(), secondProductSizes.getText().toString());
         listOfProductsToAddToBasket.put(current_product_id++, secondProduct);
 
     }
 
     private boolean addToColoursList() {
         boolean addedColours = false;
-
-        String msgAdded = "Colours Added";
 
         Colours[] coloursArray = {new Colours(0, "Choose Colour Please"), new Colours(1, "Space Gray"), new Colours(2, "Silver"), new Colours(3, "Gold")};
 
@@ -364,9 +381,31 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         return true;
     }
 
+    private boolean addToSizesList() {
+        boolean addedSizes = false;
+
+        Size[] techSizes = {new Size(0, "Please choose size"), new Size(1, "64GB"), new Size(2, "128GB"), new Size(3, "256GB"),
+                new Size(4, "512GB")};
+
+        for (Size sizes : techSizes) {
+            listOfSizes.add(sizes);
+            addedSizes = true;
+        }
+
+        Size[] clothingSizes = {new Size(0, "Please choose size"), new Size(1, "XS"), new Size(2, "S"), new Size(3, "M"),
+                new Size(4, "L"), new Size(5, "XL")};
+
+        for (Size clothingSize : clothingSizes) {
+            listOfSizes.add(clothingSize);
+            addedSizes = true;
+        }
+
+
+        return true;
+    }
+
     private boolean addToQuantitiesList() { // Routine to add the quantities to the array list
         boolean addedQuantities = false;
-        String msgQtyAdded = "Quantities added";
 
         Quantities[] firstProductQuantities = { // Create quantities array of objects
                 new Quantities(0), new Quantities(1), new Quantities(2)
@@ -590,7 +629,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
     // Anonymous inner classes that will be used later on in the basket activity and the payment form
 
-    public static class Colours { // Anonymous inner class o
+    public static class Colours { // Anonymous inner class of colours
         private int index;
         private String colour;
 
@@ -618,6 +657,37 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         @Override
         public String toString() {
             return " " + this.colour;
+        }
+    }
+
+    public static class Size {
+        private int index;
+        private String theSize;
+
+        public Size(int index, String theSize) {
+            this.index = index;
+            this.theSize = theSize;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
+        public String getTheSize() {
+            return theSize;
+        }
+
+        public void setTheSize(String theSize) {
+            this.theSize = theSize;
+        }
+
+        @Override
+        public String toString() {
+            return " " + this.theSize;
         }
     }
 }

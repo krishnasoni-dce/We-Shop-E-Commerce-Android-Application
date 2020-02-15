@@ -13,13 +13,15 @@ public class Products implements Serializable { // Products Class
     private String colour; // Product Colour
     private int quantity;
     private String cost;
+    private String size;
 
-    public Products(int productID, String productName, String colour, int quantity, String cost) { // Parameterised constructor
+    public Products(int productID, String productName, String colour, int quantity, String cost, String size) {
         this.productID = productID;
         this.productName = productName;
         this.colour = colour;
         this.quantity = quantity;
         this.cost = cost;
+        this.size = size;
     }
 
     public int getProductID() {
@@ -30,7 +32,7 @@ public class Products implements Serializable { // Products Class
         this.productID = productID;
     }
 
-    public String getProductName() { // Gets the product name
+    public String getProductName() {
         return productName;
     }
 
@@ -62,8 +64,17 @@ public class Products implements Serializable { // Products Class
         this.cost = cost;
     }
 
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
     @Override
     public String toString() { // To string method returns all of the data from the instance
-        return "Product Name : " + this.productName + "\n " + "Product Colour " + colour + "\n " + "Product Quantity : " + this.quantity + "\n " + this.cost;
+        return "Product Name : " + this.productName + "\n " + "Product Colour " + colour + "\n " + "Product Quantity : " + this.quantity + "\n " + this.cost
+                + "\n " + this.size;
     }
 }
