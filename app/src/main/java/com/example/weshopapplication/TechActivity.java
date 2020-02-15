@@ -101,10 +101,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         this.firstProductSizes = findViewById(R.id.firstTechProductSizeLabel);
         this.firstProductSizesMenu = findViewById(R.id.firstProductSizeDropDownMenu);
 
-        this.sizesAdapter = new SizesAdapter(TechActivity.this, listOfSizes);
-        sizesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        firstProductSizesMenu.setAdapter(sizesAdapter);
-
         this.firstProductColourOptions = findViewById(R.id.firstColourSpinner); // Spinner 1. -> COLOURS
         this.firstProductQuantityOptions = findViewById(R.id.firstQuantitySpinner); // Spinner 2 -> QUANTITIES
         this.firstAddToBasketButton = findViewById(R.id.thirdAddToBasketBtn); // Button: -> ADD TO BASKET BUTTON 1
@@ -122,6 +118,11 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         // Create 2nd array list
         this.secondListOfColours = new ArrayList<>();
         this.secondListOfQuantities = new ArrayList<>();
+
+        this.sizesAdapter = new SizesAdapter(TechActivity.this, listOfSizes);
+        sizesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        firstProductSizesMenu.setAdapter(sizesAdapter);
+        firstProductSizesMenu.setOnItemSelectedListener(this);
 
         addToColoursList();
         addToQuantitiesList();
@@ -361,7 +362,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         dialog.show();
 
-        Products secondProduct = new Products(current_product_id++, secondProductText.getText().toString(), secondProductColourOptions.getSelectedItem().toString(), (int) secondProductQuantityOptions.getSelectedItemId(), secondProductCost.getText().toString(), secondProductSizes.getText().toString());
+        Products secondProduct = new Products(current_product_id++, secondProductText.getText().toString(), secondProductColourOptions.getSelectedItem().toString(), (int) secondProductQuantityOptions.getSelectedItemId(), secondProductCost.getText().toString(), secondProductSizesMenu.getSelectedItem().toString());
         listOfProductsToAddToBasket.put(current_product_id++, secondProduct);
 
     }
@@ -391,15 +392,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
             listOfSizes.add(sizes);
             addedSizes = true;
         }
-
-        Size[] clothingSizes = {new Size(0, "Please choose size"), new Size(1, "XS"), new Size(2, "S"), new Size(3, "M"),
-                new Size(4, "L"), new Size(5, "XL")};
-
-        for (Size clothingSize : clothingSizes) {
-            listOfSizes.add(clothingSize);
-            addedSizes = true;
-        }
-
 
         return true;
     }
