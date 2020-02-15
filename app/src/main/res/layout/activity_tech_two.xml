@@ -35,8 +35,8 @@
         android:id="@+id/thirdProductCostTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginBottom="468dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginBottom="476dp"
         android:fontFamily="sans-serif-medium"
         android:text="Product Cost £: "
         android:textColor="@color/white"
@@ -49,8 +49,8 @@
         android:id="@+id/thirdColourLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="13dp"
         android:fontFamily="sans-serif-medium"
         android:text="Colour"
         android:textColor="@color/white"
@@ -61,20 +61,19 @@
 
     <Spinner
         android:id="@+id/thirdColourDropDownMenu"
-        android:layout_width="118dp"
-        android:layout_height="20dp"
-        android:layout_marginBottom="12dp"
+        android:layout_width="62dp"
+        android:layout_height="19dp"
+        android:layout_marginBottom="13dp"
         app:layout_constraintBottom_toTopOf="@+id/thirdAddToBasketBtn"
         app:layout_constraintStart_toEndOf="@+id/thirdColourLbl" />
 
     <Spinner
         android:id="@+id/thirdQuantityDropDownMenu"
-        android:layout_width="114dp"
+        android:layout_width="79dp"
         android:layout_height="19dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="432dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/thirdAddToBasketBtn"
+        app:layout_constraintStart_toEndOf="@+id/thirdQuantityLbl" />
 
     <Button
         android:id="@+id/thirdAddToBasketBtn"
@@ -94,15 +93,15 @@
         android:id="@+id/thirdQuantityLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginBottom="13dp"
         android:fontFamily="sans-serif-medium"
         android:text="Quantity"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/thirdAddToBasketBtn"
-        app:layout_constraintStart_toEndOf="@+id/thirdColourDropDownMenu" />
+        app:layout_constraintStart_toEndOf="@+id/spinner5" />
 
     <TextView
         android:id="@+id/fourthProductTitleLbl"
@@ -132,36 +131,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
-        android:layout_marginEnd="138dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="21dp"
         android:fontFamily="sans-serif-medium"
         android:text="Product Cost £:"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/fourthProductQuantityLbl"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/fourthProductColourLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="6dp"
         android:fontFamily="sans-serif-medium"
         android:text="Colour"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/fourthAddToBasketButton"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/fourthProductDropDownMenu"
-        android:layout_width="106dp"
-        android:layout_height="21dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="67dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="7dp"
         app:layout_constraintBottom_toTopOf="@+id/fourthAddToBasketButton"
         app:layout_constraintStart_toEndOf="@+id/fourthProductColourLabel" />
 
@@ -169,22 +167,22 @@
         android:id="@+id/fourthProductQuantityLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginBottom="6dp"
         android:fontFamily="sans-serif-medium"
         android:text="Quantity"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fourthProductDropDownMenu" />
+        app:layout_constraintBottom_toTopOf="@+id/fourthAddToBasketButton"
+        app:layout_constraintStart_toEndOf="@+id/textView21" />
 
     <Spinner
         android:id="@+id/fourthProductQuantityDropDown"
         android:layout_width="75dp"
         android:layout_height="21dp"
-        android:layout_marginBottom="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/fourthAddToBasketButton"
         app:layout_constraintStart_toEndOf="@+id/fourthProductQuantityLbl" />
 
     <Button
@@ -201,5 +199,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginBottom="11dp"
+        android:text="Size"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/thirdAddToBasketBtn"
+        app:layout_constraintStart_toEndOf="@+id/thirdColourDropDownMenu" />
+
+    <Spinner
+        android:id="@+id/spinner5"
+        android:layout_width="84dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginBottom="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/thirdAddToBasketBtn"
+        app:layout_constraintStart_toEndOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="6dp"
+        android:text="Size"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/fourthAddToBasketButton"
+        app:layout_constraintStart_toEndOf="@+id/fourthProductDropDownMenu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
