@@ -119,11 +119,6 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         this.secondListOfColours = new ArrayList<>();
         this.secondListOfQuantities = new ArrayList<>();
 
-        this.sizesAdapter = new SizesAdapter(TechActivity.this, listOfSizes);
-        sizesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        firstProductSizesMenu.setAdapter(sizesAdapter);
-        firstProductSizesMenu.setOnItemSelectedListener(this);
-
         addToColoursList();
         addToQuantitiesList();
         addToSizesList();
@@ -139,6 +134,12 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
         // Add action listener for first product colour and first product quantity
         firstProductColourOptions.setOnItemSelectedListener(this);
         firstProductQuantityOptions.setOnItemSelectedListener(this);
+
+        this.sizesAdapter = new SizesAdapter(TechActivity.this, listOfSizes);
+        sizesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        firstProductSizesMenu.setAdapter(sizesAdapter);
+        firstProductSizesMenu.setOnItemSelectedListener(this);
 
         secondProductColourOptions.setOnItemSelectedListener(this);
         secondProductQuantityOptions.setOnItemSelectedListener(this);
@@ -331,7 +332,7 @@ public class TechActivity extends AppCompatActivity implements AdapterView.OnIte
 
         dialog.show();
 
-        Products firstProduct = new Products(current_product_id, firstProductText.getText().toString(), firstProductColourOptions.getSelectedItem().toString(), (int) firstProductQuantityOptions.getSelectedItemId(), productCost.getText().toString(), firstProductSizes.getText().toString());
+        Products firstProduct = new Products(current_product_id, firstProductText.getText().toString(), firstProductColourOptions.getSelectedItem().toString(), (int) firstProductQuantityOptions.getSelectedItemId(), productCost.getText().toString(), firstProductSizesMenu.getSelectedItem().toString());
 
         listOfProductsToAddToBasket.put(current_product_id, firstProduct); // Add the product data to the hash map
     }
