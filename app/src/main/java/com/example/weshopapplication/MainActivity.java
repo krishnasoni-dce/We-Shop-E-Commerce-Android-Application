@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button registerButton; // Variable Button to register
     private Button loginButton; // Variable to store the login button
+    private Button contactUsBtn;
     private FirebaseAuth auth;
 
     @Override
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.registerButton = findViewById(R.id.registerBtn);
         this.loginButton = findViewById(R.id.loginBtn);
+        this.contactUsBtn = findViewById(R.id.contactUsBtn);
 
         this.auth = FirebaseAuth.getInstance(); // Get instance of fire base
 
@@ -68,6 +70,20 @@ public class MainActivity extends AppCompatActivity {
 
                 } catch (ActivityNotFoundException exc) {
                     Log.d("Error : ", exc.getMessage());
+                }
+            }
+        });
+
+        this.contactUsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+
+                    Intent contactUsIntent = new Intent(MainActivity.this, ContactUsActivity.class);
+                    startActivity(contactUsIntent);
+
+                } catch (ActivityNotFoundException exc) {
+                    Log.d("Error", exc.toString());
                 }
             }
         });

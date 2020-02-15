@@ -64,10 +64,10 @@
 
     <Button
         android:id="@+id/contactUsBtn"
-        android:layout_width="112dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginBottom="184dp"
+        android:layout_width="116dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginBottom="192dp"
         android:background="@drawable/button_round"
         android:text="Contact Us"
         android:textColor="@color/white"
