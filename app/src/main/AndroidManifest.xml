@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:theme">
-        <activity android:name=".SubmitComplaint"></activity>
+        <activity android:name=".CheckComplaints"></activity>
+        <activity android:name=".SubmitComplaint" />
         <activity android:name=".ContactUsActivity" />
         <activity android:name=".SportsAndOutdoorsActivityTwo" />
         <activity android:name=".TechActivityTwo" />

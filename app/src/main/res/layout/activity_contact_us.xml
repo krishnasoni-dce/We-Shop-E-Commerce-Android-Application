@@ -8,7 +8,7 @@
     tools:context=".ContactUsActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/contactUsTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="90dp"
@@ -19,7 +19,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/btnAddData"
+        android:id="@+id/submitComplaintBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -30,7 +30,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/btnCheckData"
+        android:id="@+id/checkComplaintsBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_round"

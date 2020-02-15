@@ -90,11 +90,10 @@
     <EditText
         android:id="@+id/add_complaint_fieldProblem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="89dp"
         android:layout_marginBottom="35dp"
         android:background="@drawable/edit_round"
-        android:ems="10"
-        android:inputType="textPostalAddress" />
+        android:ems="10" />
 
     <LinearLayout
         android:layout_width="match_parent"
