@@ -32,7 +32,6 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         try {
 
-
             switch (v.getId()) {
                 case R.id.submitComplaintBtn:
                     Intent submitComplaintIntent = new Intent(ContactUsActivity.this, SubmitComplaint.class);
