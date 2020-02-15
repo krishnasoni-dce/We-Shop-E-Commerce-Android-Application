@@ -25,22 +25,28 @@
         android:layout_marginBottom="20dp"
         android:text="@string/add_data_field_username"
         android:textColor="@color/white"
+        android:layout_marginLeft="20dp"
         android:textSize="25dp"
         android:textStyle="bold" />
 
     <EditText
         android:id="@+id/add_usernameField"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/edit_round"
+        android:drawableLeft="@drawable/ic_account_circle_black_24dp"
+        android:drawablePadding="15dp"
+        android:hint="Enter Username"
         android:inputType="textPersonName"
+        android:paddingLeft="20dp"
         android:text=""
         android:textColor="@color/white"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/add_complaint_email_address"
+        android:layout_marginLeft="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -52,14 +58,19 @@
     <EditText
         android:id="@+id/add_complaintEmailField"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/edit_round"
+        android:drawableLeft="@drawable/ic_email_black_24dp"
+        android:drawablePadding="15dp"
+        android:hint="E-mail Address"
+        android:paddingLeft="20dp"
         android:ems="10"
         android:inputType="textEmailAddress" />
 
     <TextView
         android:id="@+id/add_complaint_phone_number"
+        android:layout_marginLeft="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
@@ -70,18 +81,23 @@
 
     <EditText
         android:id="@+id/add_complaint_phoneNumberField"
+        android:layout_height="36dp"
+        android:drawableLeft="@drawable/ic_phone_android_black_24dp"
+        android:drawablePadding="15dp"
+        android:hint="@string/phone_number_lbl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/edit_round"
         android:ems="10"
         android:inputType="phone" />
 
     <TextView
-        android:id="@+id/add_tv_address"
+        android:id="@+id/add_complaint_problem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="18dp"
         android:text="@string/add_data_field_problem"
         android:textColor="@color/white"
         android:textSize="25dp"
@@ -91,8 +107,12 @@
         android:id="@+id/add_complaint_fieldProblem"
         android:layout_width="match_parent"
         android:layout_height="89dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/edit_round"
+        android:drawableLeft="@drawable/ic_report_problem_black_24dp"
+        android:drawablePadding="15dp"
+        android:hint="@string/problem_lbl"
+        android:paddingLeft="20dp"
         android:ems="10" />
 
     <LinearLayout

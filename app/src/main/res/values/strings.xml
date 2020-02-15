@@ -2,6 +2,9 @@
     <string name="app_name">We Shop E-Commerce</string>
     <string name="title_activity_login">LoginActivity</string>
 
+    <string name="phone_number_lbl">Enter Phone Number</string>
+    <string name="problem_lbl">Enter Problem Here Please</string>
+
     <string name="main_title">"We Shop Contact Us Form"</string>
     <string name="main_submit_complaint">"Submit Complaint"</string>
     <string name="main_check_complaints">"Check Complaints"</string>
